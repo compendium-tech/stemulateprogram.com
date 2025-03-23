@@ -1,13 +1,12 @@
-import React, { ChangeEvent, FormEvent, useState } from "react"
+import { ChangeEvent, FormEvent, useState } from "react"
 import { createClient } from "@supabase/supabase-js"
 
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import { FormInput } from "./form-input"
+import { FormTextarea } from "./form-textarea"
+import { InterestCheckboxes } from "./interest-checkboxes"
 import {
   Dialog,
-  DialogTrigger,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -16,10 +15,11 @@ import {
 } from "@/components/ui/dialog"
 
 const supabaseUrl = "https://msrispzrxbjjnbrinwcp.supabase.co"
-const supabaseAnonKey = "<YOUR_SUPABASE_KEY_HERE>"
+const supabaseAnonKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zcmlzcHpyeGJqam5icmlud2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NzUwMTYsImV4cCI6MjA1ODI1MTAxNn0.97KV1d1i4jZP6A-y6Wl_CHiJLxF8v93F_xO4xBOYReY"
 const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
-const researchFields: string[] = [
+const researchFields = [
   "Biology",
   "Business",
   "Chemistry",
@@ -118,19 +118,21 @@ export default function ApplicationForm() {
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
+  ) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }))
+    const key = name as keyof FormDataType
+    setFormData((prev) => ({ ...prev, [key]: value }))
+    setErrors((prev) => ({ ...prev, [key]: validateField(name, value) }))
   }
 
   const handleMultiSelectChange = (
     field: keyof FormDataType,
     value: string
   ): void => {
-    const updated = formData[field].includes(value)
-      ? formData[field].filter((item) => item !== value)
-      : [...formData[field], value].slice(0, 3)
+    const current = formData[field] as string[]
+    const updated = current.includes(value)
+      ? current.filter((item: string) => item !== value)
+      : [...current, value].slice(0, 3)
     setFormData((prev) => ({ ...prev, [field]: updated }))
   }
 
@@ -146,7 +148,7 @@ export default function ApplicationForm() {
   const validateAll = (): boolean => {
     const newErrors: FormErrors = {}
     Object.entries(formData).forEach(([key, val]) => {
-      newErrors[key] = validateField(key, val)
+      newErrors[key] = validateField(key, val as string)
     })
     setErrors(newErrors)
     return Object.values(newErrors).some(Boolean)
@@ -188,9 +190,9 @@ export default function ApplicationForm() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-10 px-6 rounded-2xl shadow-2xl bg-white border border-blue-200">
-      <h1 className="text-3xl md:text-5xl font-bold mb-8 text-blue-700">
-        🎓 Application Form
+    <div className="max-w-3xl mx-auto py-10 px-6 bg-white">
+      <h1 className="text-3xl md:text-4xl font-bold mb-8 text-red-600">
+        Application Form
       </h1>
       <form onSubmit={handleSubmit} className="space-y-6 text-lg">
         {[
@@ -206,50 +208,24 @@ export default function ApplicationForm() {
           ["Parent Name", "parentName", "Jane Doe"],
           ["Parent Phone", "parentPhone", "+1234567899"],
         ].map(([label, name, placeholder]) => (
-          <div key={name}>
-            <Label
-              htmlFor={name}
-              className="text-base font-medium text-gray-700"
-            >
-              {label}
-            </Label>
-            <Input
-              id={name}
-              name={name}
-              placeholder={placeholder}
-              value={formData[name]}
-              onChange={handleChange}
-              className="h-12 text-lg px-4 border border-blue-300 rounded-xl hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder:text-gray-400"
-            />
-            {errors[name] && (
-              <p className="text-sm text-red-500 mt-1">{errors[name]}</p>
-            )}
-          </div>
+          <FormInput
+            key={name}
+            label={label}
+            name={name as keyof FormDataType}
+            value={formData[name as keyof FormDataType] as string}
+            placeholder={placeholder}
+            error={errors[name as keyof FormDataType]}
+            onChange={handleChange}
+          />
         ))}
 
-        <div>
-          <Label className="text-base font-medium text-gray-700">
-            Fields of Interest (Choose up to 3)
-          </Label>
-          <div className="grid grid-cols-2 gap-2 mt-2">
-            {researchFields.map((field) => (
-              <label
-                key={field}
-                className="flex items-center space-x-2 hover:bg-blue-50 px-2 py-1 rounded-lg cursor-pointer"
-              >
-                <input
-                  type="checkbox"
-                  checked={formData.fieldsOfInterest.includes(field)}
-                  onChange={() =>
-                    handleMultiSelectChange("fieldsOfInterest", field)
-                  }
-                  className="accent-blue-500"
-                />
-                <span>{field}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+        <InterestCheckboxes
+          fields={researchFields}
+          selected={formData.fieldsOfInterest}
+          onChange={(value) =>
+            handleMultiSelectChange("fieldsOfInterest", value)
+          }
+        />
 
         {[
           "researchInterest",
@@ -257,40 +233,21 @@ export default function ApplicationForm() {
           "motivation",
           "additionalInfo",
         ].map((name) => (
-          <div key={name}>
-            <Label
-              htmlFor={name}
-              className="text-base font-medium text-gray-700 capitalize"
-            >
-              {name.replace(/([A-Z])/g, " $1")}
-            </Label>
-            <Textarea
-              id={name}
-              name={name}
-              placeholder="Write here..."
-              value={formData[name]}
-              onChange={handleChange}
-              className="min-h-[150px] text-lg px-4 py-2 border border-blue-300 rounded-xl hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder:text-gray-400"
-              maxLength={1000}
-            />
-            <p className="text-sm text-gray-500 italic mt-1">
-              Using AI is prohibited.
-            </p>
-            <p className="text-sm text-gray-500">
-              Character count: {formData[name].length}/1000
-            </p>
-            {errors[name] && (
-              <p className="text-sm text-red-500 mt-1">{errors[name]}</p>
-            )}
-          </div>
+          <FormTextarea
+            key={name}
+            name={name as keyof FormDataType}
+            value={formData[name as keyof FormDataType] as string}
+            error={errors[name]}
+            onChange={handleChange}
+          />
         ))}
 
         <div>
-          <Label className="text-base font-medium text-gray-700">
+          <label className="text-base font-medium text-gray-700">
             Financial Aid
-          </Label>
+          </label>
           <select
-            className="h-12 w-full text-lg border border-blue-300 rounded-xl px-4 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder:text-gray-400"
+            className="h-12 w-full text-lg border rounded-xl px-4 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-400"
             value={formData.financialAid}
             onChange={(e) => handleSelectChange("financialAid", e.target.value)}
           >
@@ -303,14 +260,13 @@ export default function ApplicationForm() {
         <div className="flex justify-center">
           <Button
             type="submit"
-            className="p-6 text-lg rounded-xl bg-blue-600 hover:bg-blue-700 transition text-white"
+            className="p-6 text-lg rounded-xl bg-red-600 hover:bg-red-700 text-white"
           >
             Submit Application
           </Button>
         </div>
       </form>
 
-      {/* Dialogs */}
       <Dialog
         open={financialAidDialogOpen}
         onOpenChange={setFinancialAidDialogOpen}
@@ -324,14 +280,12 @@ export default function ApplicationForm() {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <div className="flex">
-              <Button
-                className=" p-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-white"
-                onClick={() => setFinancialAidDialogOpen(false)}
-              >
-                OK
-              </Button>
-            </div>
+            <Button
+              className="p-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white"
+              onClick={() => setFinancialAidDialogOpen(false)}
+            >
+              OK
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

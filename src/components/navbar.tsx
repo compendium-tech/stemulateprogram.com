@@ -10,7 +10,7 @@ const navItems: NavItem[] = [
   { label: "About Us", href: "/about-us" },
   { label: "Publications", href: "/publications" },
   { label: "Info Session", href: "/info-session" },
-  { label: "FAQS", href: "/faqs" },
+  { label: "FAQS", href: "/faq" },
 ]
 
 export const Navbar: FC = () => {
