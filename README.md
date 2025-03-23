@@ -1,10 +1,4 @@
-## Веб сайт исследовательской программы STEMulate
-
-![Снимок экрана 2025-03-23 в 16 23 44](https://github.com/user-attachments/assets/4c951306-4ba0-4f91-bb70-9e8cad62060a)
-
-### Использованные технологии
-
-- **Языки программирования**: Javascript, Typescript
-- **Веб фреймворк**: React
-- **Валидация данных форм**: Zod
-- **CSS фреймворк**: Tailwind CSS
+## STEMulate Research Program Website 
+<img src="https://github.com/user-attachments/assets/4e75bfec-3a6b-4226-b1bc-731d2285602d" align="left" width="32%">
+<img src="https://github.com/user-attachments/assets/be59297a-193c-47a5-9446-90816f8058cd" align="left" width="42%">
+<img src="https://github.com/user-attachments/assets/10879c21-3ae7-4816-a181-064e9d7ccb71" align="left" width="52%">
