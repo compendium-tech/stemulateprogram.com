@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-clip-text {
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+}
+
+.grid-bg-animation {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    );
+  background-size: 50px 50px;
+  animation: gridAnimation 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes gridAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 250px 250px;
+  }
+}
+
+@keyframes redPulse {
+  0%, 100% {
+    fill: #ff0000; /* bright red */
+  }
+  50% {
+    fill: #ff6b6b; /* lighter red in the middle */
+  }
+}
+
+.red-pulse {
+  animation: redPulse 2s infinite ease-in-out;
+}
+
+
