@@ -1,4 +1,4 @@
-import { StandartNavbarLayout } from "@/layout/navbar"
+import { StandartLayout } from "@/layout/navbar"
 const AboutUsPageContent = () => (
   <main className="min-h-screen bg-neutral-900 text-white py-8 px-4 md:px-8 flex items-center justify-center">
     <div className="max-w-4xl mx-auto space-y-8">
@@ -17,5 +17,5 @@ const AboutUsPageContent = () => (
 )
 
 export const AboutUsPage = () => (
-  <StandartNavbarLayout Component={AboutUsPageContent} />
+  <StandartLayout Component={AboutUsPageContent} />
 )

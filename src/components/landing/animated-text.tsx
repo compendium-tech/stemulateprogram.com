@@ -1,36 +1,13 @@
 import { motion } from "framer-motion"
 import { FC } from "react"
 
-interface WordMotionSpanProps {
-  text: string
-}
-
-export const AnimatedText: FC<WordMotionSpanProps> = ({ text }) => {
-  return (
-    <motion.span
-      variants={{
-        hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
-        visible: {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          transition: { duration: 0.6, ease: "easeOut" },
-        },
-      }}
-      className="mr-2 mb-1"
-    >
-      {text}
-    </motion.span>
-  )
-}
-
-interface AnimatedTextProps {
+interface StaggerTextProps {
   text: string
   className?: string
   chunkSize?: number
 }
 
-export const AnimatedTextWordByWord: FC<AnimatedTextProps> = ({
+export const StaggerText: FC<StaggerTextProps> = ({
   text,
   className,
   chunkSize = 1,
@@ -43,7 +20,7 @@ export const AnimatedTextWordByWord: FC<AnimatedTextProps> = ({
 
   return (
     <motion.span
-      className={`flex flex-wrap ${className}`}
+      className={`${className}`}
       variants={{
         hidden: {},
         visible: {
@@ -55,8 +32,31 @@ export const AnimatedTextWordByWord: FC<AnimatedTextProps> = ({
       viewport={{ once: true }}
     >
       {chunks.map((chunk, i) => (
-        <AnimatedText text={chunk} key={i} />
+        <StaggerTextChunk text={chunk} key={i} />
       ))}
+    </motion.span>
+  )
+}
+
+interface StaggerTextGroupProps {
+  text: string
+}
+
+const StaggerTextChunk: FC<StaggerTextGroupProps> = ({ text }) => {
+  return (
+    <motion.span
+      variants={{
+        hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
+        visible: {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          transition: { duration: 0.6, ease: "easeOut" },
+        },
+      }}
+      className="inline-block whitespace-pre"
+    >
+      {text + " "}
     </motion.span>
   )
 }

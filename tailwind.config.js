@@ -4,7 +4,7 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      sans: ['Helvetica', 'sans-serif']
+      sans: ['Montserrat', 'Helvetica', 'sans-serif']
     },
     extend: {
       colors: {

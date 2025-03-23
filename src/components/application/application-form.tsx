@@ -1,19 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { ChangeEvent, FormEvent, useState } from "react"
 import { createClient } from "@supabase/supabase-js"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-
-// Optional: if using shadcn/ui for Dialog
 import {
   Dialog,
   DialogTrigger,
@@ -24,11 +15,29 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 
-// Example: set up Supabase client (use your own env variables or inline them here)
 const supabaseUrl = "https://msrispzrxbjjnbrinwcp.supabase.co"
-const supabaseAnonKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zcmlzcHpyeGJqam5icmlud2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NzUwMTYsImV4cCI6MjA1ODI1MTAxNn0.97KV1d1i4jZP6A-y6Wl_CHiJLxF8v93F_xO4xBOYReY"
+const supabaseAnonKey = "<YOUR_SUPABASE_KEY_HERE>"
 const supabase = createClient(supabaseUrl, supabaseAnonKey)
+
+const researchFields: string[] = [
+  "Biology",
+  "Business",
+  "Chemistry",
+  "Computer Science",
+  "Ecology",
+  "Economics",
+  "Education",
+  "Engineering",
+  "Gender Studies",
+  "History",
+  "Mathematics",
+  "Media Studies",
+  "Neuroscience",
+  "Physics",
+  "Political Science",
+  "Psychology",
+  "Sociology",
+]
 
 interface FormDataType {
   email: string
@@ -42,12 +51,16 @@ interface FormDataType {
   gpa: string
   parentName: string
   parentPhone: string
-  fieldsOfInterest: string[] | string // simplified to one string for the demo
+  fieldsOfInterest: string[]
   researchInterest: string
   extracurricular: string
   motivation: string
   financialAid: string
   additionalInfo: string
+}
+
+interface FormErrors {
+  [key: string]: string
 }
 
 export default function ApplicationForm() {
@@ -71,10 +84,7 @@ export default function ApplicationForm() {
     additionalInfo: "",
   })
 
-  // For storing validation errors by field
-  const [errors, setErrors] = useState<{ [key: string]: string }>({})
-
-  // For controlling dialogs
+  const [errors, setErrors] = useState<FormErrors>({})
   const [financialAidDialogOpen, setFinancialAidDialogOpen] = useState(false)
   const [submissionErrorDialogOpen, setSubmissionErrorDialogOpen] =
     useState(false)
@@ -82,134 +92,79 @@ export default function ApplicationForm() {
     useState(false)
   const [submissionErrorMessage, setSubmissionErrorMessage] = useState("")
 
-  const researchFields = [
-    "Biology",
-    "Business",
-    "Chemistry",
-    "Computer Science",
-    "Ecology",
-    "Economics",
-    "Education",
-    "Engineering",
-    "Gender Studies",
-    "History",
-    "Mathematics",
-    "Media Studies",
-    "Neuroscience",
-    "Physics",
-    "Political Science",
-    "Psychology",
-    "Sociology",
-  ]
+  const countWords = (text: string): number =>
+    text.trim().split(/\s+/).filter(Boolean).length
 
-  // Simple helper to count words
-  const countWords = (text: string) => {
-    return text.trim().split(/\s+/).filter(Boolean).length
-  }
-
-  // Validate fields on change or blur (basic sample logic)
-  const validateField = (name: string, value: string) => {
-    let errorMsg = ""
-
+  const validateField = (name: string, value: string): string => {
+    let error = ""
     if (
-      !value &&
-      ["email", "fullName", "phone", "currentGrade", "gpa"].includes(name)
+      ["email", "fullName", "phone", "currentGrade", "gpa"].includes(name) &&
+      !value
     ) {
-      errorMsg = "This field is required."
+      error = "This field is required."
     }
-
-    if (name === "email" && value) {
-      // Very naive email check
-      const emailRegex = /\S+@\S+\.\S+/
-      if (!emailRegex.test(value)) {
-        errorMsg = "Please enter a valid email address."
-      }
+    if (name === "email" && value && !/\S+@\S+\.\S+/.test(value)) {
+      error = "Invalid email format."
     }
-
-    if (name === "researchInterest") {
-      const words = countWords(value)
-      // Example says 300 words max
-      if (words > 300) {
-        errorMsg = "Must not exceed 300 words."
-      }
+    if (name === "researchInterest" && countWords(value) > 300) {
+      error = "Max 300 words allowed."
     }
-
     if (name === "motivation") {
       const words = countWords(value)
-      // Example says 100-150 words
-      if (words < 100 || words > 150) {
-        errorMsg = "Must be between 100 and 150 words."
-      }
+      if (words < 100 || words > 150) error = "Should be 100-150 words."
     }
-
-    return errorMsg
+    return error
   }
 
-  // Called when text fields change
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-
-    // Validate immediately
-    const fieldError = validateField(name, value)
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: fieldError }))
+    setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }))
   }
 
-  // Called when single-select changes
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [name]: value }))
+  const handleMultiSelectChange = (
+    field: keyof FormDataType,
+    value: string
+  ): void => {
+    const updated = formData[field].includes(value)
+      ? formData[field].filter((item) => item !== value)
+      : [...formData[field], value].slice(0, 3)
+    setFormData((prev) => ({ ...prev, [field]: updated }))
+  }
 
-    // If the user selected "yes" for financialAid, show a dialog
-    if (name === "financialAid" && value === "yes") {
+  const handleSelectChange = (
+    field: keyof FormDataType,
+    value: string
+  ): void => {
+    setFormData((prev) => ({ ...prev, [field]: value }))
+    if (field === "financialAid" && value === "yes")
       setFinancialAidDialogOpen(true)
-    }
   }
 
-  // Final check across all fields on submit
-  const validateAll = () => {
-    const newErrors: { [key: string]: string } = {}
-    Object.entries(formData).forEach(([fieldName, fieldValue]) => {
-      // We skip validating optional fields like ieltsScore if we want
-      const err = validateField(fieldName, fieldValue)
-      if (err) {
-        newErrors[fieldName] = err
-      }
+  const validateAll = (): boolean => {
+    const newErrors: FormErrors = {}
+    Object.entries(formData).forEach(([key, val]) => {
+      newErrors[key] = validateField(key, val)
     })
     setErrors(newErrors)
-    return newErrors
+    return Object.values(newErrors).some(Boolean)
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault()
-    const validationErrors = validateAll()
-
-    if (Object.values(validationErrors).some((err) => err !== "")) {
-      // If any errors exist, show them in a dialog or do something
+    if (validateAll()) {
       setSubmissionErrorMessage("Please correct the errors before submitting.")
       setSubmissionErrorDialogOpen(true)
       return
     }
-
-    // If no errors, proceed with Supabase insert
-    try {
-      const { data, error } = await supabase
-        .from("applications") // change to your table name
-        .insert([formData])
-
-      if (error) {
-        console.error("Supabase error:", error)
-        setSubmissionErrorMessage(error.message)
-        setSubmissionErrorDialogOpen(true)
-        return
-      }
-
-      // If success
-      console.log("Form submitted successfully:", data)
+    const { error } = await supabase.from("applications").insert([formData])
+    if (error) {
+      setSubmissionErrorMessage(error.message)
+      setSubmissionErrorDialogOpen(true)
+    } else {
       setSubmissionSuccessDialogOpen(true)
-
-      // Optionally reset form
       setFormData({
         email: "",
         fullName: "",
@@ -229,336 +184,166 @@ export default function ApplicationForm() {
         financialAid: "",
         additionalInfo: "",
       })
-    } catch (err: any) {
-      console.error("Submission error:", err)
-      setSubmissionErrorMessage(err.message)
-      setSubmissionErrorDialogOpen(true)
     }
   }
 
   return (
-    <div className="py-10 px-4">
-      <h1 className="text-3xl font-bold mb-6">Application Form</h1>
+    <div className="max-w-3xl mx-auto py-10 px-6 rounded-2xl shadow-2xl bg-white border border-blue-200">
+      <h1 className="text-3xl md:text-5xl font-bold mb-8 text-blue-700">
+        🎓 Application Form
+      </h1>
+      <form onSubmit={handleSubmit} className="space-y-6 text-lg">
+        {[
+          ["Email", "email", "example@mail.com"],
+          ["Full Name", "fullName", "John Doe"],
+          ["City and Country", "cityCountry", "New York, USA"],
+          ["Phone", "phone", "+1234567890"],
+          ["IELTS/TOEFL Score", "ieltsScore", "e.g. 7.5"],
+          ["SAT Score", "satScore", "e.g. 1450"],
+          ["School Name", "schoolName", "Springfield High School"],
+          ["Current Grade", "currentGrade", "11"],
+          ["GPA", "gpa", "4.0 / 5.0"],
+          ["Parent Name", "parentName", "Jane Doe"],
+          ["Parent Phone", "parentPhone", "+1234567899"],
+        ].map(([label, name, placeholder]) => (
+          <div key={name}>
+            <Label
+              htmlFor={name}
+              className="text-base font-medium text-gray-700"
+            >
+              {label}
+            </Label>
+            <Input
+              id={name}
+              name={name}
+              placeholder={placeholder}
+              value={formData[name]}
+              onChange={handleChange}
+              className="h-12 text-lg px-4 border border-blue-300 rounded-xl hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder:text-gray-400"
+            />
+            {errors[name] && (
+              <p className="text-sm text-red-500 mt-1">{errors[name]}</p>
+            )}
+          </div>
+        ))}
 
-      <form onSubmit={handleSubmit} className="space-y-8 rounded-lg p-6 ">
-        {/* Email */}
         <div>
-          <Label htmlFor="email" className="text-lg font-medium">
-            Email
+          <Label className="text-base font-medium text-gray-700">
+            Fields of Interest (Choose up to 3)
           </Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-          )}
+          <div className="grid grid-cols-2 gap-2 mt-2">
+            {researchFields.map((field) => (
+              <label
+                key={field}
+                className="flex items-center space-x-2 hover:bg-blue-50 px-2 py-1 rounded-lg cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  checked={formData.fieldsOfInterest.includes(field)}
+                  onChange={() =>
+                    handleMultiSelectChange("fieldsOfInterest", field)
+                  }
+                  className="accent-blue-500"
+                />
+                <span>{field}</span>
+              </label>
+            ))}
+          </div>
         </div>
 
-        {/* Full Name */}
-        <div>
-          <Label htmlFor="fullName" className="text-lg font-medium">
-            Full Name
-          </Label>
-          <Input
-            id="fullName"
-            name="fullName"
-            value={formData.fullName}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-          {errors.fullName && (
-            <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
-          )}
-        </div>
-
-        {/* City and Country */}
-        <div>
-          <Label htmlFor="cityCountry" className="text-lg font-medium">
-            City and country of residence
-          </Label>
-          <Input
-            id="cityCountry"
-            name="cityCountry"
-            value={formData.cityCountry}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-        </div>
-
-        {/* Phone */}
-        <div>
-          <Label htmlFor="phone" className="text-lg font-medium">
-            Phone number
-          </Label>
-          <Input
-            id="phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-          {errors.phone && (
-            <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-          )}
-        </div>
-
-        {/* IELTS */}
-        <div>
-          <Label htmlFor="ieltsScore" className="text-lg font-medium">
-            IELTS/TOEFL score (if available)
-          </Label>
-          <Input
-            id="ieltsScore"
-            name="ieltsScore"
-            value={formData.ieltsScore}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-        </div>
-
-        {/* SAT */}
-        <div>
-          <Label htmlFor="satScore" className="text-lg font-medium">
-            SAT score (Verbal & Math) (if available)
-          </Label>
-          <Input
-            id="satScore"
-            name="satScore"
-            value={formData.satScore}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-        </div>
-
-        {/* School */}
-        <div>
-          <Label htmlFor="schoolName" className="text-lg font-medium">
-            Current school name
-          </Label>
-          <Input
-            id="schoolName"
-            name="schoolName"
-            value={formData.schoolName}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-        </div>
-
-        {/* Grade */}
-        <div>
-          <Label htmlFor="currentGrade" className="text-lg font-medium">
-            Current grade
-          </Label>
-          <Input
-            id="currentGrade"
-            name="currentGrade"
-            value={formData.currentGrade}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-          {errors.currentGrade && (
-            <p className="text-red-500 text-sm mt-1">{errors.currentGrade}</p>
-          )}
-        </div>
-
-        {/* GPA */}
-        <div>
-          <Label htmlFor="gpa" className="text-lg font-medium">
-            High school GPA. (e.g. 4.8/5)
-          </Label>
-          <Input
-            id="gpa"
-            name="gpa"
-            value={formData.gpa}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-          {errors.gpa && (
-            <p className="text-red-500 text-sm mt-1">{errors.gpa}</p>
-          )}
-        </div>
-
-        {/* Parent name */}
-        <div>
-          <Label htmlFor="parentName" className="text-lg font-medium">
-            Full name of your parent/guardian
-          </Label>
-          <Input
-            id="parentName"
-            name="parentName"
-            value={formData.parentName}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-        </div>
-
-        {/* Parent phone */}
-        <div>
-          <Label htmlFor="parentPhone" className="text-lg font-medium">
-            Phone number of your parent/guardian
-          </Label>
-          <Input
-            id="parentPhone"
-            name="parentPhone"
-            type="tel"
-            value={formData.parentPhone}
-            onChange={handleChange}
-            className="mt-1 h-12"
-          />
-        </div>
-
-        {/* Fields of interest */}
-        <div>
-          <Label htmlFor="fieldsOfInterest" className="text-lg font-medium">
-            Pick top 3 fields of interest
-          </Label>
-          <Select
-            onValueChange={(value) =>
-              handleSelectChange("fieldsOfInterest", value)
-            }
-          >
-            <SelectTrigger className="mt-1 h-12">
-              <SelectValue placeholder="Select fields" />
-            </SelectTrigger>
-            <SelectContent>
-              {researchFields.map((field) => (
-                <SelectItem key={field} value={field}>
-                  {field}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <p className="text-sm text-gray-500 mt-1">
-            Note: In a real app, this might be a multi-select
-          </p>
-        </div>
-
-        {/* Research Interest */}
-        <div>
-          <Label htmlFor="researchInterest" className="text-lg font-medium">
-            Why are you interested in the chosen areas of research? (300 words).
-          </Label>
-          <p className="text-base italic mt-1 mb-2">Using AI is prohibited</p>
-          <Textarea
-            id="researchInterest"
-            name="researchInterest"
-            value={formData.researchInterest}
-            onChange={handleChange}
-            className="mt-1 min-h-[200px]"
-          />
-          {errors.researchInterest && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.researchInterest}
+        {[
+          "researchInterest",
+          "extracurricular",
+          "motivation",
+          "additionalInfo",
+        ].map((name) => (
+          <div key={name}>
+            <Label
+              htmlFor={name}
+              className="text-base font-medium text-gray-700 capitalize"
+            >
+              {name.replace(/([A-Z])/g, " $1")}
+            </Label>
+            <Textarea
+              id={name}
+              name={name}
+              placeholder="Write here..."
+              value={formData[name]}
+              onChange={handleChange}
+              className="min-h-[150px] text-lg px-4 py-2 border border-blue-300 rounded-xl hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder:text-gray-400"
+              maxLength={1000}
+            />
+            <p className="text-sm text-gray-500 italic mt-1">
+              Using AI is prohibited.
             </p>
-          )}
-        </div>
+            <p className="text-sm text-gray-500">
+              Character count: {formData[name].length}/1000
+            </p>
+            {errors[name] && (
+              <p className="text-sm text-red-500 mt-1">{errors[name]}</p>
+            )}
+          </div>
+        ))}
 
-        {/* Extracurricular */}
         <div>
-          <Label htmlFor="extracurricular" className="text-lg font-medium">
-            Extracurricular activities (Please list up to 5).
+          <Label className="text-base font-medium text-gray-700">
+            Financial Aid
           </Label>
-          <Textarea
-            id="extracurricular"
-            name="extracurricular"
-            value={formData.extracurricular}
-            onChange={handleChange}
-            className="mt-1 min-h-[200px]"
-          />
-        </div>
-
-        {/* Motivation */}
-        <div>
-          <Label htmlFor="motivation" className="text-lg font-medium">
-            What are your motivations to apply? (100-150 words)
-          </Label>
-          <p className="text-base italic mt-1 mb-2">Using AI is prohibited</p>
-          <Textarea
-            id="motivation"
-            name="motivation"
-            value={formData.motivation}
-            onChange={handleChange}
-            className="mt-1 min-h-[200px]"
-          />
-          {errors.motivation && (
-            <p className="text-red-500 text-sm mt-1">{errors.motivation}</p>
-          )}
-        </div>
-
-        {/* Financial aid */}
-        <div>
-          <Label htmlFor="financialAid" className="text-lg font-medium">
-            Are you applying for financial aid?
-          </Label>
-          <Select
-            onValueChange={(value) => handleSelectChange("financialAid", value)}
+          <select
+            className="h-12 w-full text-lg border border-blue-300 rounded-xl px-4 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition placeholder:text-gray-400"
+            value={formData.financialAid}
+            onChange={(e) => handleSelectChange("financialAid", e.target.value)}
           >
-            <SelectTrigger className="mt-1 h-12">
-              <SelectValue placeholder="Select" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="yes">Yes</SelectItem>
-              <SelectItem value="no">No</SelectItem>
-            </SelectContent>
-          </Select>
+            <option value="">Select</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
         </div>
 
-        {/* Additional Info */}
-        <div>
-          <Label htmlFor="additionalInfo" className="text-lg font-medium">
-            Additional information
-          </Label>
-          <Textarea
-            id="additionalInfo"
-            name="additionalInfo"
-            value={formData.additionalInfo}
-            onChange={handleChange}
-            className="mt-1 min-h-[100px]"
-          />
+        <div className="flex justify-center">
+          <Button
+            type="submit"
+            className="p-6 text-lg rounded-xl bg-blue-600 hover:bg-blue-700 transition text-white"
+          >
+            Submit Application
+          </Button>
         </div>
-
-        <Button type="submit" className="w-full py-6 text-lg">
-          Submit Application
-        </Button>
       </form>
 
-      {/* === Dialog when user selects "yes" for financial aid === */}
+      {/* Dialogs */}
       <Dialog
         open={financialAidDialogOpen}
         onOpenChange={setFinancialAidDialogOpen}
       >
-        <DialogContent>
+        <DialogContent className="bg-white rounded-xl">
           <DialogHeader>
-            <DialogTitle>Financial Aid Notice</DialogTitle>
+            <DialogTitle>Financial Aid Info</DialogTitle>
             <DialogDescription>
-              You have indicated you need financial aid. An additional interview
-              and documentation from your parents will be required.
+              You selected financial aid. Additional documents and interview
+              will be required.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button onClick={() => setFinancialAidDialogOpen(false)}>OK</Button>
+            <div className="flex">
+              <Button
+                className=" p-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-white"
+                onClick={() => setFinancialAidDialogOpen(false)}
+              >
+                OK
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      {/* === Dialog for submission errors === */}
       <Dialog
         open={submissionErrorDialogOpen}
         onOpenChange={setSubmissionErrorDialogOpen}
       >
-        <DialogContent>
+        <DialogContent className="bg-white rounded-xl">
           <DialogHeader>
             <DialogTitle>Submission Error</DialogTitle>
-            <DialogDescription>
-              {submissionErrorMessage ||
-                "There was a problem submitting your application."}
-            </DialogDescription>
+            <DialogDescription>{submissionErrorMessage}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <Button onClick={() => setSubmissionErrorDialogOpen(false)}>
@@ -568,16 +353,15 @@ export default function ApplicationForm() {
         </DialogContent>
       </Dialog>
 
-      {/* === Dialog for successful submission === */}
       <Dialog
         open={submissionSuccessDialogOpen}
         onOpenChange={setSubmissionSuccessDialogOpen}
       >
-        <DialogContent>
+        <DialogContent className="bg-white rounded-xl">
           <DialogHeader>
             <DialogTitle>Success</DialogTitle>
             <DialogDescription>
-              Your application has been submitted successfully.
+              Your application was submitted successfully.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

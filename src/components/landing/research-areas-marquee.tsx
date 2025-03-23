@@ -1,6 +1,6 @@
 import { FC } from "react"
 import Marquee from "react-fast-marquee"
-import { AnimatedTextWordByWord } from "./animated-text"
+import { StaggerText } from "./animated-text"
 
 export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
   const half = Math.ceil(areas.length / 2)
@@ -20,7 +20,7 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
             key={idx}
             className="p-6 m-2 border-color-white rounded-2xl flex-shrink-0"
           >
-            <i className="text-2xl font-medium">{area}</i>
+            <i className="text-xl md:text-2xl font-medium">{area}</i>
           </div>
         ))}
       </Marquee>
@@ -35,8 +35,8 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
             key={idx}
             className="p-6 m-2 border-color-white rounded-2xl flex-shrink-0"
           >
-            <i className="text-2xl font-medium">
-              <AnimatedTextWordByWord text={area} />
+            <i className="text-xl md:text-2xl font-medium">
+              <StaggerText text={area} />
             </i>
           </div>
         ))}

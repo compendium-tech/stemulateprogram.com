@@ -1,6 +1,6 @@
 import ApplicationForm from "@/components/application/application-form"
 import ProgramInfo from "@/components/application/program-info"
-import { StandartNavbarLayout } from "@/layout/navbar"
+import { StandartLayout } from "@/layout/navbar"
 
 const ApplicationFormPageContent = () => {
   return (
@@ -16,5 +16,5 @@ const ApplicationFormPageContent = () => {
 }
 
 export const ApplicationFormPage = () => {
-  return <StandartNavbarLayout Component={ApplicationFormPageContent} />
+  return <StandartLayout Component={ApplicationFormPageContent} />
 }

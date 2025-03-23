@@ -6,14 +6,15 @@ interface NavItem {
   href: string
 }
 
+const navItems: NavItem[] = [
+  { label: "About Us", href: "/about-us" },
+  { label: "Publications", href: "/publications" },
+  { label: "Info Session", href: "/info-session" },
+  { label: "FAQS", href: "/faqs" },
+]
+
 export const Navbar: FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
-  const navItems: NavItem[] = [
-    { label: "About Us", href: "/about-us" },
-    { label: "Publications", href: "/publications" },
-    { label: "Info Session", href: "/info-session" },
-    { label: "FAQS", href: "/faqs" },
-  ]
 
   return (
     <header className="relative w-full bg-neutral-900 backdrop-blur-md text-white py-4 px-8 flex justify-between items-center z-50">
@@ -64,21 +65,24 @@ export const Navbar: FC = () => {
         </button>
 
         {/* Mobile Menu List */}
-        {menuOpen && (
-          <ul className="absolute text-xl right-0 top-12 bg-neutral-900 w-48 text-white flex flex-col space-y-3 p-4 rounded-lg border z-50">
-            {navItems.map((item, i) => (
-              <li key={i}>
-                <a
-                  href={item.href}
-                  className="block hover:text-red-500"
-                  onClick={() => setMenuOpen(false)} // auto-close on click
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
+        <div
+          className={`absolute text-xl rounded-xl right-0 top-12 bg-neutral-900 w-48 text-white flex flex-col space-y-3 p-4 rounded-lg border z-50 transform transition-all duration-300 ease-in-out origin-top-right ${
+            menuOpen
+              ? "opacity-100 scale-100 pointer-events-auto"
+              : "opacity-0 scale-95 pointer-events-none"
+          }`}
+        >
+          {navItems.map((item, i) => (
+            <a
+              key={i}
+              href={item.href}
+              className="block hover:text-red-500"
+              onClick={() => setMenuOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
       </div>
     </header>
   )
