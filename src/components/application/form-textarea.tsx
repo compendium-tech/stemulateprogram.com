@@ -9,13 +9,13 @@ interface FormTextareaProps {
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
-export const FormTextarea = ({
+export const FormTextarea: React.FC<FormTextareaProps> = ({
   name,
   value,
   error,
   onChange,
-}: FormTextareaProps) => (
-  <div>
+}) => (
+  <>
     <Label
       htmlFor={name}
       className="text-base font-medium text-gray-700 capitalize"
@@ -36,5 +36,5 @@ export const FormTextarea = ({
       Character count: {value.length}/1000
     </p>
     {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
-  </div>
+  </>
 )

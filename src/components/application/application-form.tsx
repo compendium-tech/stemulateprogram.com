@@ -84,7 +84,7 @@ const formSchema = z.object({
   financialAid: z.boolean().default(false),
 })
 
-export default function ResearchApplicationForm() {
+export const ApplicationForm: React.FC = () => {
   const [activeTab, setActiveTab] = useState("personal")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [extracurriculars, setExtracurriculars] = useState<string[]>([])
@@ -699,25 +699,20 @@ export default function ResearchApplicationForm() {
                 <div className="space-y-4">
                   <div className="flex flex-col space-y-2">
                     <Label htmlFor="new-activity">Add Activity</Label>
-                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                    <div className="flex flex-col flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                       <Input
                         id="new-activity"
                         value={newActivity}
                         onChange={(e) => setNewActivity(e.target.value)}
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter") {
+                            addExtracurricular()
+                          }
+                        }}
                         placeholder="e.g., Debate Club, Volunteer Work, Sports Team"
                         disabled={extracurriculars.length >= 5}
                         className="flex-grow"
                       />
-                      <Button
-                        type="button"
-                        onClick={addExtracurricular}
-                        disabled={
-                          !newActivity.trim() || extracurriculars.length >= 5
-                        }
-                        className="sm:flex-shrink-0"
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
                     </div>
                     {extracurriculars.length >= 5 && (
                       <p className="text-sm text-muted-foreground">

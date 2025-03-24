@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { WorldMapSimple } from "./world-map"
-import { StaggerText } from "./animated-text"
+import { StaggerText } from "./stagger-text"
 
 export const LandingHero = () => {
   return (

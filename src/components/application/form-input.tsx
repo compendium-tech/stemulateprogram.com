@@ -11,15 +11,15 @@ interface FormInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export const FormInput = ({
+export const FormInput: React.FC<FormInputProps> = ({
   label,
   name,
   value,
   placeholder,
   error,
   onChange,
-}: FormInputProps) => (
-  <div>
+}) => (
+  <>
     <Label htmlFor={name} className="text-base font-medium text-gray-700">
       {label}
     </Label>
@@ -32,5 +32,5 @@ export const FormInput = ({
       className="h-12 text-lg px-4 border rounded-xl hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 transition placeholder:text-gray-400"
     />
     {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
-  </div>
+  </>
 )

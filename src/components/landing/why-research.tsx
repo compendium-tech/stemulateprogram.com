@@ -1,5 +1,5 @@
 import { CheckCircleIcon } from "lucide-react"
-import { StaggerText } from "./animated-text"
+import { StaggerText } from "./stagger-text"
 
 export const WhyResearch = () => {
   return (

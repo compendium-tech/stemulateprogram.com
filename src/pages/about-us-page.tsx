@@ -1,5 +1,6 @@
 import { StandartLayout } from "@/layout/navbar"
-const AboutUsPageContent = () => (
+
+const AboutUsPageContent: React.FC = () => (
   <main className="min-h-screen bg-neutral-900 text-white py-8 px-4 md:px-8 flex items-center justify-center">
     <div className="max-w-4xl mx-auto space-y-8">
       <p className="font-bold text-5xl">About Us</p>
@@ -16,6 +17,8 @@ const AboutUsPageContent = () => (
   </main>
 )
 
-export const AboutUsPage = () => (
-  <StandartLayout Component={AboutUsPageContent} />
+export const AboutUsPage: React.FC = () => (
+  <StandartLayout>
+    <AboutUsPageContent />
+  </StandartLayout>
 )

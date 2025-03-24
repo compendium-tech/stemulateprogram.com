@@ -13,7 +13,7 @@ export const FAQ = () => {
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
               <AccordionTrigger>
-                <p className="text-xl md:text-2xl">{faq.question}</p>
+                <p className="text-lg md:text-2xl">{faq.question}</p>
               </AccordionTrigger>
               <AccordionContent>
                 <p className="md:text-xl">{faq.answer}</p>

@@ -1,8 +1,8 @@
-import ApplicationForm from "@/components/application/application-form"
-import ProgramInfo from "@/components/application/program-info"
+import { ApplicationForm } from "@/components/application/application-form"
+import { ProgramInfo } from "@/components/application/program-info"
 import { StandartLayout } from "@/layout/navbar"
 
-const ApplicationFormPageContent = () => {
+const ApplicationFormPageContent: React.FC = () => {
   return (
     <>
       <main className="min-h-screen bg-white py-8 px-4 md:px-8">
@@ -15,6 +15,8 @@ const ApplicationFormPageContent = () => {
   )
 }
 
-export const ApplicationFormPage = () => {
-  return <StandartLayout Component={ApplicationFormPageContent} />
-}
+export const ApplicationFormPage: React.FC = () => (
+  <StandartLayout>
+    <ApplicationFormPageContent />
+  </StandartLayout>
+)

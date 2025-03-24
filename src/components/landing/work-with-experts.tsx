@@ -1,4 +1,4 @@
-import { StaggerText } from "./animated-text"
+import { StaggerText } from "./stagger-text"
 
 export const WorkWithExperts = () => (
   <section className="text-black relative px-5 md:px-14 bg-white py-20">

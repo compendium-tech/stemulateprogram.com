@@ -1,6 +1,6 @@
 import { FC } from "react"
 import Marquee from "react-fast-marquee"
-import { StaggerText } from "./animated-text"
+import { StaggerText } from "./stagger-text"
 
 export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
   const half = Math.ceil(areas.length / 2)

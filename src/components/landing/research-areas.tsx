@@ -1,4 +1,4 @@
-import { StaggerText } from "./animated-text"
+import { StaggerText } from "./stagger-text"
 import { ResearchAreasMarquee } from "./research-areas-marquee"
 
 export const ResearchAreas = () => {

@@ -1,14 +1,14 @@
-import { Footer } from "@/components/footer"
-import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/common/footer"
+import { Navbar } from "@/components/common/navbar"
 
-export const StandartLayout: React.FC<{ Component: React.FC<any> }> = ({
-  Component,
+export const StandartLayout: React.FC<{ children: React.ReactNode }> = ({
+  children,
 }) => {
   return (
-    <div>
+    <>
       <Navbar />
-      <Component />
+      {children}
       <Footer />
-    </div>
+    </>
   )
 }
