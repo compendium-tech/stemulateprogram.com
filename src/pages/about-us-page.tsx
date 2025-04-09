@@ -1,29 +1,40 @@
 import { StandartLayout } from "@/layout/navbar"
 import { useEffect, useRef, useState } from "react"
-import GLOBE from "vanta/dist/vanta.globe.min"
 
 const AboutUsPageContent: React.FC = () => {
-  const [vantaEffect, setVantaEffect] = useState(null)
-  const myRef = useRef(null)
+  const [vantaEffect, setVantaEffect] = useState<any>(null)
+  const myRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
+    // Use an async function or .then() to handle dynamic import properly:
     if (!vantaEffect) {
-      setVantaEffect(
-        GLOBE({
-          el: myRef.current,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          color: 0xff3f3f,
-          backgroundColor: "#171717",
+      import("vanta/dist/vanta.globe.min.js")
+        .then((vantaModule) => {
+          if (!myRef.current) return
+
+          const GLOBE = vantaModule.default
+          const effect = GLOBE({
+            el: myRef.current,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.0,
+            minWidth: 200.0,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0xff3f3f,
+            backgroundColor: "#171717",
+          })
+          setVantaEffect(effect)
         })
-      )
+        .catch((err) => {
+          console.error("Error loading Vanta Globe:", err)
+        })
     }
     return () => {
-      if (vantaEffect) vantaEffect.destroy()
+      if (vantaEffect) {
+        vantaEffect.destroy()
+      }
     }
   }, [vantaEffect])
 
