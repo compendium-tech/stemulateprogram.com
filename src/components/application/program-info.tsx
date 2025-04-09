@@ -34,7 +34,7 @@ export const ProgramInfo: React.FC = () => (
           sciences. Students can conduct research and write a paper under the
           guidance of an experienced mentor in any of the following fields:
         </p>
-        <div className="flex space-x-4">
+        <div className="md:flex md:space-x-6">
           <ul className="mt-2 space-y-1">
             <li>- Biology</li>
             <li>- Business</li>
