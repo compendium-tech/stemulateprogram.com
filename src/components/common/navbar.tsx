@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Logo } from "./logo"
+import { Link } from "react-router-dom"
 
 interface NavItem {
   label: string
@@ -24,9 +25,9 @@ export const Navbar: React.FC = () => {
       {/* Desktop Navigation */}
       <nav className="text-xl underline-offset-4 hidden md:flex space-x-6">
         {navItems.map((item, i) => (
-          <a key={i} href={item.href} className="hover:text-red-500">
+          <Link key={i} to={item.href} className="hover:text-red-500">
             {item.label}
-          </a>
+          </Link>
         ))}
       </nav>
 
