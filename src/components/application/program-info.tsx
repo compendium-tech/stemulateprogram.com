@@ -2,7 +2,7 @@ export const ProgramInfo: React.FC = () => (
   <div className="space-y-6">
     <div className="space-y-6">
       <div>
-        <h2 className="text-3xl md:text-4xl font-medium mb-6 mt-6">
+        <h2 className="text-2xl md:text-4xl font-medium mb-6 mt-6">
           Program Overview:
         </h2>
         <p className="md:text-lg">
@@ -94,7 +94,7 @@ export const ProgramInfo: React.FC = () => (
         <p className="text-base">
           For any questions please contact us at:
           <br />
-          email: stemulate.program@gmail.com
+          Email: stemulate.program@gmail.com
         </p>
       </div>
     </div>

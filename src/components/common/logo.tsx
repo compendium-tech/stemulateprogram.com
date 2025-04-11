@@ -2,6 +2,6 @@ import { Link } from "react-router-dom"
 
 export const Logo: React.FC = () => (
   <Link to="/">
-    <img src="logo.svg" alt="Logo" />
+    <img className="p-2" src="logo.svg" alt="logo" />
   </Link>
 )

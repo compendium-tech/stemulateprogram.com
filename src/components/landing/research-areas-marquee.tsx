@@ -18,9 +18,9 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
         {areas1.map((area, idx) => (
           <div
             key={idx}
-            className="p-6 m-2 border-color-white rounded-2xl flex-shrink-0"
+            className="p-4 m-2 border-color-white rounded-2xl flex-shrink-0"
           >
-            <i className="text-xl md:text-2xl font-medium">{area}</i>
+            <i className="text-sm sm:text-lg md:text-2xl font-medium">{area}</i>
           </div>
         ))}
       </Marquee>
@@ -33,9 +33,9 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
         {areas2.map((area, idx) => (
           <div
             key={idx}
-            className="p-6 m-2 border-color-white rounded-2xl flex-shrink-0"
+            className="p-4 m-2 border-color-white rounded-2xl flex-shrink-0"
           >
-            <i className="text-xl md:text-2xl font-medium">
+            <i className="text-sm sm:text-lg md:text-2xl font-medium">
               <StaggerText text={area} />
             </i>
           </div>
