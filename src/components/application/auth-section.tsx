@@ -67,17 +67,21 @@ export function AuthSection() {
   return (
     <>
       {!showEmailForm ? (
-        <div className="text-center space-x-2 space-y-2">
+        <div className="flex flex-col space-y-2">
           {/* --------- Google Login --------- */}
-          <Button onClick={handleGoogleLogin}>
-            <LogInIcon className="mr-2 h-4 w-4" />
-            Login with Google
+          <Button className="p-5" onClick={handleGoogleLogin}>
+            <LogInIcon className="mr-2 h-8 w-8" />
+            <p className="text-lg">Login with Google</p>
           </Button>
 
           {/* --------- Email Login (Magic Link) --------- */}
-          <Button variant="outline" onClick={() => setShowEmailForm(true)}>
-            <LogInIcon className="mr-2 h-4 w-4" />
-            Login with email
+          <Button
+            className="p-5"
+            variant="outline"
+            onClick={() => setShowEmailForm(true)}
+          >
+            <LogInIcon className="mr-2 h-8 w-8" />
+            <p className="text-lg">Login with Email</p>
           </Button>
         </div>
       ) : (

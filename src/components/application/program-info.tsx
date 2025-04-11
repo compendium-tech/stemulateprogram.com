@@ -34,7 +34,7 @@ export const ProgramInfo: React.FC = () => (
           sciences. Students can conduct research and write a paper under the
           guidance of an experienced mentor in any of the following fields:
         </p>
-        <div className="md:flex md:space-x-6">
+        <div className="mt-4 text-sm md:text-lg flex space-x-8 md:space-x-16">
           <ul className="mt-2 space-y-1">
             <li>- Biology</li>
             <li>- Business</li>
@@ -42,16 +42,14 @@ export const ProgramInfo: React.FC = () => (
             <li>- Computer Science</li>
             <li>- Ecology</li>
             <li>- Economics</li>
-          </ul>
-          <ul className="mt-2 space-y-1">
             <li>- Education</li>
             <li>- Engineering</li>
+          </ul>
+          <ul className="mt-2 space-y-1">
             <li>- Gender Studies</li>
             <li>- History</li>
             <li>- Mathematics</li>
             <li>- Media Studies</li>
-          </ul>
-          <ul className="mt-2 space-y-1">
             <li>- Neuroscience</li>
             <li>- Physics</li>
             <li>- Political Science</li>
@@ -71,7 +69,7 @@ export const ProgramInfo: React.FC = () => (
 
       <div>
         <h2 className="md:text-lg font-medium mb-2">Program details:</h2>
-        <ul className="space-y-1">
+        <ul className="space-y-1 text-sm md:text-lg">
           <li>
             - Program dates: January 20th to March 17th (duration is 8 weeks).
           </li>
