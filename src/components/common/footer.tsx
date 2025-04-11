@@ -1,6 +1,6 @@
 import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons"
 import { MailIcon } from "lucide-react"
-import { Logo } from "./logo"
+import { Link } from "react-router-dom"
 
 interface FooterLink {
   href: string
@@ -27,7 +27,9 @@ export const Footer: React.FC = () => (
     <div className="container mx-auto px-4">
       <div className="flex flex-col md:flex-row items-center justify-between">
         <div className="mb-6 md:mb-0">
-          <Logo />
+          <Link to="/">
+            <img className="p-2" src="logo.svg" alt="logo" />
+          </Link>
         </div>
         <div className="flex items-center space-x-6 mb-6 md:mb-0">
           {links.map(({ href, icon }) => (

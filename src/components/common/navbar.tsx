@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { Logo } from "./logo"
 import { Link } from "react-router-dom"
 
 interface NavItem {
@@ -19,7 +18,9 @@ export const Navbar: React.FC = () => {
   return (
     <header className="relative w-full bg-neutral-900 backdrop-blur-md text-white py-4 px-8 flex justify-between items-center z-50">
       <div className="text-xl font-bold">
-        <Logo />
+        <Link to="/">
+          <img className="p-2" src="logo.svg" alt="logo" />
+        </Link>
       </div>
 
       {/* Desktop Navigation */}
