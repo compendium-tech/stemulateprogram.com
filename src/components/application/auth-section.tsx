@@ -20,7 +20,7 @@ export function AuthSection() {
       await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: "/apply",
+          redirectTo: "https://stemulate-website.vercel.app/apply",
         },
       })
     } catch (error: any) {
@@ -40,7 +40,7 @@ export function AuthSection() {
       const { error } = await supabase.auth.signInWithOtp({
         email,
         options: {
-          emailRedirectTo: "/apply",
+          emailRedirectTo: "https://stemulate-website.vercel.app/apply",
         },
       })
       if (error) {
