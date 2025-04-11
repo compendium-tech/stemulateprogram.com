@@ -350,8 +350,8 @@ export const ApplicationForm = () => {
   if (!user) {
     return (
       <Card>
-        <div className="flex flex-col items-center justify-center h-[60vh] space-y-6">
-          <h1 className="text-3xl font-bold">STEMulate ID</h1>
+        <div className="flex flex-col items-center justify-center h-[60vh] space-y-3">
+          <h1 className="text-3xl font-bold">STEMulate Account</h1>
           <p className="text-lg text-muted-foreground max-w-md text-center">
             Please log in to continue to the application form.
           </p>
@@ -363,7 +363,7 @@ export const ApplicationForm = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <div className="flex justify-end my-4 space-x-2">
+      <div className="flex justify-end mt-12 space-x-2">
         <Button>
           <UserIcon />
           <p className="text-xs">{user.email}</p>

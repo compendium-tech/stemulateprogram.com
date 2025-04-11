@@ -71,7 +71,7 @@ export function AuthSection() {
           {/* --------- Google Login --------- */}
           <Button className="p-5" onClick={handleGoogleLogin}>
             <LogInIcon className="mr-2 h-8 w-8" />
-            <p className="text-lg">Login with Google</p>
+            <p className="text-lg">Sign In With Google</p>
           </Button>
 
           {/* --------- Email Login (Magic Link) --------- */}
@@ -81,7 +81,7 @@ export function AuthSection() {
             onClick={() => setShowEmailForm(true)}
           >
             <LogInIcon className="mr-2 h-8 w-8" />
-            <p className="text-lg">Login with Email</p>
+            <p className="text-lg">Sign In With Email</p>
           </Button>
         </div>
       ) : (
@@ -98,7 +98,7 @@ export function AuthSection() {
           {/* Put both buttons side by side in a flex row */}
           <div className="flex items-center space-x-2">
             <Button onClick={handleSendMagicLink} disabled={loading || !email}>
-              {loading ? "Sending link..." : "Send Magic Link"}
+              {loading ? "Sending link..." : "Send Sign In Link"}
             </Button>
             <Button onClick={() => setShowEmailForm(false)}>
               <ArrowLeftIcon className="mr-1" />
