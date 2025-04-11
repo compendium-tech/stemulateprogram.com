@@ -1,3 +1,14 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "headers": [
+    {
+      "source": "/(.*)\\.(svg|png|jpg|jpeg|json)$",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60"
+        }
+      ]
+    }
+  ]
 }
