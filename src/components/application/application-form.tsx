@@ -27,6 +27,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { AuthSection } from "./auth-section"
+import { Spinner } from "./spinner"
 
 // -------------------------
 //     SUPABASE CLIENT
@@ -100,6 +101,7 @@ const formSchema = z.object({
 })
 
 export const ApplicationForm = () => {
+  const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<any>(null) // store supabase user
   const [applicationExists, setApplicationExists] = useState(false) // tracks if user already submitted
   const [activeTab, setActiveTab] = useState("personal")
@@ -153,6 +155,10 @@ export const ApplicationForm = () => {
   }, [])
 
   async function checkApplicationExistence(email?: string) {
+    setLoading(true)
+
+    if (!email) return
+
     try {
       const { data: applications, error } = await supabase
         .from("applications")
@@ -168,6 +174,7 @@ export const ApplicationForm = () => {
       if (applications && applications.length > 0) {
         setApplicationExists(true)
       }
+      setLoading(false)
     } catch (err) {
       console.error("Unexpected error checking application existence:", err)
     }
@@ -368,7 +375,9 @@ export const ApplicationForm = () => {
       </div>
 
       <Card>
-        {applicationExists ? (
+        {loading ? (
+          <Spinner />
+        ) : applicationExists ? (
           <CardContent className="flex flex-col items-center justify-center h-[60vh] space-y-6">
             <h1 className="text-2xl font-semibold">Application Submitted</h1>
             <p className="text-center text-muted-foreground max-w-md">
