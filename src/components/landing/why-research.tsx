@@ -1,10 +1,11 @@
 import { CheckCircleIcon } from "lucide-react"
 import { StaggerText } from "./stagger-text"
+import "./why-research.css"
 
 export const WhyResearch = () => {
   return (
     <section
-      className="relative text-white bg-fixed bg-cover bg-center bg-no-repeat
+      className="relative text-white section-with-fixed-bg bg-cover bg-center bg-no-repeat
                  py-24 px-5 sm:px-14 bg-[url(/university.webp)]"
     >
       {/* To make background look darker */}
