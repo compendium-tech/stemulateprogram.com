@@ -2,7 +2,7 @@ export const ProgramInfo: React.FC = () => (
   <div className="space-y-6">
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl md:text-4xl font-medium mb-6 mt-6">
+        <h2 className="text-2xl md:text-4xl font-semibold mb-6 mt-6">
           Program Overview:
         </h2>
         <p className="md:text-lg">

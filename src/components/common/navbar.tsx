@@ -24,7 +24,6 @@ export const Navbar: React.FC = () => {
         </Link>
       </div>
 
-      {/* Desktop Navigation */}
       <nav className="text-xl underline-offset-4 hidden md:flex space-x-6">
         {navItems.map((item, i) => (
           <Link key={i} to={item.href} className="hover:text-red-500">
@@ -33,7 +32,6 @@ export const Navbar: React.FC = () => {
         ))}
       </nav>
 
-      {/* Mobile Navigation */}
       <div className="md:hidden relative">
         <button
           onClick={() => setIsMobileNavMenuOpen((prev) => !prev)}
@@ -64,7 +62,6 @@ export const Navbar: React.FC = () => {
           </svg>
         </button>
 
-        {/* Mobile Menu List */}
         <div
           className={`absolute text-xl rounded-xl right-0 top-12 bg-neutral-900/90 backdrop-blur-md w-48 text-white flex flex-col space-y-3 p-4 rounded-lg border z-50 transform transition-all duration-300 ease-in-out origin-top-right ${
             isMobileNavMenuOpen
