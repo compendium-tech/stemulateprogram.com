@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Loader2, X, Plus, LogOutIcon, LogInIcon } from "lucide-react"
+import { Loader2, X, Plus, LogOutIcon, UserIcon } from "lucide-react"
 
 import { createClient } from "@supabase/supabase-js"
 
@@ -26,6 +26,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import { AuthSection } from "./auth-section"
 
 // -------------------------
 //     SUPABASE CLIENT
@@ -100,6 +101,7 @@ const formSchema = z.object({
 
 export const ApplicationForm = () => {
   const [user, setUser] = useState<any>(null) // store supabase user
+  const [applicationExists, setApplicationExists] = useState(false) // tracks if user already submitted
   const [activeTab, setActiveTab] = useState("personal")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [extracurriculars, setExtracurriculars] = useState<string[]>([])
@@ -116,25 +118,6 @@ export const ApplicationForm = () => {
   }
 
   // -------------------------
-  //   GOOGLE OAUTH / LOGIN
-  // -------------------------
-  async function handleGoogleLogin() {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: "http://localhost:5173/apply",
-      },
-    })
-    if (error) {
-      console.error("Error signing in with Google:", error)
-      toast({
-        title: "Login Error",
-        description: error.message,
-      })
-    }
-  }
-
-  // -------------------------
   //   LOGOUT
   // -------------------------
   async function handleLogout() {
@@ -143,12 +126,13 @@ export const ApplicationForm = () => {
   }
 
   // -------------------------
-  //   CHECK SESSION
+  //   CHECK SESSION & APP
   // -------------------------
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data?.session?.user) {
         setUser(data.session.user)
+        checkApplicationExistence(data.session.user.email)
       }
     })
 
@@ -156,6 +140,7 @@ export const ApplicationForm = () => {
       async (_, session) => {
         if (session?.user) {
           setUser(session.user)
+          checkApplicationExistence(session.user.email)
         } else {
           setUser(null)
         }
@@ -166,6 +151,27 @@ export const ApplicationForm = () => {
       authListener.subscription.unsubscribe()
     }
   }, [])
+
+  async function checkApplicationExistence(email?: string) {
+    try {
+      const { data: applications, error } = await supabase
+        .from("applications")
+        .select("id")
+        .eq("email", email)
+
+      if (error) {
+        console.error("Error checking application existence:", error)
+        return
+      }
+
+      // If any row returned, it means this user already submitted an application
+      if (applications && applications.length > 0) {
+        setApplicationExists(true)
+      }
+    } catch (err) {
+      console.error("Unexpected error checking application existence:", err)
+    }
+  }
 
   // -------------------------
   //       FORM LOGIC
@@ -251,12 +257,11 @@ export const ApplicationForm = () => {
 
         if (insertError) {
           toast({
-            title: "Application Submittion Failed",
+            title: "Application Submission Failed",
             description:
-              "Your research program application has not been submitted due to some technical issues.",
+              "Your research program application could not be submitted due to some technical issues.",
           })
           setIsSubmitting(false)
-
           return
         }
 
@@ -265,6 +270,7 @@ export const ApplicationForm = () => {
           description:
             "Your research program application has been submitted successfully.",
         })
+        setApplicationExists(true) // Mark that they've now submitted
       } catch (error: any) {
         console.error("Error inserting form data:", error)
         toast({
@@ -333,8 +339,8 @@ export const ApplicationForm = () => {
   // -------------------------------------------------
   // RENDER STARTS HERE
   // -------------------------------------------------
+  // If not logged in, ask user to log in
   if (!user) {
-    // If no user logged in, show the "STEMulate ID" screen
     return (
       <Card>
         <div className="flex flex-col items-center justify-center h-[60vh] space-y-6">
@@ -342,21 +348,43 @@ export const ApplicationForm = () => {
           <p className="text-lg text-muted-foreground max-w-md text-center">
             Please log in to continue to the application form.
           </p>
-          <Button onClick={handleGoogleLogin} variant="default">
-            <LogInIcon /> Login with Google
+          <AuthSection />
+        </div>
+      </Card>
+    )
+  }
+
+  // If user is logged in but has already submitted an application, show "Thank You" message
+  if (applicationExists) {
+    return (
+      <Card>
+        <div className="flex flex-col items-center justify-center h-[60vh] space-y-6">
+          <h1 className="text-2xl font-semibold">Application Submitted</h1>
+          <p className="text-center text-muted-foreground max-w-md">
+            Thank you for submitting your application! If you have any questions
+            or need to update your information, please contact us.
+          </p>
+          <Button variant="outline" onClick={handleLogout}>
+            <LogOutIcon className="mr-2" />
+            Logout
           </Button>
         </div>
       </Card>
     )
   }
 
-  // If user is logged in, show the form and a Logout button
+  // Otherwise show the form
   return (
     <div className="w-full max-w-4xl mx-auto">
       {/* Simple logout button at the top */}
-      <div className="flex justify-end my-4">
+      <div className="flex justify-end my-4 space-x-2">
+        <Button>
+          <UserIcon />
+          <p className="text-xs">{user.email}</p>
+        </Button>
         <Button variant="outline" onClick={handleLogout}>
-          <LogOutIcon /> Logout
+          <LogOutIcon className="mr-2" />
+          Logout
         </Button>
       </div>
 
@@ -621,7 +649,7 @@ export const ApplicationForm = () => {
                 </TabsContent>
 
                 {/* ================ PARENT TAB ================ */}
-                <TabsContent value="parent" className="space-y=6 space-y-6">
+                <TabsContent value="parent" className="space-y-6">
                   <div className="space-y-2">
                     <h2 className="text-2xl font-semibold">
                       Parent Information
