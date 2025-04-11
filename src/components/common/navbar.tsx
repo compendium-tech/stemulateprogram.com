@@ -64,22 +64,29 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Menu List */}
         <div
-          className={`absolute text-xl rounded-xl right-0 top-12 bg-neutral-900/80 backdrop-blur-md w-48 text-white flex flex-col space-y-3 p-4 rounded-lg border z-50 transform transition-all duration-300 ease-in-out origin-top-right ${
+          className={`absolute text-xl rounded-xl right-0 top-12 bg-neutral-900/90 backdrop-blur-md w-48 text-white flex flex-col space-y-3 p-4 rounded-lg border z-50 transform transition-all duration-300 ease-in-out origin-top-right ${
             isMobileNavMenuOpen
               ? "opacity-100 scale-100 pointer-events-auto"
               : "opacity-0 scale-95 pointer-events-none"
           }`}
         >
-          {navItems.map((item, i) => (
-            <a
-              key={i}
-              href={item.href}
-              className="block hover:text-red-500"
-              onClick={() => setIsMobileNavMenuOpen(false)}
-            >
-              {item.label}
-            </a>
-          ))}
+          {[
+            {
+              label: "Home",
+              href: "/",
+            },
+          ]
+            .concat(navItems)
+            .map((item, i) => (
+              <Link
+                key={i}
+                to={item.href}
+                className="block hover:text-red-500"
+                onClick={() => setIsMobileNavMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
         </div>
       </div>
     </header>
