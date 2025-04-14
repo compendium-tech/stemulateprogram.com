@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Loader2, X, Plus, LogOutIcon, UserIcon } from "lucide-react"
 
-import { createClient } from "@supabase/supabase-js"
-
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsTrigger } from "@/components/ui/tabs"
 import { TabsList } from "@/components/ui/tabs"
@@ -28,19 +26,9 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { AuthSection } from "./auth-section"
 import { Spinner } from "./spinner"
+import { supabaseClient } from "@/supabase"
 
-// -------------------------
-//     SUPABASE CLIENT
-// -------------------------
-const supabaseUrl = "https://msrispzrxbjjnbrinwcp.supabase.co"
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zcmlzcHpyeGJqam5icmlud2NwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI2NzUwMTYsImV4cCI6MjA1ODI1MTAxNn0.97KV1d1i4jZP6A-y6Wl_CHiJLxF8v93F_xO4xBOYReY"
-const supabase = createClient(supabaseUrl, supabaseKey)
-
-// -------------------------
-//     FORM SCHEMA
-// -------------------------
-const FIELDS_OF_INTEREST = [
+const fieldsOfInterest = [
   "Biology",
   "Business",
   "Chemistry",
@@ -61,21 +49,18 @@ const FIELDS_OF_INTEREST = [
 ]
 
 const formSchema = z.object({
-  // Personal Information
   email: z.string().email({ message: "Invalid email address" }),
   fullName: z.string().min(2, { message: "Full name is required" }),
   city: z.string().min(2, { message: "City is required" }),
   country: z.string().min(2, { message: "Country is required" }),
   phone: z.string().min(10, { message: "Valid phone number is required" }),
 
-  // Academic Background
   ieltsScore: z.string().min(1, { message: "IELTS score is required" }),
   satScore: z.string().min(1, { message: "SAT score is required" }),
   schoolName: z.string().min(2, { message: "School name is required" }),
   grade: z.string().min(1, { message: "Grade is required" }),
   gpa: z.string().min(1, { message: "GPA is required" }),
 
-  // Parent Information
   parentFullName: z
     .string()
     .min(2, { message: "Parent's full name is required" }),
@@ -83,7 +68,6 @@ const formSchema = z.object({
     .string()
     .min(10, { message: "Valid parent phone number is required" }),
 
-  // Research & Extracurricular
   fieldsOfInterest: z
     .array(z.string())
     .min(1, { message: "Select at least one field of interest" })
@@ -92,18 +76,18 @@ const formSchema = z.object({
     .string()
     .min(50, { message: "Should be at least 50 characters" }),
 
-  // Additional Information
   motivation: z.string().min(50, {
     message: "Motivation statement should be at least 50 characters",
   }),
+
   additionalInfo: z.string().optional(),
   financialAid: z.boolean().default(false),
 })
 
 export const ApplicationForm = () => {
   const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState<any>(null) // store supabase user
-  const [applicationExists, setApplicationExists] = useState(false) // tracks if user already submitted
+  const [user, setUser] = useState<any>(null)
+  const [applicationExists, setApplicationExists] = useState(false)
   const [activeTab, setActiveTab] = useState("personal")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [extracurriculars, setExtracurriculars] = useState<string[]>([])
@@ -119,30 +103,27 @@ export const ApplicationForm = () => {
     additional: "Additional",
   }
 
-  // -------------------------
-  //   LOGOUT
-  // -------------------------
-  async function handleLogout() {
-    await supabase.auth.signOut()
+  const handleLogout = async () => {
+    await supabaseClient.auth.signOut()
     setUser(null)
   }
 
-  // -------------------------
-  //   CHECK SESSION & APP
-  // -------------------------
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => {
+    supabaseClient.auth.getSession().then(({ data }) => {
       if (data?.session?.user) {
         setUser(data.session.user)
-        checkApplicationExistence(data.session.user.email)
+
+        if (data.session.user.email)
+          checkApplicationExistence(data.session.user.email)
       }
     })
 
-    const { data: authListener } = supabase.auth.onAuthStateChange(
+    const { data: authListener } = supabaseClient.auth.onAuthStateChange(
       async (_, session) => {
         if (session?.user) {
           setUser(session.user)
-          checkApplicationExistence(session.user.email)
+
+          if (session.user.email) checkApplicationExistence(session.user.email)
         } else {
           setUser(null)
         }
@@ -154,13 +135,11 @@ export const ApplicationForm = () => {
     }
   }, [])
 
-  async function checkApplicationExistence(email?: string) {
+  const checkApplicationExistence = async (email: string) => {
     setLoading(true)
 
-    if (!email) return
-
     try {
-      const { data: applications, error } = await supabase
+      const { data: applications, error } = await supabaseClient
         .from("applications")
         .select("id")
         .eq("email", email)
@@ -174,16 +153,13 @@ export const ApplicationForm = () => {
       if (applications && applications.length > 0) {
         setApplicationExists(true)
       }
+
       setLoading(false)
     } catch (err) {
       console.error("Unexpected error checking application existence:", err)
     }
   }
 
-  // -------------------------
-  //       FORM LOGIC
-  // -------------------------
-  // Function to scroll to the active tab with left alignment
   const scrollToTab = (index: number) => {
     if (tabsRef.current) {
       const tabElements = tabsRef.current.querySelectorAll('[role="tab"]')
@@ -244,7 +220,7 @@ export const ApplicationForm = () => {
     },
   })
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true)
 
     const formData = {
@@ -254,7 +230,7 @@ export const ApplicationForm = () => {
 
     setTimeout(async () => {
       try {
-        const { error: insertError } = await supabase
+        const { error: insertError } = await supabaseClient
           .from("applications")
           .insert([
             {
@@ -277,7 +253,8 @@ export const ApplicationForm = () => {
           description:
             "Your research program application has been submitted successfully.",
         })
-        setApplicationExists(true) // Mark that they've now submitted
+
+        setApplicationExists(true)
       } catch (error: any) {
         console.error("Error inserting form data:", error)
         toast({
@@ -289,27 +266,26 @@ export const ApplicationForm = () => {
     }, 1500)
   }
 
-  // -------------------------
-  // EXTRACURRICULAR HELPERS
-  // -------------------------
   const addExtracurricular = () => {
     if (newActivity.trim() && extracurriculars.length < 5) {
       setExtracurriculars([...extracurriculars, newActivity.trim()])
       setNewActivity("")
     }
   }
+
   const removeExtracurricular = (index: number) => {
     setExtracurriculars(extracurriculars.filter((_, i) => i !== index))
   }
 
-  // Next Tab with minimal checks
   const nextTab = (tab: string) => {
     if (tab === "personal") {
       const personalFields = ["email", "fullName", "city", "country", "phone"]
+
       const isValid = personalFields.every(
         (field) =>
           !form.formState.errors[field as keyof z.infer<typeof formSchema>]
       )
+
       if (isValid) setActiveTab("academic")
     } else if (tab === "academic") {
       const academicFields = [
@@ -319,10 +295,12 @@ export const ApplicationForm = () => {
         "grade",
         "gpa",
       ]
+
       const isValid = academicFields.every(
         (field) =>
           !form.formState.errors[field as keyof z.infer<typeof formSchema>]
       )
+
       if (isValid) setActiveTab("parent")
     } else if (tab === "parent") {
       const parentFields = ["parentFullName", "parentPhone"]
@@ -343,10 +321,6 @@ export const ApplicationForm = () => {
     }
   }
 
-  // -------------------------------------------------
-  // RENDER STARTS HERE
-  // -------------------------------------------------
-  // If not logged in, ask user to log in
   if (!user) {
     return (
       <Card>
@@ -421,7 +395,6 @@ export const ApplicationForm = () => {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-8"
                 >
-                  {/* ================ PERSONAL TAB ================ */}
                   <TabsContent value="personal" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -528,7 +501,6 @@ export const ApplicationForm = () => {
                     </div>
                   </TabsContent>
 
-                  {/* ================ ACADEMIC TAB ================ */}
                   <TabsContent value="academic" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -648,7 +620,6 @@ export const ApplicationForm = () => {
                     </div>
                   </TabsContent>
 
-                  {/* ================ PARENT TAB ================ */}
                   <TabsContent value="parent" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -710,7 +681,6 @@ export const ApplicationForm = () => {
                     </div>
                   </TabsContent>
 
-                  {/* ================ RESEARCH TAB ================ */}
                   <TabsContent value="research" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -737,7 +707,7 @@ export const ApplicationForm = () => {
                             </FormDescription>
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
-                            {FIELDS_OF_INTEREST.map((field) => (
+                            {fieldsOfInterest.map((field) => (
                               <FormField
                                 key={field}
                                 control={form.control}
@@ -842,7 +812,6 @@ export const ApplicationForm = () => {
                     </div>
                   </TabsContent>
 
-                  {/* ================ EXTRACURRICULAR TAB ================ */}
                   <TabsContent value="extracurricular" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -931,7 +900,6 @@ export const ApplicationForm = () => {
                     </div>
                   </TabsContent>
 
-                  {/* ================ ADDITIONAL TAB ================ */}
                   <TabsContent value="additional" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">

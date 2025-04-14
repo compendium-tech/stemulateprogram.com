@@ -2,7 +2,7 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "headers": [
     {
-      "source": "/(.*)\\.(svg|png|jpg|jpeg|json)$",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

@@ -62,12 +62,12 @@ const PublicationsPageContent = () => {
   return (
     <main className="min-h-screen bg-white text-black py-24 px-4 md:px-8 flex-col items-center">
       <div className="max-w-5xl mx-auto space-y-8">
-        <p className="font-bold text-3xl sm:text-4xl md:text-5xl">
+        <p className="font-bold text-2xl sm:text-4xl md:text-5xl">
           Publications
         </p>
         <ul className="space-y-8">
           {publications.map((pub, index) => (
-            <li key={index} className="text-lg md:text-xl">
+            <li key={index} className="md:text-xl">
               "<i>{pub.name}</i>"" by{" "}
               <i>
                 <b>{pub.student}</b>
