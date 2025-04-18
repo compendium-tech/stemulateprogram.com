@@ -16,10 +16,7 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
         speed={80}
       >
         {areas1.map((area, idx) => (
-          <div
-            key={idx}
-            className="p-4 m-2 border-color-white rounded-2xl flex-shrink-0"
-          >
+          <div key={idx} className="p-4 m-2 border-color-white rounded-2xl">
             <i className="text-sm sm:text-lg md:text-2xl font-medium">{area}</i>
           </div>
         ))}
@@ -31,10 +28,7 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
         speed={80}
       >
         {areas2.map((area, idx) => (
-          <div
-            key={idx}
-            className="p-4 m-2 border-color-white rounded-2xl flex-shrink-0"
-          >
+          <div key={idx} className="p-4 m-2 rounded-2xl">
             <i className="text-sm sm:text-lg md:text-2xl font-medium">
               <StaggerText text={area} />
             </i>
