@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-import { Loader2, X, Plus, LogOutIcon, UserIcon } from "lucide-react"
+import { zodResolver } from "@hookform/resolvers/zod"
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsTrigger } from "@/components/ui/tabs"
 import { TabsList } from "@/components/ui/tabs"
-import { toast } from "@/hooks/use-toast"
-
 import {
   Form,
   FormControl,
@@ -24,6 +21,15 @@ import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
+import {
+  Loader2,
+  X,
+  Plus,
+  LogOutIcon,
+  UserIcon,
+  AlertCircle,
+} from "lucide-react"
+import { toast } from "@/hooks/use-toast"
 import { AuthSection } from "./auth-section"
 import { Spinner } from "./spinner"
 import { supabaseClient } from "@/supabase"
@@ -48,6 +54,18 @@ const fieldsOfInterest = [
   "Sociology",
 ]
 
+// Extracurricular item schema
+const extracurricularItemSchema = z.object({
+  position: z
+    .string()
+    .max(50, "Position/Leadership description must be at most 50 characters"),
+  name: z.string().max(100, "Name must be at most 100 characters"),
+  description: z
+    .string()
+    .max(150, "Description must be at most 150 characters"),
+})
+
+// Main form schema
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   fullName: z.string().min(2, { message: "Full name is required" }),
@@ -72,26 +90,47 @@ const formSchema = z.object({
     .array(z.string())
     .min(1, { message: "Select at least one field of interest" })
     .max(3, { message: "You can select up to 3 fields of interest" }),
+
+  // 2) ADD MAX CHARACTER VALIDATION & SHOW COUNTER
   researchInterest: z
     .string()
-    .min(50, { message: "Should be at least 50 characters" }),
+    .min(50, { message: "Should be at least 50 characters" })
+    .max(500, { message: "Should not exceed 500 characters" }),
 
-  motivation: z.string().min(50, {
-    message: "Motivation statement should be at least 50 characters",
-  }),
+  motivation: z
+    .string()
+    .min(50, {
+      message: "Motivation statement should be at least 50 characters",
+    })
+    .max(500, { message: "Should not exceed 500 characters" }),
 
   additionalInfo: z.string().optional(),
   financialAid: z.boolean().default(false),
+
+  // 3) EXTRACURRICULAR ACTIVITIES AS ARRAY OF OBJECTS
+  extracurriculars: z
+    .array(extracurricularItemSchema)
+    .max(5, { message: "You can list up to 5 activities" })
+    .optional(),
 })
 
+// -------------------------------------
+// COMPONENT
+// -------------------------------------
 export const ApplicationForm = () => {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<any>(null)
   const [applicationExists, setApplicationExists] = useState(false)
   const [activeTab, setActiveTab] = useState("personal")
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [extracurriculars, setExtracurriculars] = useState<string[]>([])
-  const [newActivity, setNewActivity] = useState("")
+
+  // For extracurricular items
+  const [showAddActivityModal, setShowAddActivityModal] = useState(false)
+  const [newActivity, setNewActivity] = useState({
+    position: "",
+    name: "",
+    description: "",
+  })
 
   const tabsRef = useRef<HTMLDivElement>(null)
   const tabLabels: Record<string, string> = {
@@ -112,9 +151,9 @@ export const ApplicationForm = () => {
     supabaseClient.auth.getSession().then(({ data }) => {
       if (data?.session?.user) {
         setUser(data.session.user)
-
-        if (data.session.user.email)
+        if (data.session.user.email) {
           checkApplicationExistence(data.session.user.email)
+        }
       }
     })
 
@@ -122,8 +161,9 @@ export const ApplicationForm = () => {
       async (_, session) => {
         if (session?.user) {
           setUser(session.user)
-
-          if (session.user.email) checkApplicationExistence(session.user.email)
+          if (session.user.email) {
+            checkApplicationExistence(session.user.email)
+          }
         } else {
           setUser(null)
         }
@@ -137,7 +177,6 @@ export const ApplicationForm = () => {
 
   const checkApplicationExistence = async (email: string) => {
     setLoading(true)
-
     try {
       const { data: applications, error } = await supabaseClient
         .from("applications")
@@ -146,17 +185,17 @@ export const ApplicationForm = () => {
 
       if (error) {
         console.error("Error checking application existence:", error)
+        setLoading(false)
         return
       }
 
-      // If any row returned, it means this user already submitted an application
       if (applications && applications.length > 0) {
         setApplicationExists(true)
       }
-
       setLoading(false)
     } catch (err) {
       console.error("Unexpected error checking application existence:", err)
+      setLoading(false)
     }
   }
 
@@ -197,6 +236,7 @@ export const ApplicationForm = () => {
     }
   }, [])
 
+  // 4) SETUP REACT HOOK FORM
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -217,110 +257,153 @@ export const ApplicationForm = () => {
       motivation: "",
       additionalInfo: "",
       financialAid: false,
+      extracurriculars: [],
     },
+    mode: "onBlur", // or "onChange", depending on your preference
   })
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  // 5) DETECT ERRORS FOR TABS & SHOW ICON
+  const errors = form.formState.errors
+
+  const hasErrorsInTab = (tab: string): boolean => {
+    switch (tab) {
+      case "personal":
+        return !!(
+          errors.email ||
+          errors.fullName ||
+          errors.city ||
+          errors.country ||
+          errors.phone
+        )
+      case "academic":
+        return !!(
+          errors.ieltsScore ||
+          errors.satScore ||
+          errors.schoolName ||
+          errors.grade ||
+          errors.gpa
+        )
+      case "parent":
+        return !!(errors.parentFullName || errors.parentPhone)
+      case "research":
+        return !!(errors.fieldsOfInterest || errors.researchInterest)
+      case "extracurricular":
+        return !!errors.extracurriculars
+      case "additional":
+        return !!errors.motivation
+      default:
+        return false
+    }
+  }
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true)
+    try {
+      const { error: insertError } = await supabaseClient
+        .from("applications")
+        .insert([
+          {
+            ...values,
+          },
+        ])
 
-    const formData = {
-      ...values,
-      extracurriculars,
-    }
-
-    setTimeout(async () => {
-      try {
-        const { error: insertError } = await supabaseClient
-          .from("applications")
-          .insert([
-            {
-              ...formData,
-            },
-          ])
-
-        if (insertError) {
-          toast({
-            title: "Application Submission Failed",
-            description:
-              "Your research program application could not be submitted due to some technical issues.",
-          })
-          setIsSubmitting(false)
-          return
-        }
-
+      if (insertError) {
         toast({
-          title: "Application Submitted",
+          title: "Application Submission Failed",
           description:
-            "Your research program application has been submitted successfully.",
+            "Your research program application could not be submitted due to some technical issues.",
         })
-
-        setApplicationExists(true)
-      } catch (error: any) {
-        console.error("Error inserting form data:", error)
-        toast({
-          title: "Submission Error",
-          description: error.message,
-        })
+        setIsSubmitting(false)
+        return
       }
-      setIsSubmitting(false)
-    }, 1500)
-  }
 
-  const addExtracurricular = () => {
-    if (newActivity.trim() && extracurriculars.length < 5) {
-      setExtracurriculars([...extracurriculars, newActivity.trim()])
-      setNewActivity("")
+      toast({
+        title: "Application Submitted",
+        description:
+          "Your research program application has been submitted successfully.",
+      })
+      setApplicationExists(true)
+    } catch (error: any) {
+      console.error("Error inserting form data:", error)
+      toast({
+        title: "Submission Error",
+        description: error.message,
+      })
     }
+    setIsSubmitting(false)
   }
 
-  const removeExtracurricular = (index: number) => {
-    setExtracurriculars(extracurriculars.filter((_, i) => i !== index))
+  // 6) POP-UP: ADD EXTRACURRICULAR
+  const handleAddExtracurricular = () => {
+    // Validate local fields quickly
+    const parsed = extracurricularItemSchema.safeParse(newActivity)
+    if (!parsed.success) {
+      // If there's an error, you could display a local toast or handle it any way you like
+      const firstError = parsed.error.issues[0]?.message || "Invalid input"
+      toast({ title: "Error", description: firstError })
+      return
+    }
+
+    // If valid, add it to array
+    const currentActivities = form.getValues("extracurriculars") || []
+    if (currentActivities.length >= 5) {
+      toast({
+        title: "Maximum Activities Reached",
+        description: "You can only add up to 5 extracurricular activities.",
+      })
+      return
+    }
+
+    form.setValue("extracurriculars", [...currentActivities, newActivity])
+    setNewActivity({ position: "", name: "", description: "" })
+    setShowAddActivityModal(false)
   }
 
+  const handleRemoveExtracurricular = (index: number) => {
+    const currentActivities = form.getValues("extracurriculars") || []
+    currentActivities.splice(index, 1)
+    form.setValue("extracurriculars", currentActivities)
+  }
+
+  // 7) WORD/CHAR COUNTERS FOR TEXTAREAS
+  // Using "character" counters here, but you can adapt to word-based if you prefer
+  const researchInterestValue = form.watch("researchInterest") || ""
+  const motivationValue = form.watch("motivation") || ""
+  const researchChars = researchInterestValue.length
+  const motivationChars = motivationValue.length
+  const MAX_CHARS = 500 // from schema
+
+  // Next tab function (unchanged logic, but calls trigger to validate)
   const nextTab = (tab: string) => {
     if (tab === "personal") {
-      const personalFields = ["email", "fullName", "city", "country", "phone"]
-
-      const isValid = personalFields.every(
-        (field) =>
-          !form.formState.errors[field as keyof z.infer<typeof formSchema>]
-      )
-
-      if (isValid) setActiveTab("academic")
+      form
+        .trigger(["email", "fullName", "city", "country", "phone"])
+        .then((valid) => {
+          if (valid) setActiveTab("academic")
+        })
     } else if (tab === "academic") {
-      const academicFields = [
-        "ieltsScore",
-        "satScore",
-        "schoolName",
-        "grade",
-        "gpa",
-      ]
-
-      const isValid = academicFields.every(
-        (field) =>
-          !form.formState.errors[field as keyof z.infer<typeof formSchema>]
-      )
-
-      if (isValid) setActiveTab("parent")
+      form
+        .trigger(["ieltsScore", "satScore", "schoolName", "grade", "gpa"])
+        .then((valid) => {
+          if (valid) setActiveTab("parent")
+        })
     } else if (tab === "parent") {
-      const parentFields = ["parentFullName", "parentPhone"]
-      const isValid = parentFields.every(
-        (field) =>
-          !form.formState.errors[field as keyof z.infer<typeof formSchema>]
-      )
-      if (isValid) setActiveTab("research")
+      form.trigger(["parentFullName", "parentPhone"]).then((valid) => {
+        if (valid) setActiveTab("research")
+      })
     } else if (tab === "research") {
-      const researchFields = ["fieldsOfInterest", "researchInterest"]
-      const isValid = researchFields.every(
-        (field) =>
-          !form.formState.errors[field as keyof z.infer<typeof formSchema>]
-      )
-      if (isValid) setActiveTab("extracurricular")
+      form.trigger(["fieldsOfInterest", "researchInterest"]).then((valid) => {
+        if (valid) setActiveTab("extracurricular")
+      })
     } else if (tab === "extracurricular") {
+      // extracurriculars is optional, but let's move on
       setActiveTab("additional")
     }
   }
 
+  // -------------------------------------
+  // RENDER
+  // -------------------------------------
   if (!user) {
     return (
       <Card>
@@ -357,7 +440,7 @@ export const ApplicationForm = () => {
             <p className="text-center text-muted-foreground max-w-md">
               Thank you for submitting your application! If you have any
               questions or need to update your information, please contact us.
-            </p>{" "}
+            </p>
           </CardContent>
         ) : (
           <CardContent className="pt-6 px-3 sm:px-6">
@@ -375,18 +458,24 @@ export const ApplicationForm = () => {
                     "research",
                     "extracurricular",
                     "additional",
-                  ].map((tab, index) => (
-                    <TabsTrigger
-                      key={tab}
-                      value={tab}
-                      className={`min-w-[90px] text-xs sm:text-sm whitespace-nowrap px-2 sm:px-4 py-1.5 sm:py-2 snap-start ${
-                        activeTab === tab ? "active-tab" : ""
-                      }`}
-                      onClick={() => scrollToTab(index)}
-                    >
-                      {tabLabels[tab]}
-                    </TabsTrigger>
-                  ))}
+                  ].map((tab, index) => {
+                    const isErrorTab = hasErrorsInTab(tab)
+                    return (
+                      <TabsTrigger
+                        key={tab}
+                        value={tab}
+                        className={`min-w-[90px] text-xs sm:text-sm whitespace-nowrap px-2 sm:px-4 py-1.5 sm:py-2 snap-start ${
+                          activeTab === tab ? "active-tab" : ""
+                        }`}
+                        onClick={() => scrollToTab(index)}
+                      >
+                        {tabLabels[tab]}
+                        {isErrorTab && (
+                          <AlertCircle className="inline-block ml-1 text-red-500 h-4 w-4" />
+                        )}
+                      </TabsTrigger>
+                    )
+                  })}
                 </TabsList>
               </div>
 
@@ -395,6 +484,7 @@ export const ApplicationForm = () => {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-8"
                 >
+                  {/* -------------------- PERSONAL TAB -------------------- */}
                   <TabsContent value="personal" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -412,6 +502,7 @@ export const ApplicationForm = () => {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
+                            {/* Remove any "invalid" styling logic; rely on FormMessage only */}
                             <Input
                               type="email"
                               placeholder="your.email@example.com"
@@ -485,22 +576,14 @@ export const ApplicationForm = () => {
                       <Button
                         type="button"
                         className="w-full sm:w-auto"
-                        onClick={() => {
-                          form.trigger([
-                            "email",
-                            "fullName",
-                            "city",
-                            "country",
-                            "phone",
-                          ])
-                          nextTab("personal")
-                        }}
+                        onClick={() => nextTab("personal")}
                       >
                         Next: Academic Background
                       </Button>
                     </div>
                   </TabsContent>
 
+                  {/* -------------------- ACADEMIC TAB -------------------- */}
                   <TabsContent value="academic" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -604,22 +687,14 @@ export const ApplicationForm = () => {
                       <Button
                         type="button"
                         className="w-full sm:w-auto"
-                        onClick={() => {
-                          form.trigger([
-                            "ieltsScore",
-                            "satScore",
-                            "schoolName",
-                            "grade",
-                            "gpa",
-                          ])
-                          nextTab("academic")
-                        }}
+                        onClick={() => nextTab("academic")}
                       >
                         Next: Parent Information
                       </Button>
                     </div>
                   </TabsContent>
 
+                  {/* -------------------- PARENT TAB -------------------- */}
                   <TabsContent value="parent" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -671,16 +746,14 @@ export const ApplicationForm = () => {
                       <Button
                         type="button"
                         className="w-full sm:w-auto"
-                        onClick={() => {
-                          form.trigger(["parentFullName", "parentPhone"])
-                          nextTab("parent")
-                        }}
+                        onClick={() => nextTab("parent")}
                       >
                         Next: Research Interests
                       </Button>
                     </div>
                   </TabsContent>
 
+                  {/* -------------------- RESEARCH TAB -------------------- */}
                   <TabsContent value="research" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -703,7 +776,7 @@ export const ApplicationForm = () => {
                             </FormLabel>
                             <FormDescription>
                               Select up to three fields that you are most
-                              interested in researching.
+                              interested in.
                             </FormDescription>
                           </div>
                           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
@@ -713,6 +786,7 @@ export const ApplicationForm = () => {
                                 control={form.control}
                                 name="fieldsOfInterest"
                                 render={({ field: { onChange, value } }) => {
+                                  const checked = value?.includes(field)
                                   return (
                                     <FormItem
                                       key={field}
@@ -720,13 +794,13 @@ export const ApplicationForm = () => {
                                     >
                                       <FormControl>
                                         <Checkbox
-                                          checked={value?.includes(field)}
-                                          onCheckedChange={(checked) => {
+                                          checked={checked}
+                                          onCheckedChange={(isChecked) => {
                                             const currentValues = [
                                               ...(value || []),
                                             ]
                                             if (
-                                              checked &&
+                                              isChecked &&
                                               currentValues.length < 3
                                             ) {
                                               onChange([
@@ -734,7 +808,7 @@ export const ApplicationForm = () => {
                                                 field,
                                               ])
                                             } else if (
-                                              checked &&
+                                              isChecked &&
                                               currentValues.length >= 3
                                             ) {
                                               toast({
@@ -780,6 +854,10 @@ export const ApplicationForm = () => {
                               {...field}
                             />
                           </FormControl>
+                          {/* SHOW CHARACTER COUNTER */}
+                          <div className="text-xs text-muted-foreground mt-1">
+                            {researchChars}/{MAX_CHARS} characters
+                          </div>
                           <FormDescription>
                             Explain why you are interested in these fields and
                             what specific questions or problems you hope to
@@ -802,16 +880,14 @@ export const ApplicationForm = () => {
                       <Button
                         type="button"
                         className="w-full sm:w-auto"
-                        onClick={() => {
-                          form.trigger(["fieldsOfInterest", "researchInterest"])
-                          nextTab("research")
-                        }}
+                        onClick={() => nextTab("research")}
                       >
                         Next: Extracurricular Activities
                       </Button>
                     </div>
                   </TabsContent>
 
+                  {/* -------------------- EXTRACURRICULAR TAB -------------------- */}
                   <TabsContent value="extracurricular" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -823,62 +899,52 @@ export const ApplicationForm = () => {
                       </p>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex flex-col space-y-2">
-                        <Label htmlFor="new-activity">Add Activity</Label>
-                        <div className="flex flex-row items-center space-x-2">
-                          <Input
-                            id="new-activity"
-                            value={newActivity}
-                            onChange={(e) => setNewActivity(e.target.value)}
-                            placeholder="e.g., Debate Club, Volunteer Work, Sports Team"
-                            disabled={extracurriculars.length >= 5}
-                            className="flex-grow"
-                          />
-                          <Button
-                            type="button"
-                            variant="default"
-                            onClick={addExtracurricular}
-                            disabled={extracurriculars.length >= 5}
-                          >
-                            <Plus className="w-4 h-4" />
-                          </Button>
-                        </div>
-                        {extracurriculars.length >= 5 && (
-                          <p className="text-sm text-muted-foreground">
-                            You have reached the maximum of 5 activities.
-                          </p>
-                        )}
-                      </div>
+                    {/* Button to open modal */}
+                    <Button
+                      type="button"
+                      variant="default"
+                      onClick={() => setShowAddActivityModal(true)}
+                    >
+                      <Plus className="w-4 h-4 mr-1" />
+                      Add Activity
+                    </Button>
 
-                      <div className="space-y-2">
-                        <Label>Your Activities</Label>
-                        {extracurriculars.length === 0 ? (
-                          <p className="text-sm text-muted-foreground py-2">
-                            No activities added yet. Add up to 5 activities
-                            above.
-                          </p>
-                        ) : (
-                          <div className="space-y-2">
-                            {extracurriculars.map((activity, index) => (
+                    {/* Show existing activities */}
+                    <div className="space-y-4 mt-4">
+                      <Label>Your Activities</Label>
+                      {form.watch("extracurriculars")?.length === 0 ? (
+                        <p className="text-sm text-muted-foreground py-2">
+                          No activities added yet. Add up to 5 activities.
+                        </p>
+                      ) : (
+                        <div className="space-y-2">
+                          {form
+                            .watch("extracurriculars")
+                            ?.map((activity, index) => (
                               <div
                                 key={index}
-                                className="flex items-center justify-between p-3 border rounded-md"
+                                className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 border rounded-md gap-2"
                               >
-                                <span>{activity}</span>
+                                <div className="text-sm space-y-1">
+                                  <p className="font-semibold">
+                                    {activity.position} – {activity.name}
+                                  </p>
+                                  <p>{activity.description}</p>
+                                </div>
                                 <Button
                                   type="button"
                                   variant="ghost"
                                   size="sm"
-                                  onClick={() => removeExtracurricular(index)}
+                                  onClick={() =>
+                                    handleRemoveExtracurricular(index)
+                                  }
                                 >
                                   <X className="h-4 w-4" />
                                 </Button>
                               </div>
                             ))}
-                          </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex flex-col sm:flex-row gap-2 justify-between">
@@ -900,6 +966,7 @@ export const ApplicationForm = () => {
                     </div>
                   </TabsContent>
 
+                  {/* -------------------- ADDITIONAL TAB -------------------- */}
                   <TabsContent value="additional" className="space-y-6">
                     <div className="space-y-2">
                       <h2 className="text-2xl font-semibold">
@@ -924,6 +991,10 @@ export const ApplicationForm = () => {
                               {...field}
                             />
                           </FormControl>
+                          {/* SHOW CHARACTER COUNTER */}
+                          <div className="text-xs text-muted-foreground mt-1">
+                            {motivationChars}/{MAX_CHARS} characters
+                          </div>
                           <FormDescription>
                             Describe why you want to participate in this program
                             and what you hope to achieve.
@@ -1025,6 +1096,81 @@ export const ApplicationForm = () => {
           </CardContent>
         )}
       </Card>
+
+      {/* ------------------------------------------------
+          EXTRACURRICULAR ADD MODAL
+          ------------------------------------------------ */}
+      {showAddActivityModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+          <div className="bg-white p-6 rounded-md w-full max-w-md">
+            <h3 className="text-xl font-semibold mb-4">
+              Add Extracurricular Activity
+            </h3>
+            <div className="space-y-4">
+              {/* Position */}
+              <div>
+                <Label htmlFor="position">
+                  Position/Leadership (max 50 chars)
+                </Label>
+                <Input
+                  id="position"
+                  placeholder="Captain, President, Member, etc."
+                  value={newActivity.position}
+                  onChange={(e) =>
+                    setNewActivity((prev) => ({
+                      ...prev,
+                      position: e.target.value,
+                    }))
+                  }
+                  maxLength={50}
+                />
+              </div>
+              {/* Name */}
+              <div>
+                <Label htmlFor="name">Name (max 100 chars)</Label>
+                <Input
+                  id="name"
+                  placeholder="Debate Club, Volunteer Group, etc."
+                  value={newActivity.name}
+                  onChange={(e) =>
+                    setNewActivity((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
+                  maxLength={100}
+                />
+              </div>
+              {/* Description */}
+              <div>
+                <Label htmlFor="description">Description (max 150 chars)</Label>
+                <Textarea
+                  id="description"
+                  placeholder="Describe your role, accomplishments, recognition..."
+                  value={newActivity.description}
+                  onChange={(e) =>
+                    setNewActivity((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
+                  maxLength={150}
+                  className="resize-none"
+                />
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end space-x-2">
+              <Button
+                variant="outline"
+                onClick={() => setShowAddActivityModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button onClick={handleAddExtracurricular}>Save</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -11,8 +11,8 @@ const LandingPageContent: React.FC = () => {
       <LandingHero />
       <WhyResearch />
       <WorkWithExperts />
-      <FAQ />
       <ResearchAreas />
+      <FAQ />
     </>
   )
 }

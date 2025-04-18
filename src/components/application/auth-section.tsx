@@ -21,12 +21,12 @@ export function AuthSection() {
       })
       if (error) {
         toast({
-          title: "Error Sending Magic Link",
+          title: "Error Sending Sign In Link",
           description: error.message,
         })
       } else {
         toast({
-          title: "Magic Link Sent!",
+          title: "Sign In Link Sent!",
           description: `Check your inbox (${email}) to complete sign-in.`,
         })
       }
@@ -41,7 +41,7 @@ export function AuthSection() {
 
   return (
     <>
-      <div className="mt-2 md:w-1/2 space-y-3">
+      <div className="mt-2 px-2 w-full md:w-1/2 space-y-3">
         <p className="text-xl font-semibold">Login with email</p>
         <Input
           type="email"
@@ -49,6 +49,9 @@ export function AuthSection() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        <p className="text-sm">
+          We will send you a link to sign into your STEMulate account.
+        </p>
 
         <div className="flex items-center space-x-2">
           <Button onClick={handleSendMagicLink} disabled={loading || !email}>
