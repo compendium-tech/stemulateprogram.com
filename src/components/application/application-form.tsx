@@ -157,7 +157,9 @@ export const ApplicationForm = () => {
       if (data?.session?.user) {
         setUser(data.session.user)
         if (data.session.user.id) {
-          checkApplicationExistence(data.session.user.id)
+          setTimeout(() => {
+            checkApplicationExistence(data.session.user.id)
+          }, 1000)
         }
       }
     })
@@ -167,7 +169,9 @@ export const ApplicationForm = () => {
         if (session?.user) {
           setUser(session.user)
           if (session.user.id) {
-            checkApplicationExistence(session.user.id)
+            setTimeout(() => {
+              checkApplicationExistence(session.user.id)
+            }, 1000)
           }
         } else {
           setUser(null)
@@ -182,6 +186,13 @@ export const ApplicationForm = () => {
 
   const checkApplicationExistence = async (userId: string) => {
     setLoading(true)
+
+    if (!user) {
+      setLoading(false)
+      setApplicationExists(false)
+      return
+    }
+
     try {
       const { data: applications, error } = await supabaseClient
         .from("applications")
@@ -189,7 +200,6 @@ export const ApplicationForm = () => {
         .eq("createdBy", userId)
 
       if (error) {
-        console.error("Error checking application existence:", error)
         setLoading(false)
         return
       }
