@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Poppins';
+}
+
+.loader {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+}
+
+.loader .blinder-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.loader .blinder-container .blinder {
+    background: #8da8a2;
+    height: 100vh;
+    flex: 1;
+    transform-origin: top;
+}
+
+.loader svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 7vw;
+    margin: auto;
+}
+
+.drip-loader {
+    animation: animateDrips 1s infinite;
+}
+
+@keyframes animateDrips {
+    to {
+        transform: translateY(100px)
+    }
+}

@@ -1,11 +1,11 @@
 export const ProgramInfo: React.FC = () => (
-  <div className="space-y-6">
+  <div className="p-4 space-y-6">
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl md:text-4xl font-semibold mb-6 mt-6">
+        <h2 className="text-lg md:text-2xl font-semibold mb-6 mt-6">
           Program Overview:
         </h2>
-        <p className="md:text-lg">
+        <p className="text-sm md:text-base">
           During the program, you will learn the basics of brainstorming and
           developing ideas, formulating hypotheses, collecting and analyzing
           data, and writing a research paper. This program is designed for
@@ -17,7 +17,7 @@ export const ProgramInfo: React.FC = () => (
       </div>
 
       <div>
-        <p className="md:text-lg">
+        <p className="text-sm md:text-base">
           At the beginning of the program, students will have group workshops on
           research basics and methodologies, topic exploration and idea
           brainstorming, ethical guidelines and plagiarism, and topic selection
@@ -29,12 +29,12 @@ export const ProgramInfo: React.FC = () => (
       </div>
 
       <div>
-        <p className="md:text-lg">
+        <p className="text-sm md:text-base">
           The mentors of the program have backgrounds in STEM and social
           sciences. Students can conduct research and write a paper under the
           guidance of an experienced mentor in any of the following fields:
         </p>
-        <div className="mt-4 text-sm md:text-lg flex space-x-8 md:space-x-16">
+        <div className="mt-4 text-sm md:text-base flex space-x-8 md:space-x-16">
           <ul className="mt-2 space-y-1">
             <li>- Biology</li>
             <li>- Business</li>
@@ -60,7 +60,7 @@ export const ProgramInfo: React.FC = () => (
       </div>
 
       <div>
-        <p className="md:text-lg">
+        <p className="text-sm md:text-base">
           Note: You will conduct research in one field only. By selecting up to
           3 fields, you indicate the areas you are interested in. This will help
           us match you to your best-fit mentor.
@@ -69,9 +69,9 @@ export const ProgramInfo: React.FC = () => (
 
       <div>
         <h2 className="md:text-lg font-medium mb-2">Program details:</h2>
-        <ul className="space-y-1 text-sm md:text-lg">
+        <ul className="space-y-1 text-sm md:text-base">
           <li>
-            - Program dates: January 20th to March 17th (duration is 8 weeks).
+            - Program dates: July 1st to September 1st (duration is 8 weeks).
           </li>
           <li>- The program will run in English.</li>
           <li>
@@ -83,13 +83,13 @@ export const ProgramInfo: React.FC = () => (
       </div>
 
       <div>
-        <p className="md:text-lg font-medium">
-          Deadline for the application: January 10th at 11:59 PM (UTC-5)
+        <p className="text-sm md:text-base font-medium">
+          Deadline for the application: June 1st at 11:59 PM (UTC-5)
         </p>
       </div>
 
       <div>
-        <p className="text-base">
+        <p className="text-sm md:text-base">
           For any questions please contact us at:
           <br />
           Email: stemulate.program@gmail.com

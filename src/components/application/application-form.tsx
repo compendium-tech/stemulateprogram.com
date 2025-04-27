@@ -58,8 +58,12 @@ const fieldsOfInterest = [
 const extracurricularItemSchema = z.object({
   position: z
     .string()
+    .min(1, "Position/Leadership is required")
     .max(50, "Position/Leadership description must be at most 50 characters"),
-  name: z.string().max(100, "Name must be at most 100 characters"),
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name must be at most 100 characters"),
   description: z
     .string()
     .max(150, "Description must be at most 150 characters"),
@@ -67,8 +71,8 @@ const extracurricularItemSchema = z.object({
 
 // Main form schema
 const formSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  fullName: z.string().min(2, { message: "Full name is required" }),
+  firstName: z.string().min(1, { message: "First name is required" }),
+  lastName: z.string().min(1, { message: "Last name is required" }),
   city: z.string().min(2, { message: "City is required" }),
   country: z.string().min(2, { message: "Country is required" }),
   phone: z.string().min(10, { message: "Valid phone number is required" }),
@@ -121,7 +125,7 @@ export const ApplicationForm = () => {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<any>(null)
   const [applicationExists, setApplicationExists] = useState(false)
-  const [activeTab, setActiveTab] = useState("personal")
+  const [activeTab, setActiveTab] = useState("info")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   // For extracurricular items
@@ -134,6 +138,7 @@ export const ApplicationForm = () => {
 
   const tabsRef = useRef<HTMLDivElement>(null)
   const tabLabels: Record<string, string> = {
+    info: "Information",
     personal: "Personal",
     academic: "Academic",
     parent: "Parent",
@@ -151,8 +156,8 @@ export const ApplicationForm = () => {
     supabaseClient.auth.getSession().then(({ data }) => {
       if (data?.session?.user) {
         setUser(data.session.user)
-        if (data.session.user.email) {
-          checkApplicationExistence(data.session.user.email)
+        if (data.session.user.id) {
+          checkApplicationExistence(data.session.user.id)
         }
       }
     })
@@ -161,8 +166,8 @@ export const ApplicationForm = () => {
       async (_, session) => {
         if (session?.user) {
           setUser(session.user)
-          if (session.user.email) {
-            checkApplicationExistence(session.user.email)
+          if (session.user.id) {
+            checkApplicationExistence(session.user.id)
           }
         } else {
           setUser(null)
@@ -175,13 +180,13 @@ export const ApplicationForm = () => {
     }
   }, [])
 
-  const checkApplicationExistence = async (email: string) => {
+  const checkApplicationExistence = async (userId: string) => {
     setLoading(true)
     try {
       const { data: applications, error } = await supabaseClient
         .from("applications")
         .select("id")
-        .eq("email", email)
+        .eq("createdBy", userId)
 
       if (error) {
         console.error("Error checking application existence:", error)
@@ -189,9 +194,10 @@ export const ApplicationForm = () => {
         return
       }
 
-      if (applications && applications.length > 0) {
+      if (applications && applications.length == 1) {
         setApplicationExists(true)
       }
+
       setLoading(false)
     } catch (err) {
       console.error("Unexpected error checking application existence:", err)
@@ -240,8 +246,8 @@ export const ApplicationForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
-      fullName: "",
+      firstName: "",
+      lastName: "",
       city: "",
       country: "",
       phone: "",
@@ -267,10 +273,12 @@ export const ApplicationForm = () => {
 
   const hasErrorsInTab = (tab: string): boolean => {
     switch (tab) {
+      case "info":
+        return false
       case "personal":
         return !!(
-          errors.email ||
-          errors.fullName ||
+          errors.firstName ||
+          errors.lastName ||
           errors.city ||
           errors.country ||
           errors.phone
@@ -377,7 +385,7 @@ export const ApplicationForm = () => {
   const nextTab = (tab: string) => {
     if (tab === "personal") {
       form
-        .trigger(["email", "fullName", "city", "country", "phone"])
+        .trigger(["firstName", "lastName", "city", "country", "phone"])
         .then((valid) => {
           if (valid) setActiveTab("academic")
         })
@@ -406,32 +414,30 @@ export const ApplicationForm = () => {
   // -------------------------------------
   if (!user) {
     return (
-      <Card>
-        <div className="flex flex-col items-center justify-center h-[60vh] space-y-3">
-          <h1 className="text-3xl font-bold">STEMulate Account</h1>
-          <p className="text-lg text-muted-foreground max-w-md text-center">
-            Please log in to continue to the application form.
-          </p>
-          <AuthSection />
-        </div>
-      </Card>
+      <div className="flex flex-col items-center justify-center h-[60vh] space-y-3">
+        <AuthSection />
+      </div>
     )
   }
 
   return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="flex justify-end mt-12 space-x-2">
-        <Button>
+        <Button className="bg-neutral-900 hover:bg-neutral-800 border-b-0 rounded-b-none">
           <UserIcon />
           <p className="text-xs">{user.email}</p>
         </Button>
-        <Button variant="outline" onClick={handleLogout}>
+        <Button
+          variant="outline"
+          onClick={handleLogout}
+          className="border-b-0 rounded-b-none"
+        >
           <LogOutIcon className="mr-2" />
           Logout
         </Button>
       </div>
 
-      <Card>
+      <Card className="rounded-t-none">
         {loading ? (
           <Spinner />
         ) : applicationExists ? (
@@ -452,6 +458,7 @@ export const ApplicationForm = () => {
                   style={{ scrollBehavior: "smooth" }}
                 >
                   {[
+                    "info",
                     "personal",
                     "academic",
                     "parent",
@@ -464,7 +471,7 @@ export const ApplicationForm = () => {
                       <TabsTrigger
                         key={tab}
                         value={tab}
-                        className={`min-w-[90px] text-xs sm:text-sm whitespace-nowrap px-2 sm:px-4 py-1.5 sm:py-2 snap-start ${
+                        className={`data-[state=active]:shadow-none text-xs sm:text-sm whitespace-nowrap px-2 sm:px-4 py-1.5 sm:py-2 snap-start ${
                           activeTab === tab ? "active-tab" : ""
                         }`}
                         onClick={() => scrollToTab(index)}
@@ -484,6 +491,128 @@ export const ApplicationForm = () => {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-8"
                 >
+                  <TabsContent value="info" className="space-y-6">
+                    <div className="space-y-2">
+                      <div className="space-y-6">
+                        <div>
+                          <h2 className="text-lg md:text-2xl font-semibold mb-6 mt-6">
+                            Program Overview:
+                          </h2>
+                          <p className="text-sm md:text-base">
+                            During the program, you will learn the basics of
+                            brainstorming and developing ideas, formulating
+                            hypotheses, collecting and analyzing data, and
+                            writing a research paper. This program is designed
+                            for motivated high school students to develop their
+                            research skills; however, anyone is welcome to
+                            apply. Although a completed research paper is not
+                            guaranteed as an outcome of the program it is likely
+                            that students will be able to write a 15-page paper.
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="text-sm md:text-base">
+                            At the beginning of the program, students will have
+                            group workshops on research basics and
+                            methodologies, topic exploration and idea
+                            brainstorming, ethical guidelines and plagiarism,
+                            and topic selection and proposal writing. Parallel
+                            to the group workshops, students will start
+                            individual work with their mentors. The program will
+                            conclude with a symposium on research papers, in
+                            which students will present their work.
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="text-sm md:text-base">
+                            The mentors of the program have backgrounds in STEM
+                            and social sciences. Students can conduct research
+                            and write a paper under the guidance of an
+                            experienced mentor in any of the following fields:
+                          </p>
+                          <div className="mt-4 text-sm md:text-base flex space-x-8 md:space-x-16">
+                            <ul className="mt-2 space-y-1">
+                              <li>- Biology</li>
+                              <li>- Business</li>
+                              <li>- Chemistry</li>
+                              <li>- Computer Science</li>
+                              <li>- Ecology</li>
+                              <li>- Economics</li>
+                              <li>- Education</li>
+                              <li>- Engineering</li>
+                            </ul>
+                            <ul className="mt-2 space-y-1">
+                              <li>- Gender Studies</li>
+                              <li>- History</li>
+                              <li>- Mathematics</li>
+                              <li>- Media Studies</li>
+                              <li>- Neuroscience</li>
+                              <li>- Physics</li>
+                              <li>- Political Science</li>
+                              <li>- Psychology</li>
+                              <li>- Sociology</li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div>
+                          <p className="text-sm md:text-base">
+                            Note: You will conduct research in one field only.
+                            By selecting up to 3 fields, you indicate the areas
+                            you are interested in. This will help us match you
+                            to your best-fit mentor.
+                          </p>
+                        </div>
+
+                        <div>
+                          <h2 className="md:text-lg font-medium mb-2">
+                            Program details:
+                          </h2>
+                          <ul className="space-y-1 text-sm md:text-base">
+                            <li>
+                              - Program dates: July 1st to September 1st
+                              (duration is 8 weeks).
+                            </li>
+                            <li>- The program will run in English.</li>
+                            <li>
+                              - Program price: $1850. Financial aid may be
+                              available to the most competitive students in the
+                              program.
+                            </li>
+                            <li>- Program format: Online (Zoom).</li>
+                          </ul>
+                        </div>
+
+                        <div>
+                          <p className="text-sm md:text-base font-medium">
+                            Deadline for the application: June 1st at 11:59 PM
+                            (UTC-5)
+                          </p>
+                        </div>
+
+                        <div>
+                          <p className="text-sm md:text-base">
+                            For any questions please contact us at:
+                            <br />
+                            Email: stemulate.program@gmail.com
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-2 justify-between">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full sm:w-auto"
+                        onClick={() => setActiveTab("personal")}
+                      >
+                        Start Application
+                      </Button>
+                    </div>
+                  </TabsContent>
                   {/* -------------------- PERSONAL TAB -------------------- */}
                   <TabsContent value="personal" className="space-y-6">
                     <div className="space-y-2">
@@ -495,38 +624,35 @@ export const ApplicationForm = () => {
                       </p>
                     </div>
 
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            {/* Remove any "invalid" styling logic; rely on FormMessage only */}
-                            <Input
-                              type="email"
-                              placeholder="your.email@example.com"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                      <FormField
+                        control={form.control}
+                        name="firstName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>First Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="John" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
 
-                    <FormField
-                      control={form.control}
-                      name="fullName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Full Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="John Doe" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                      <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Last Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="John" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                       <FormField
@@ -575,7 +701,7 @@ export const ApplicationForm = () => {
                     <div className="flex flex-col sm:flex-row gap-2 justify-between">
                       <Button
                         type="button"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800"
                         onClick={() => nextTab("personal")}
                       >
                         Next: Academic Background
@@ -686,7 +812,7 @@ export const ApplicationForm = () => {
                       </Button>
                       <Button
                         type="button"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800"
                         onClick={() => nextTab("academic")}
                       >
                         Next: Parent Information
@@ -745,7 +871,7 @@ export const ApplicationForm = () => {
                       </Button>
                       <Button
                         type="button"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800"
                         onClick={() => nextTab("parent")}
                       >
                         Next: Research Interests
@@ -879,7 +1005,7 @@ export const ApplicationForm = () => {
                       </Button>
                       <Button
                         type="button"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800"
                         onClick={() => nextTab("research")}
                       >
                         Next: Extracurricular Activities
@@ -903,6 +1029,7 @@ export const ApplicationForm = () => {
                     <Button
                       type="button"
                       variant="default"
+                      className="bg-neutral-900 hover:bg-neutral-800"
                       onClick={() => setShowAddActivityModal(true)}
                     >
                       <Plus className="w-4 h-4 mr-1" />
@@ -958,7 +1085,7 @@ export const ApplicationForm = () => {
                       </Button>
                       <Button
                         type="button"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800"
                         onClick={() => nextTab("extracurricular")}
                       >
                         Next: Additional Information
@@ -1076,7 +1203,7 @@ export const ApplicationForm = () => {
                       </Button>
                       <Button
                         type="submit"
-                        className="w-full sm:w-auto"
+                        className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800"
                         disabled={isSubmitting}
                       >
                         {isSubmitting ? (
@@ -1166,7 +1293,12 @@ export const ApplicationForm = () => {
               >
                 Cancel
               </Button>
-              <Button onClick={handleAddExtracurricular}>Save</Button>
+              <Button
+                className="bg-neutral-900 hover:bg-neutral-800"
+                onClick={handleAddExtracurricular}
+              >
+                Save
+              </Button>
             </div>
           </div>
         </div>

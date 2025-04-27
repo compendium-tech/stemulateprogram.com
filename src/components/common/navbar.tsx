@@ -25,11 +25,18 @@ export const Navbar: React.FC = () => {
       </div>
 
       <nav className="text-xl underline-offset-4 hidden md:flex space-x-6">
-        {navItems.map((item, i) => (
-          <Link key={i} to={item.href} className="hover:text-red-500">
-            {item.label}
-          </Link>
-        ))}
+        {[
+          {
+            label: "Home",
+            href: "/",
+          },
+        ]
+          .concat(navItems)
+          .map((item, i) => (
+            <Link key={i} to={item.href} className="hover:text-red-500">
+              {item.label}
+            </Link>
+          ))}
       </nav>
 
       <div className="md:hidden relative">

@@ -13,6 +13,7 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
         gradient={true}
         gradientColor="#171717"
         direction="right"
+        autoFill
         speed={80}
       >
         {areas1.map((area, idx) => (
@@ -25,6 +26,7 @@ export const ResearchAreasMarquee: FC<{ areas: string[] }> = ({ areas }) => {
         gradient={true}
         gradientColor="#171717"
         direction="left"
+        autoFill
         speed={80}
       >
         {areas2.map((area, idx) => (

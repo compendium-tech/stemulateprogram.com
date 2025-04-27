@@ -41,7 +41,7 @@ export const WhyResearch = () => {
 const reasonsWhyResearch = [
   {
     title: "Make an impact on the world",
-    description: `Every day, we read about research that changes our lives—from
+    description: `Every day, we read about research that changes our lives - from
         studies on vaccines to new computational algorithms. Each of
         these breakthroughs comes from researchers working to advance
         their field.`,
@@ -56,7 +56,7 @@ const reasonsWhyResearch = [
     title: "Get a head start on your career",
     description: `Creating a research project is an effective way for you to
                   showcase your strengths and demonstrate your abilities. Doing
-                  research can help at each stage of life—whether applying to
+                  research can help at each stage of life - whether applying to
                   college, grad school, or your next job.`,
   },
 ]

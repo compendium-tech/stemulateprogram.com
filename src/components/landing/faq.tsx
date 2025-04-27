@@ -45,8 +45,7 @@ export const faqs = [
     answer: `Submit your application through our online portal and complete an interview.`,
   },
   {
-    question:
-      "What is the workload like for students in the STEMulate Research Program?",
+    question: "What is the workload like for students?",
     answer: `The program is designed to be rigorous but manageable, with weekly mentor
              check-ins and independent research assignments. Students typically dedicate
              8-10 hours per week to research and related activities. Flexible scheduling
