@@ -25,6 +25,10 @@ export function AuthSection() {
     try {
       const { error } = await supabaseClient.auth.signInWithOtp({
         email,
+        options: {
+          emailRedirectTo: "https://stemulateprogram.com/apply",
+          shouldCreateUser: true,
+        },
       })
 
       if (error) {

@@ -28,11 +28,23 @@ import {
   LogOutIcon,
   UserIcon,
   AlertCircle,
+  EditIcon,
 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 import { AuthSection } from "./auth-section"
 import { Spinner } from "./spinner"
 import { supabaseClient } from "@/supabase"
+import confetti from "canvas-confetti"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "../ui/alert-dialog"
 
 const fieldsOfInterest = [
   "Biology",
@@ -127,6 +139,13 @@ export const ApplicationForm = () => {
   const [applicationExists, setApplicationExists] = useState(false)
   const [activeTab, setActiveTab] = useState("info")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [editIndex, setEditIndex] = useState<number | null>(null)
+
+  const [activityErrors, setActivityErrors] = useState({
+    position: "",
+    name: "",
+    description: "",
+  })
 
   // For extracurricular items
   const [showAddActivityModal, setShowAddActivityModal] = useState(false)
@@ -135,6 +154,7 @@ export const ApplicationForm = () => {
     name: "",
     description: "",
   })
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false)
 
   const tabsRef = useRef<HTMLDivElement>(null)
   const tabLabels: Record<string, string> = {
@@ -148,7 +168,7 @@ export const ApplicationForm = () => {
   }
 
   const handleLogout = async () => {
-    await supabaseClient.auth.signOut()
+    localStorage.removeItem("supabase.auth.token")
     setUser(null)
   }
 
@@ -157,9 +177,7 @@ export const ApplicationForm = () => {
       if (data?.session?.user) {
         setUser(data.session.user)
         if (data.session.user.id) {
-          setTimeout(() => {
-            checkApplicationExistence(data.session.user.id)
-          }, 1000)
+          checkApplicationExistence(data.session.user.id)
         }
       }
     })
@@ -169,9 +187,7 @@ export const ApplicationForm = () => {
         if (session?.user) {
           setUser(session.user)
           if (session.user.id) {
-            setTimeout(() => {
-              checkApplicationExistence(session.user.id)
-            }, 1000)
+            checkApplicationExistence(session.user.id)
           }
         } else {
           setUser(null)
@@ -187,12 +203,6 @@ export const ApplicationForm = () => {
   const checkApplicationExistence = async (userId: string) => {
     setLoading(true)
 
-    if (!user) {
-      setLoading(false)
-      setApplicationExists(false)
-      return
-    }
-
     try {
       const { data: applications, error } = await supabaseClient
         .from("applications")
@@ -204,9 +214,7 @@ export const ApplicationForm = () => {
         return
       }
 
-      if (applications && applications.length == 1) {
-        setApplicationExists(true)
-      }
+      setApplicationExists(applications && applications.length == 1)
 
       setLoading(false)
     } catch (err) {
@@ -252,10 +260,15 @@ export const ApplicationForm = () => {
     }
   }, [])
 
+  const savedFormData =
+    typeof window !== "undefined"
+      ? JSON.parse(localStorage.getItem("applicationFormData") || "null")
+      : null
+
   // 4) SETUP REACT HOOK FORM
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: savedFormData || {
       firstName: "",
       lastName: "",
       city: "",
@@ -277,6 +290,17 @@ export const ApplicationForm = () => {
     },
     mode: "onBlur", // or "onChange", depending on your preference
   })
+
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      try {
+        localStorage.setItem("applicationFormData", JSON.stringify(value))
+      } catch (error) {
+        console.error("Failed to save form data to localStorage:", error)
+      }
+    })
+    return () => subscription.unsubscribe()
+  }, [form])
 
   // 5) DETECT ERRORS FOR TABS & SHOW ICON
   const errors = form.formState.errors
@@ -335,10 +359,10 @@ export const ApplicationForm = () => {
         return
       }
 
-      toast({
-        title: "Application Submitted",
-        description:
-          "Your research program application has been submitted successfully.",
+      confetti({
+        particleCount: 150,
+        spread: 60,
+        origin: { y: 0.6 },
       })
       setApplicationExists(true)
     } catch (error: any) {
@@ -351,36 +375,52 @@ export const ApplicationForm = () => {
     setIsSubmitting(false)
   }
 
-  // 6) POP-UP: ADD EXTRACURRICULAR
-  const handleAddExtracurricular = () => {
-    // Validate local fields quickly
-    const parsed = extracurricularItemSchema.safeParse(newActivity)
-    if (!parsed.success) {
-      // If there's an error, you could display a local toast or handle it any way you like
-      const firstError = parsed.error.issues[0]?.message || "Invalid input"
-      toast({ title: "Error", description: firstError })
-      return
-    }
-
-    // If valid, add it to array
-    const currentActivities = form.getValues("extracurriculars") || []
-    if (currentActivities.length >= 5) {
-      toast({
-        title: "Maximum Activities Reached",
-        description: "You can only add up to 5 extracurricular activities.",
-      })
-      return
-    }
-
-    form.setValue("extracurriculars", [...currentActivities, newActivity])
-    setNewActivity({ position: "", name: "", description: "" })
-    setShowAddActivityModal(false)
-  }
-
   const handleRemoveExtracurricular = (index: number) => {
     const currentActivities = form.getValues("extracurriculars") || []
     currentActivities.splice(index, 1)
     form.setValue("extracurriculars", currentActivities)
+  }
+
+  const handleSaveExtracurricular = () => {
+    const errors = {
+      position: newActivity.position.trim() ? "" : "Position is required",
+      name: newActivity.name.trim() ? "" : "Name is required",
+      description: newActivity.description.trim()
+        ? ""
+        : "Description is required",
+    }
+
+    setActivityErrors(errors)
+
+    const hasErrors = Object.values(errors).some((err) => err !== "")
+    if (hasErrors) {
+      return
+    }
+
+    const currentActivities = form.getValues("extracurriculars") || []
+
+    if (editIndex !== null) {
+      // Editing existing
+      const updatedActivities = [...currentActivities]
+      updatedActivities[editIndex] = newActivity
+      form.setValue("extracurriculars", updatedActivities)
+    } else {
+      // Adding new
+      if (currentActivities.length >= 5) {
+        toast({
+          title: "Maximum Activities Reached",
+          description: "You can only add up to 5 extracurricular activities.",
+        })
+        return
+      }
+      form.setValue("extracurriculars", [...currentActivities, newActivity])
+    }
+
+    // Clear modal state
+    setNewActivity({ position: "", name: "", description: "" })
+    setActivityErrors({ position: "", name: "", description: "" })
+    setEditIndex(null)
+    setShowAddActivityModal(false)
   }
 
   // 7) WORD/CHAR COUNTERS FOR TEXTAREAS
@@ -440,9 +480,9 @@ export const ApplicationForm = () => {
         <Button
           variant="outline"
           onClick={handleLogout}
-          className="border-b-0 rounded-b-none"
+          className="border-b-0 text-xs rounded-b-none"
         >
-          <LogOutIcon className="mr-2" />
+          <LogOutIcon />
           Logout
         </Button>
       </div>
@@ -1062,22 +1102,52 @@ export const ApplicationForm = () => {
                                 key={index}
                                 className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 border rounded-md gap-2"
                               >
-                                <div className="text-sm space-y-1">
-                                  <p className="font-semibold">
-                                    {activity.position} – {activity.name}
+                                <div className="text-sm space-y-1 w-full">
+                                  <div className="flex justify-between items-center w-full">
+                                    <p className="font-semibold truncate">
+                                      {activity.position} – {activity.name}
+                                    </p>
+                                    <div className="flex items-center space-x-2">
+                                      <Tooltip>
+                                        <TooltipTrigger asChild>
+                                          <EditIcon
+                                            className="w-4 h-4 cursor-pointer"
+                                            onClick={() => {
+                                              const currentActivities =
+                                                form.getValues(
+                                                  "extracurriculars"
+                                                ) || []
+                                              const activityToEdit =
+                                                currentActivities[index]
+                                              setNewActivity(activityToEdit)
+                                              setEditIndex(index)
+                                              setShowAddActivityModal(true)
+                                            }}
+                                          />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                          Edit activity
+                                        </TooltipContent>
+                                      </Tooltip>
+                                      <Tooltip>
+                                        <TooltipTrigger asChild>
+                                          <X
+                                            className="w-4 h-4 cursor-pointer"
+                                            onClick={() =>
+                                              handleRemoveExtracurricular(index)
+                                            }
+                                          />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                          Remove activity
+                                        </TooltipContent>
+                                      </Tooltip>
+                                    </div>
+                                  </div>
+                                  <p className="break-words">
+                                    {activity.description}
                                   </p>
-                                  <p>{activity.description}</p>
                                 </div>
-                                <Button
-                                  type="button"
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() =>
-                                    handleRemoveExtracurricular(index)
-                                  }
-                                >
-                                  <X className="h-4 w-4" />
-                                </Button>
                               </div>
                             ))}
                         </div>
@@ -1212,7 +1282,8 @@ export const ApplicationForm = () => {
                         Previous: Extracurricular Activities
                       </Button>
                       <Button
-                        type="submit"
+                        type="button"
+                        onClick={() => setShowConfirmationDialog(true)}
                         className="w-full sm:w-auto bg-neutral-900 hover:bg-neutral-800"
                         disabled={isSubmitting}
                       >
@@ -1233,6 +1304,33 @@ export const ApplicationForm = () => {
           </CardContent>
         )}
       </Card>
+
+      <AlertDialog
+        open={showConfirmationDialog}
+        onOpenChange={setShowConfirmationDialog}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          </AlertDialogHeader>
+          <div className="text-sm text-muted-foreground">
+            Please make sure you reviewed all information carefully. You won't
+            be able to edit the application after submission.
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-neutral-900 hover:bg-neutral-800"
+              onClick={() => {
+                form.handleSubmit(onSubmit)()
+                setShowConfirmationDialog(false)
+              }}
+            >
+              Yes
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* ------------------------------------------------
           EXTRACURRICULAR ADD MODAL
@@ -1261,7 +1359,13 @@ export const ApplicationForm = () => {
                   }
                   maxLength={50}
                 />
+                {activityErrors.position && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {activityErrors.position}
+                  </p>
+                )}
               </div>
+
               {/* Name */}
               <div>
                 <Label htmlFor="name">Name (max 100 chars)</Label>
@@ -1277,7 +1381,13 @@ export const ApplicationForm = () => {
                   }
                   maxLength={100}
                 />
+                {activityErrors.name && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {activityErrors.name}
+                  </p>
+                )}
               </div>
+
               {/* Description */}
               <div>
                 <Label htmlFor="description">Description (max 150 chars)</Label>
@@ -1294,8 +1404,14 @@ export const ApplicationForm = () => {
                   maxLength={150}
                   className="resize-none"
                 />
+                {activityErrors.description && (
+                  <p className="text-sm text-red-500 mt-1">
+                    {activityErrors.description}
+                  </p>
+                )}
               </div>
             </div>
+
             <div className="mt-6 flex justify-end space-x-2">
               <Button
                 variant="outline"
@@ -1305,7 +1421,7 @@ export const ApplicationForm = () => {
               </Button>
               <Button
                 className="bg-neutral-900 hover:bg-neutral-800"
-                onClick={handleAddExtracurricular}
+                onClick={handleSaveExtracurricular}
               >
                 Save
               </Button>
