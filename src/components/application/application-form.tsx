@@ -1125,7 +1125,7 @@ export const ApplicationForm = () => {
                                             }}
                                           />
                                         </TooltipTrigger>
-                                        <TooltipContent>
+                                        <TooltipContent className="bg-neutral-900">
                                           Edit activity
                                         </TooltipContent>
                                       </Tooltip>
@@ -1138,7 +1138,7 @@ export const ApplicationForm = () => {
                                             }
                                           />
                                         </TooltipTrigger>
-                                        <TooltipContent>
+                                        <TooltipContent className="bg-neutral-900">
                                           Remove activity
                                         </TooltipContent>
                                       </Tooltip>
