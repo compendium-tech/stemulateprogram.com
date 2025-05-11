@@ -16,10 +16,11 @@ export const LandingHero = () => {
       <div className="flex justify-center">
         <Link to="apply">
           <button
-            className="
-              text-sm sm:text-base bg-red-600
-              hover:bg-red-700 text-white font-bold
-              py-3 px-4 rounded-xl flex space-x-3"
+            className="text-sm sm:text-base bg-red-600
+    hover:bg-red-700 text-white font-bold
+    py-3 px-4 rounded-xl flex space-x-3
+    transition duration-300 ease-in-out
+    hover:drop-shadow-xl hover:shadow-red-500/50"
           >
             <StarsIcon className="w-5 h-5" />
             <p>Apply For Program</p>
