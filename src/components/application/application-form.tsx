@@ -136,6 +136,7 @@ const formSchema = z.object({
 export const ApplicationForm = () => {
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState<any>(null)
+  const [isAuthChecked, setIsAuthChecked] = useState(false)
   const [applicationExists, setApplicationExists] = useState(false)
   const [activeTab, setActiveTab] = useState("info")
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -176,6 +177,8 @@ export const ApplicationForm = () => {
     supabaseClient.auth.getSession().then(({ data }) => {
       if (data?.session?.user) {
         setUser(data.session.user)
+        setIsAuthChecked(true)
+
         if (data.session.user.id) {
           checkApplicationExistence(data.session.user.id)
         }
@@ -192,6 +195,8 @@ export const ApplicationForm = () => {
         } else {
           setUser(null)
         }
+
+        setIsAuthChecked(true)
       }
     )
 
@@ -459,9 +464,10 @@ export const ApplicationForm = () => {
     }
   }
 
-  // -------------------------------------
-  // RENDER
-  // -------------------------------------
+  if (!isAuthChecked) {
+    return <Spinner />
+  }
+
   if (!user) {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh] space-y-3">

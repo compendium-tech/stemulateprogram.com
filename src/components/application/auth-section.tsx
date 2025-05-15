@@ -111,7 +111,7 @@ export function AuthSection() {
           <Button
             onClick={handleSendOtp}
             disabled={sendingOtp || !email}
-            className="w-full bg-neutral-800 hover:bg-neutral-700"
+            className="w-full bg-neutral-800 hover:bg-neutral-700 rounded-xl"
           >
             <MailCheckIcon />
             {sendingOtp ? "Sending code..." : "Send Verification Code"}
