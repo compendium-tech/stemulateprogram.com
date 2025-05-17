@@ -15,11 +15,14 @@ export function AuthSection() {
   const [code, setCode] = useState("")
   const [sendCodeError, setSendCodeError] = useState("")
   const [verifyCodeError, setVerifyCodeError] = useState("")
+  const [signInOrSignUp, setSignInOrSignUp] = useState<
+    "signIn" | "signUp" | null
+  >(null)
   const [isCodeSent, setIsCodeSent] = useState(false)
   const [sendingOtp, setSendingOtp] = useState(false)
   const [verifyingOtp, setVerifyingOtp] = useState(false)
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = async (signUp: boolean) => {
     if (!email) return
     setSendingOtp(true)
     try {
@@ -27,7 +30,7 @@ export function AuthSection() {
         email,
         options: {
           emailRedirectTo: "https://stemulateprogram.com/apply",
-          shouldCreateUser: true,
+          shouldCreateUser: signUp,
         },
       })
 
@@ -41,6 +44,12 @@ export function AuthSection() {
             setVerifyCodeError(
               "Too many login attempts. Please try again later."
             )
+          }
+        } else if (error.code === "otp_disabled") {
+          if (!isCodeSent) {
+            setSendCodeError("Account with such email doesn't exist.")
+          } else {
+            setVerifyCodeError("Account with such email doesn't exist.")
           }
         } else {
           if (!isCodeSent) {
@@ -89,34 +98,93 @@ export function AuthSection() {
   return (
     <div className="mt-2 px-2 w-full md:w-3/6 space-y-3">
       {!isCodeSent ? (
-        <>
-          <p className="text-2xl md:text-3xl font-semibold">
-            Confirm your email
-          </p>
-          <p className="md:text-lg">
-            We'll send you a code to access your application form.
-          </p>
-          <Input
-            className="md:text-base"
-            type="email"
-            placeholder="your.email@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+        !signInOrSignUp ? (
+          <>
+            <p className="text-2xl font-semibold">
+              Welcome to application form.
+            </p>
+            <p className="md:text-lg">
+              It seems like you are not logged in to your STEMulate account.
+            </p>
+            <Button
+              onClick={() => setSignInOrSignUp("signIn")}
+              variant="outline"
+              className="mr-4 rounded-xl"
+            >
+              Login
+            </Button>
+            <Button
+              onClick={() => setSignInOrSignUp("signUp")}
+              variant="outline"
+              className="rounded-xl"
+            >
+              Sign up
+            </Button>
+          </>
+        ) : signInOrSignUp === "signIn" ? (
+          <>
+            <p className="text-2xl md:text-3xl font-semibold">
+              Log into your account
+            </p>
+            <p className="md:text-lg">
+              We'll send you a code to access your application form.
+            </p>
+            <Input
+              className="md:text-base"
+              type="email"
+              placeholder="your.email@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          {sendCodeError && (
-            <p className="text-red-500 text-sm">{sendCodeError}</p>
-          )}
+            {sendCodeError && (
+              <p className="text-red-500 text-sm">{sendCodeError}</p>
+            )}
 
-          <Button
-            onClick={handleSendOtp}
-            disabled={sendingOtp || !email}
-            className="w-full bg-neutral-800 hover:bg-neutral-700 rounded-xl"
-          >
-            <MailCheckIcon />
-            {sendingOtp ? "Sending code..." : "Send Verification Code"}
-          </Button>
-        </>
+            <Button
+              onClick={() => handleSendOtp(false)}
+              disabled={sendingOtp || !email}
+              variant="outline"
+              className="w-full rounded-xl"
+            >
+              <MailCheckIcon />
+              {sendingOtp ? "Sending code..." : "Send Verification Code"}
+            </Button>
+          </>
+        ) : (
+          <>
+            <>
+              <p className="text-2xl md:text-3xl font-semibold">
+                Create an account
+              </p>
+              <p className="md:text-lg">
+                We'll send you a code to confirm you email and access your
+                application form.
+              </p>
+              <Input
+                className="md:text-base"
+                type="email"
+                placeholder="your.email@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+
+              {sendCodeError && (
+                <p className="text-red-500 text-sm">{sendCodeError}</p>
+              )}
+
+              <Button
+                onClick={() => handleSendOtp(true)}
+                disabled={sendingOtp || !email}
+                variant="outline"
+                className="w-full rounded-xl"
+              >
+                <MailCheckIcon />
+                {sendingOtp ? "Sending code..." : "Send Verification Code"}
+              </Button>
+            </>
+          </>
+        )
       ) : (
         <>
           <p className="text-xl font-semibold">Enter Verification Code</p>
@@ -145,7 +213,7 @@ export function AuthSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <Button
-              className="bg-neutral-800 hover:bg-neutral-700"
+              className="bg-neutral-800 hover:bg-neutral-700 rounded-xl"
               onClick={handleVerifyCode}
               disabled={verifyingOtp || code.length !== 6}
             >
@@ -155,8 +223,8 @@ export function AuthSection() {
 
             <Button
               variant={"outline"}
-              onClick={handleSendOtp}
-              className="text-sm text-primary underline hover:text-primary/80"
+              onClick={() => handleSendOtp(true)}
+              className="text-sm text-primary underline hover:text-primary/80 rounded-xl"
               disabled={sendingOtp}
             >
               <MailCheckIcon />
