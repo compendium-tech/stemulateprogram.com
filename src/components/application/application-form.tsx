@@ -633,7 +633,7 @@ export const ApplicationForm = () => {
                             </li>
                             <li>- The program will run in English.</li>
                             <li>
-                              - Program price: $1850. Financial aid may be
+                              - Program price: $1500. Financial aid may be
                               available to the most competitive students in the
                               program.
                             </li>
