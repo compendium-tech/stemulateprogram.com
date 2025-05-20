@@ -4,6 +4,7 @@ import { ResearchAreas } from "@/components/landing/research-areas"
 import { FAQ } from "@/components/landing/faq"
 import { StandartLayout } from "@/layout/navbar"
 import { LandingHero } from "@/components/landing/hero"
+import { Countdown } from "@/components/landing/countdown"
 
 const LandingPageContent: React.FC = () => {
   return (

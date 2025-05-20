@@ -100,7 +100,7 @@ export function AuthSection() {
       {!isCodeSent ? (
         !signInOrSignUp ? (
           <>
-            <p className="text-2xl font-semibold">
+            <p className="text-3xl md:text-2xl font-semibold">
               Welcome to application form.
             </p>
             <p className="md:text-lg">
@@ -109,14 +109,14 @@ export function AuthSection() {
             <Button
               onClick={() => setSignInOrSignUp("signIn")}
               variant="outline"
-              className="mr-4 rounded-xl"
+              className="mr-4 p-5 text-lg rounded-xl"
             >
               Login
             </Button>
             <Button
               onClick={() => setSignInOrSignUp("signUp")}
               variant="outline"
-              className="rounded-xl"
+              className="p-5 text-lg rounded-xl"
             >
               Sign up
             </Button>

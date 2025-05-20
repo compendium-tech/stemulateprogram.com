@@ -8,7 +8,7 @@ import {
 export const FAQ = () => {
   return (
     <>
-      <section className="px-5 md:px-14 bg-neutral-900 text-white pb-10">
+      <section className="px-5 md:px-14 bg-neutral-900 text-white">
         <Accordion type="single" collapsible className="w-full">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`}>

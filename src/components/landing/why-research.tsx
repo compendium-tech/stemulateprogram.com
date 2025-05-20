@@ -6,7 +6,7 @@ export const WhyResearch = () => {
   return (
     <section
       className="relative text-white section-with-fixed-bg bg-cover bg-center bg-no-repeat
-                 py-24 px-5 sm:px-14 bg-[url(/university.webp)]"
+                 py-24 px-5 sm:px-14"
     >
       {/* To make background look darker */}
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
