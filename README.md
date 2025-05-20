@@ -1,8 +1,12 @@
 ## STEMulate Research Program Website 
 
+### What is this?
+
 Website made for STEMulate Research program for bringing in new students and accepting applications. 
 
----
+### What is STEMulate Research Program?
+
+International research program, uniting students from over 20 countries, mentored by experts from top institutions like Stanford, Purdue, UC Berkley, in collaboration with OdepLabs and 360mentors, aimed at achieving the 4th Sustainable Development Goal of the United Nations: ensuring inclusive and equitable quality education and promoting lifelong learning opportunities for all.
 
 Us on:
 - Instagram: <a href="https://instagram.com/stemulate_program">@stemulate_program</a>
