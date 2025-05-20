@@ -39,11 +39,9 @@ export function AuthSection() {
           setSendCodeError("Invalid email address.")
         } else if (error.code === "over_email_send_rate_limit") {
           if (!isCodeSent) {
-            setSendCodeError("Too many login attempts. Please try again later.")
+            setSendCodeError("Too many login attempts, try again later.")
           } else {
-            setVerifyCodeError(
-              "Too many login attempts. Please try again later."
-            )
+            setVerifyCodeError("Too many login attempts, try again later.")
           }
         } else if (error.code === "otp_disabled") {
           if (!isCodeSent) {

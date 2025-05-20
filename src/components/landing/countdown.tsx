@@ -67,9 +67,9 @@ export function Countdown() {
                 <div className="ml-3">
                   <p className="text-xs md:text-sm text-gray-200">
                     Deadline:{" "}
-                    <span className="font-semibold">June 1st at 11:59 PM</span>.
-                    Be sure to submit your application on time to be considered
-                    for the research program.
+                    <span className="font-semibold">June 20th at 11:59 PM</span>
+                    . Be sure to submit your application on time to be
+                    considered for the research program.
                   </p>
                 </div>
               </div>
