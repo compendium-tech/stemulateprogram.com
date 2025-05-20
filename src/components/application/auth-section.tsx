@@ -8,7 +8,7 @@ import {
   InputOTPSlot,
 } from "../ui/input-otp" // Import OTP component
 import { supabaseClient } from "@/supabase"
-import { Fingerprint, MailCheckIcon } from "lucide-react"
+import { Fingerprint, LogInIcon, MailCheckIcon, UserIcon } from "lucide-react"
 
 export function AuthSection() {
   const [email, setEmail] = useState<string>("")
@@ -109,15 +109,17 @@ export function AuthSection() {
             <Button
               onClick={() => setSignInOrSignUp("signIn")}
               variant="outline"
-              className="mr-4 p-5 text-lg rounded-xl"
+              className="mr-4 p-4 rounded-xl"
             >
+              <LogInIcon />
               Login
             </Button>
             <Button
               onClick={() => setSignInOrSignUp("signUp")}
               variant="outline"
-              className="p-5 text-lg rounded-xl"
+              className="p-4 rounded-xl"
             >
+              <UserIcon />
               Sign up
             </Button>
           </>
