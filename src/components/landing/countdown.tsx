@@ -35,7 +35,7 @@ export function Countdown() {
   }, [])
 
   return (
-    <div className="flex items-center justify-center p-4">
+    <div className="flex items-center justify-center p-4 mt-8">
       <div className="w-full max-w-3xl">
         {timeLeft.days == 0 && timeLeft.hours == 0 && timeLeft.minutes == 0 ? (
           <div className="flex flex-col items-center space-y-4 p-6 text-center">
