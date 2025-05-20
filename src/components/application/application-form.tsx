@@ -643,7 +643,7 @@ export const ApplicationForm = () => {
 
                         <div>
                           <p className="text-sm md:text-base font-medium">
-                            Deadline for the application: June 1st at 11:59 PM
+                            Deadline for the application: June 20th at 11:59 PM
                             (UTC-5)
                           </p>
                         </div>
