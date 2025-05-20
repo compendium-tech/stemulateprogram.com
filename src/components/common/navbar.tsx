@@ -10,7 +10,10 @@ const navItems: NavItem[] = [
   { label: "Apply", href: "/apply" },
   { label: "About Us", href: "/about-us" },
   { label: "Publications", href: "/publications" },
-  { label: "Info Session", href: "/info-session" },
+  {
+    label: "Info Session",
+    href: "https://calendly.com/stemulate-program/30min",
+  },
 ]
 
 export const Navbar: React.FC = () => {
