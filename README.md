@@ -1,4 +1,7 @@
 ## STEMulate Research Program Website 
-<img src="https://github.com/user-attachments/assets/4e75bfec-3a6b-4226-b1bc-731d2285602d" align="left" width="32%">
-<img src="https://github.com/user-attachments/assets/be59297a-193c-47a5-9446-90816f8058cd" align="left" width="42%">
-<img src="https://github.com/user-attachments/assets/10879c21-3ae7-4816-a181-064e9d7ccb71" align="left" width="52%">
+
+<img src="https://github.com/user-attachments/assets/d6d9fd54-db08-4a86-b04b-dd7a46570706" align="left" width="32%">
+<img src="https://github.com/user-attachments/assets/4d86fe8f-ef09-4db1-9940-c5e20f8c61f4" align="left" width="52%">
+<img src="https://github.com/user-attachments/assets/2af34595-4208-4220-b3d8-8710f5e59a2d" align="left" width="32%">
+<img src="https://github.com/user-attachments/assets/5667bb77-bf87-4b83-b561-f61b7a7426fa" align="left" width="40%">
+<img src="https://github.com/user-attachments/assets/30da8b92-1a53-486c-8c21-669fa78e3fd3" align="left" width="20%">
