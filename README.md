@@ -1,8 +1,8 @@
 ## STEMulate Research Program Website 
 
-### What is this?
+### What is this webside used for?
 
-Website made for STEMulate Research program for bringing in new students and accepting applications. 
+This website is made for STEMulate Research program for bringing in new students and accepting applications. 
 
 ### What is STEMulate Research Program?
 
