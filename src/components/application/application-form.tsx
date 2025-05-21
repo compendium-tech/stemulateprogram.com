@@ -636,10 +636,6 @@ export const ApplicationForm = () => {
                             Program details:
                           </h2>
                           <ul className="space-y-1 text-sm md:text-base">
-                            <li>
-                              - Program dates: July 1st to September 1st
-                              (duration is 8 weeks).
-                            </li>
                             <li>- The program will run in English.</li>
                             <li>- Program price: $1500.</li>{" "}
                             <li>
