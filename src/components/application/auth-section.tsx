@@ -8,7 +8,13 @@ import {
   InputOTPSlot,
 } from "../ui/input-otp" // Import OTP component
 import { supabaseClient } from "@/supabase"
-import { Fingerprint, LogInIcon, MailCheckIcon, UserIcon } from "lucide-react"
+import {
+  Fingerprint,
+  LogInIcon,
+  MailCheckIcon,
+  StepBackIcon,
+  UserIcon,
+} from "lucide-react"
 
 export function AuthSection() {
   const [email, setEmail] = useState<string>("")
@@ -141,15 +147,19 @@ export function AuthSection() {
               <p className="text-red-500 text-sm">{sendCodeError}</p>
             )}
 
-            <Button
-              onClick={() => handleSendOtp(false)}
-              disabled={sendingOtp || !email}
-              variant="outline"
-              className="w-full rounded-xl"
-            >
-              <MailCheckIcon />
-              {sendingOtp ? "Sending code..." : "Send Verification Code"}
-            </Button>
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+              <Button
+                onClick={() => handleSendOtp(false)}
+                disabled={sendingOtp || !email}
+                variant="outline"
+              >
+                <MailCheckIcon />
+                {sendingOtp ? "Sending code..." : "Send Verification Code"}
+              </Button>
+              <Button onClick={() => setSignInOrSignUp(null)} variant="outline">
+                <StepBackIcon /> Go back
+              </Button>
+            </div>
           </>
         ) : (
           <>
@@ -173,15 +183,23 @@ export function AuthSection() {
                 <p className="text-red-500 text-sm">{sendCodeError}</p>
               )}
 
-              <Button
-                onClick={() => handleSendOtp(true)}
-                disabled={sendingOtp || !email}
-                variant="outline"
-                className="w-full rounded-xl"
-              >
-                <MailCheckIcon />
-                {sendingOtp ? "Sending code..." : "Send Verification Code"}
-              </Button>
+              <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+                <Button
+                  onClick={() => handleSendOtp(true)}
+                  disabled={sendingOtp || !email}
+                  variant="outline"
+                  className="w-full rounded-xl"
+                >
+                  <MailCheckIcon />
+                  {sendingOtp ? "Sending code..." : "Send Verification Code"}
+                </Button>
+                <Button
+                  onClick={() => setSignInOrSignUp(null)}
+                  variant="outline"
+                >
+                  <StepBackIcon /> Go back
+                </Button>
+              </div>
             </>
           </>
         )
@@ -211,25 +229,47 @@ export function AuthSection() {
             <p className="text-red-500 text-sm">{verifyCodeError}</p>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-4">
             <Button
-              className="bg-neutral-800 hover:bg-neutral-700 rounded-xl"
+              className="w-full md:w-1/2 bg-neutral-800 hover:bg-neutral-700 rounded-xl py-2 md:py-2.5"
               onClick={handleVerifyCode}
               disabled={verifyingOtp || code.length !== 6}
             >
-              <Fingerprint />
-              {verifyingOtp ? "Signing in..." : "Sign in"}
+              <div className="flex items-center justify-center gap-2">
+                <Fingerprint className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="">
+                  {verifyingOtp ? "Signing in..." : "Sign in"}
+                </span>
+              </div>
             </Button>
 
-            <Button
-              variant={"outline"}
-              onClick={() => handleSendOtp(true)}
-              className="text-sm text-primary underline hover:text-primary/80 rounded-xl"
-              disabled={sendingOtp}
-            >
-              <MailCheckIcon />
-              {sendingOtp ? "Resending..." : "Resend Code"}
-            </Button>
+            <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
+              <Button
+                variant="outline"
+                onClick={() => handleSendOtp(true)}
+                className="w-full md:w-auto text-primary hover:text-primary/80 rounded-xl py-2 md:py-2.5"
+                disabled={sendingOtp}
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <MailCheckIcon className="h-4 w-4 md:h-5 md:w-5" />
+                  <span>{sendingOtp ? "Resending..." : "Resend Code"}</span>
+                </div>
+              </Button>
+
+              <Button
+                onClick={() => {
+                  setSignInOrSignUp(null)
+                  setIsCodeSent(false)
+                }}
+                variant="outline"
+                className="w-full md:w-auto rounded-xl py-2 md:py-2.5"
+              >
+                <div className="flex items-center justify-center gap-2">
+                  <StepBackIcon className="h-4 w-4 md:h-5 md:w-5" />
+                  <span>Go back</span>
+                </div>
+              </Button>
+            </div>
           </div>
         </>
       )}
