@@ -122,6 +122,7 @@ const formSchema = z.object({
 
   additionalInfo: z.string().optional(),
   financialAid: z.boolean().default(false),
+  noFinancialAidMoney: z.string().optional(),
 
   // 3) EXTRACURRICULAR ACTIVITIES AS ARRAY OF OBJECTS
   extracurriculars: z
@@ -290,6 +291,7 @@ export const ApplicationForm = () => {
       researchInterest: "",
       motivation: "",
       additionalInfo: "",
+      noFinancialAidMoney: "",
       financialAid: false,
       extracurriculars: [],
     },
@@ -344,6 +346,10 @@ export const ApplicationForm = () => {
   }
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!values.financialAid) {
+      values.noFinancialAidMoney = undefined
+    }
+
     setIsSubmitting(true)
     try {
       const { error: insertError } = await supabaseClient
@@ -635,10 +641,10 @@ export const ApplicationForm = () => {
                               (duration is 8 weeks).
                             </li>
                             <li>- The program will run in English.</li>
+                            <li>- Program price: $1500.</li>{" "}
                             <li>
-                              - Program price: $1500. Financial aid may be
-                              available to the most competitive students in the
-                              program.
+                              - Financial aid may be available to the most
+                              competitive students in the program.
                             </li>
                             <li>- Program format: Online (Zoom).</li>
                           </ul>
@@ -788,7 +794,10 @@ export const ApplicationForm = () => {
                           <FormItem>
                             <FormLabel>IELTS Score</FormLabel>
                             <FormControl>
-                              <Input placeholder="7.5" {...field} />
+                              <Input
+                                placeholder="Do not include practice tests!"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -802,7 +811,10 @@ export const ApplicationForm = () => {
                           <FormItem>
                             <FormLabel>SAT Score</FormLabel>
                             <FormControl>
-                              <Input placeholder="1450" {...field} />
+                              <Input
+                                placeholder="Do not include practice tests!"
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -1273,10 +1285,32 @@ export const ApplicationForm = () => {
                     {form.watch("financialAid") && (
                       <Alert>
                         <AlertDescription>
-                          You have selected that you are applying for financial
-                          aid. Additional documents and an interview will be
-                          required as part of the financial aid application
-                          process.
+                          <p className="mb-4">
+                            You have selected that you are applying for
+                            financial aid. Additional documents and an interview
+                            will be required as part of the financial aid
+                            application process.
+                          </p>
+                          <FormField
+                            control={form.control}
+                            name="noFinancialAidMoney"
+                            render={({ field }) => (
+                              <FormItem>
+                                <FormLabel className="">
+                                  How much are you able to pay on your own
+                                  (without aid)?
+                                </FormLabel>
+                                <FormControl>
+                                  <Input
+                                    className="mt-2"
+                                    placeholder="Amount, preferably in USD."
+                                    {...field}
+                                  />
+                                </FormControl>
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
                         </AlertDescription>
                       </Alert>
                     )}
