@@ -188,7 +188,7 @@ export function AuthSection() {
                   onClick={() => handleSendOtp(true)}
                   disabled={sendingOtp || !email}
                   variant="outline"
-                  className="w-full rounded-xl"
+                  className="rounded-xl"
                 >
                   <MailCheckIcon />
                   {sendingOtp ? "Sending code..." : "Send Verification Code"}
