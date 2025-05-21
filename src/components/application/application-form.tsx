@@ -45,6 +45,8 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "../ui/alert-dialog"
+import { PhoneInput } from "../input/phone-number-input"
+import { CountryInput } from "../input/country-input"
 
 const fieldsOfInterest = [
   "Biology",
@@ -95,9 +97,12 @@ const formSchema = z.object({
   grade: z.string().min(1, { message: "Grade is required" }),
   gpa: z.string().min(1, { message: "GPA is required" }),
 
-  parentFullName: z
+  parentFirstName: z
     .string()
-    .min(2, { message: "Parent's full name is required" }),
+    .min(1, { message: "Parent's first name is required" }),
+  parentLastName: z
+    .string()
+    .min(1, { message: "Parent's last name is required" }),
   parentPhone: z
     .string()
     .min(10, { message: "Valid parent phone number is required" }),
@@ -333,7 +338,11 @@ export const ApplicationForm = () => {
           errors.gpa
         )
       case "parent":
-        return !!(errors.parentFullName || errors.parentPhone)
+        return !!(
+          errors.parentFirstName ||
+          errors.parentLastName ||
+          errors.parentPhone
+        )
       case "research":
         return !!(errors.fieldsOfInterest || errors.researchInterest)
       case "extracurricular":
@@ -457,9 +466,11 @@ export const ApplicationForm = () => {
           if (valid) setActiveTab("parent")
         })
     } else if (tab === "parent") {
-      form.trigger(["parentFullName", "parentPhone"]).then((valid) => {
-        if (valid) setActiveTab("research")
-      })
+      form
+        .trigger(["parentFirstName", "parentLastName", "parentPhone"])
+        .then((valid) => {
+          if (valid) setActiveTab("research")
+        })
     } else if (tab === "research") {
       form.trigger(["fieldsOfInterest", "researchInterest"]).then((valid) => {
         if (valid) setActiveTab("extracurricular")
@@ -488,8 +499,8 @@ export const ApplicationForm = () => {
         <Button className="bg-neutral-900 hover:bg-neutral-800 border-b-0 rounded-b-none">
           <UserIcon />
           <p className="text-xs">
-            {user.email.substring(0, 21)}
-            {user.email.length > 20 && <>...</>}
+            {user.email.substring(0, 18)}
+            {user.email.length > 17 && <>...</>}
           </p>
         </Button>
         <Button
@@ -737,7 +748,7 @@ export const ApplicationForm = () => {
                           <FormItem>
                             <FormLabel>Country</FormLabel>
                             <FormControl>
-                              <Input placeholder="United States" {...field} />
+                              <CountryInput {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -752,7 +763,7 @@ export const ApplicationForm = () => {
                         <FormItem>
                           <FormLabel>Phone Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="+1 (555) 123-4567" {...field} />
+                            <PhoneInput {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -899,19 +910,35 @@ export const ApplicationForm = () => {
                       </p>
                     </div>
 
-                    <FormField
-                      control={form.control}
-                      name="parentFullName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Parent/Guardian Full Name</FormLabel>
-                          <FormControl>
-                            <Input placeholder="Jane Doe" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                      <FormField
+                        control={form.control}
+                        name="parentFirstName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>First Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="John" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="parentLastName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Last Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Johnson" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
                     <FormField
                       control={form.control}
@@ -920,7 +947,7 @@ export const ApplicationForm = () => {
                         <FormItem>
                           <FormLabel>Parent/Guardian Phone Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="+1 (555) 987-6543" {...field} />
+                            <PhoneInput {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>

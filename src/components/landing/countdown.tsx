@@ -60,12 +60,12 @@ export function Countdown() {
               <TimeUnit value={timeLeft.seconds} label="Seconds" />
             </div>
             <div className="py-4 px-6">
-              <div className="flex">
+              <div className="flex items-center space-x-6">
                 <div className="flex-shrink-0">
-                  <Clock className="h-5 w-5 text-gray-200" />
+                  <Clock className="h-6 w-6 text-gray-200" />
                 </div>
                 <div className="ml-3">
-                  <p className="text-xs md:text-sm text-gray-200">
+                  <p className="text-left text-xs md:text-sm text-gray-200">
                     Deadline:{" "}
                     <span className="font-semibold">June 19th at 11:59 PM</span>
                     . Be sure to submit your application on time to be
