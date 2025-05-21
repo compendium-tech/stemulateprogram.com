@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button"
 import { StandartLayout } from "@/layout/navbar"
+import { Link } from "react-router-dom"
 
 const publications = [
   {
@@ -65,8 +67,18 @@ const PublicationsPageContent = () => {
         <p className="font-bold text-2xl sm:text-4xl md:text-5xl">
           Publications
         </p>
-        <p className="text-xl">Research made by our students.</p>
-        <ul className="space-y-8">
+        {/* <p className="text-xl">Research made by our students.</p> */}
+        <p className="text-xl">
+          Here every student can get published their research paper and
+          presentation. If you want to get published, please contact us.
+        </p>
+        <p className="text-xl">
+          Haven't applied yet?{" "}
+          <Link to="/apply" className="underline">
+            Apply now!
+          </Link>
+        </p>
+        {/* <ul className="space-y-8">
           {publications.map((pub, index) => (
             <li key={index} className="md:text-xl">
               "<i>{pub.name}</i>" by{" "}
@@ -94,7 +106,7 @@ const PublicationsPageContent = () => {
               .
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </main>
   )
