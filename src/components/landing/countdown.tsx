@@ -3,7 +3,7 @@ import { Clock, CheckCircle } from "lucide-react"
 
 export function Countdown() {
   // Target date: June 1st at 11:59 PM of the current year
-  const targetDate = new Date(new Date().getFullYear(), 5, 20, 23, 59, 59)
+  const targetDate = new Date(new Date().getFullYear(), 5, 19, 23, 59, 59)
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
 
   function calculateTimeLeft() {
@@ -44,7 +44,7 @@ export function Countdown() {
               Application Deadline Has Passed
             </h3>
             <p className="text-gray-400 text-sm">
-              The deadline for submitting applications was June 20th at 11:59
+              The deadline for submitting applications was June 19th at 11:59
               PM. Please contact the program coordinator for any inquiries.
             </p>
           </div>
@@ -67,7 +67,7 @@ export function Countdown() {
                 <div className="ml-3">
                   <p className="text-xs md:text-sm text-gray-200">
                     Deadline:{" "}
-                    <span className="font-semibold">June 20th at 11:59 PM</span>
+                    <span className="font-semibold">June 19th at 11:59 PM</span>
                     . Be sure to submit your application on time to be
                     considered for the research program.
                   </p>
