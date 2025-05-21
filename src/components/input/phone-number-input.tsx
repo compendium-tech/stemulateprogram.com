@@ -161,10 +161,7 @@ export function PhoneInput({
             className="w-max items-center justify-between whitespace-nowrap"
           >
             {selectedCountry?.name ? (
-              <>
-                <span>{selectedCountry.emoji}</span>
-                <span>{selectedCountry.name}</span>
-              </>
+              <span>{selectedCountry.emoji}</span>
             ) : (
               "Choose country"
             )}
