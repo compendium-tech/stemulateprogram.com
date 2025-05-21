@@ -481,7 +481,10 @@ export const ApplicationForm = () => {
       <div className="flex justify-end mt-12 space-x-2">
         <Button className="bg-neutral-900 hover:bg-neutral-800 border-b-0 rounded-b-none">
           <UserIcon />
-          <p className="text-xs">{user.email}</p>
+          <p className="text-xs">
+            {user.email.substring(0, 21)}
+            {user.email.length > 20 && <>...</>}
+          </p>
         </Button>
         <Button
           variant="outline"
