@@ -718,7 +718,7 @@ export const ApplicationForm = () => {
                           <FormItem>
                             <FormLabel>Last Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="John" {...field} />
+                              <Input placeholder="Johnson" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
