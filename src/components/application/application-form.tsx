@@ -359,15 +359,19 @@ export const ApplicationForm = () => {
       values.noFinancialAidMoney = undefined
     }
 
+    const applicationObject: any = values
+    applicationObject.extracurriculars = values.extracurriculars
+      ?.map(
+        (activity) =>
+          `${activity.position} - ${activity.name}\n${activity.description}`
+      )
+      .join("\n\n")
+
     setIsSubmitting(true)
     try {
       const { error: insertError } = await supabaseClient
         .from("applications")
-        .insert([
-          {
-            ...values,
-          },
-        ])
+        .insert([applicationObject])
 
       if (insertError) {
         toast({
