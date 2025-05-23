@@ -59,6 +59,7 @@ const highlightedCountries = [
   "France",
   "United Kingdom",
   "Kazakhstan",
+  "Austria",
   "Armenia",
   "Azerbaijan",
   "Brazil",
