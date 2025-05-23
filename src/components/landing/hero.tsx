@@ -31,7 +31,7 @@ export const LandingHero = () => {
       <div className="mt-10 mb-8">
         <WorldMapSimple highlightedCountries={highlightedCountries} />
       </div>
-      <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <div className="flex flex-col md:flex-row justify-center items-center md:gap-4 gap-0">
         <Countdown
           text="Priority Application Deadline"
           targetDate={new Date(2025, 5, 16, 23, 59, 59)}
