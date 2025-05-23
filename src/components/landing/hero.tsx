@@ -28,10 +28,27 @@ export const LandingHero = () => {
           </button>
         </Link>
       </div>
-      <div className="mt-10">
+      <div className="mt-10 mb-8">
         <WorldMapSimple highlightedCountries={highlightedCountries} />
       </div>
-      <Countdown />
+      <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+        <Countdown
+          text="Priority Application Deadline"
+          targetDate={new Date(2025, 5, 16, 23, 59, 59)}
+          deadlineDescriptionText="Applications submitted by this date will be given priority review."
+          deadlinePassedHeader="Priority Application Deadline Passed"
+          deadlinePassedText="The priority deadline for submitting applications was June 16th at 11:59
+          PM. Please contact the program coordinator for any inquiries."
+        />
+        <Countdown
+          text="Final Application Deadline"
+          targetDate={new Date(2025, 5, 23, 23, 59, 59)}
+          deadlineDescriptionText="Applications submitted by this date will be considered for review."
+          deadlinePassedHeader="Final Application Deadline Passed"
+          deadlinePassedText="The final deadline for submitting applications was June 16th at 11:59
+          PM. Please contact the program coordinator for any inquiries."
+        />
+      </div>
     </section>
   )
 }
