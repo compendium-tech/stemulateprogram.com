@@ -91,8 +91,8 @@ const formSchema = z.object({
   country: z.string().min(2, { message: "Country is required" }),
   phone: z.string().min(10, { message: "Valid phone number is required" }),
 
-  ieltsScore: z.string().min(1, { message: "IELTS score is required" }),
-  satScore: z.string().min(1, { message: "SAT score is required" }),
+  ieltsScore: z.string(),
+  satScore: z.string(),
   schoolName: z.string().min(2, { message: "School name is required" }),
   grade: z.string().min(1, { message: "Grade is required" }),
   gpa: z.string().min(1, { message: "GPA is required" }),
@@ -801,42 +801,6 @@ export const ApplicationForm = () => {
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                      <FormField
-                        control={form.control}
-                        name="ieltsScore"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>IELTS Score</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="Do not include practice tests!"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-
-                      <FormField
-                        control={form.control}
-                        name="satScore"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>SAT Score</FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="Do not include practice tests!"
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
                     <FormField
                       control={form.control}
                       name="schoolName"
@@ -881,6 +845,42 @@ export const ApplicationForm = () => {
                             <FormDescription>
                               Please include the scale (e.g., 3.8/4.0)
                             </FormDescription>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+                      <FormField
+                        control={form.control}
+                        name="ieltsScore"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>IELTS Score (Optional)</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Do not include practice tests!"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="satScore"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>SAT Score (Optional)</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="Do not include practice tests!"
+                                {...field}
+                              />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
