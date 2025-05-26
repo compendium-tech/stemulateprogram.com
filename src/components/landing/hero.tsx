@@ -71,4 +71,5 @@ const highlightedCountries = [
   "Philippines",
   "Vietnam",
   "Thailand",
+  "Peru",
 ]
