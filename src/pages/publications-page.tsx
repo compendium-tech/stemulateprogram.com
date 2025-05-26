@@ -67,11 +67,11 @@ const PublicationsPageContent = () => {
           Publications
         </p>
         {/* <p className="text-xl">Research made by our students.</p> */}
-        <p className="text-xl">
+        <p className="text-lg md:text-xl">
           Here every student can get published their research paper and
           presentation. If you want to get published, please contact us.
         </p>
-        <p className="text-xl">
+        <p className="text-lg md:text-xl">
           Haven't applied yet?{" "}
           <Link to="/apply" className="underline">
             Apply now!

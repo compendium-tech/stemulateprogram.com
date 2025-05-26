@@ -15,7 +15,7 @@ export const WorkWithExperts = () => (
     <img
       src="universities.png"
       alt="Universities"
-      className="w-full max-w-4xl mx-auto mt-6"
+      className="w-full max-w-3xl mx-auto mt-6"
     />
   </section>
 )
