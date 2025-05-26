@@ -647,17 +647,15 @@ export const ApplicationForm = () => {
                         </div>
 
                         <div>
-                          <h2 className="md:text-lg font-medium mb-2">
-                            Program details:
-                          </h2>
-                          <ul className="space-y-1 text-sm md:text-base">
-                            <li>- The program will run in English.</li>
-                            <li>- Program price: $1500.</li>{" "}
+                          <h2 className="font-medium mb-2">Program details:</h2>
+                          <ul className="space-y-1">
+                            <li>- Language: English.</li>
+                            <li>- Format: Online (Zoom).</li>
+                            <li>- Price: $1500.</li>{" "}
                             <li>
                               - Financial aid may be available to the most
                               competitive students in the program.
                             </li>
-                            <li>- Program format: Online (Zoom).</li>
                           </ul>
                         </div>
 
