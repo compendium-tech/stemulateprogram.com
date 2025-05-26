@@ -551,7 +551,7 @@ export const ApplicationForm = () => {
                       <TabsTrigger
                         key={tab}
                         value={tab}
-                        className={`data-[state=active]:shadow-none text-xs sm:text-sm whitespace-nowrap px-2 sm:px-4 py-1.5 sm:py-2 snap-start ${
+                        className={`data-[state=active]:shadow-none text-base whitespace-nowrap px-3 snap-start ${
                           activeTab === tab ? "active-tab" : ""
                         }`}
                         onClick={() => scrollToTab(index)}
@@ -575,10 +575,10 @@ export const ApplicationForm = () => {
                     <div className="space-y-2">
                       <div className="space-y-6">
                         <div>
-                          <h2 className="text-lg md:text-2xl font-semibold mb-6 mt-6">
+                          <h2 className="text-2xl font-semibold mb-6 mt-6">
                             Program Overview:
                           </h2>
-                          <p className="text-sm md:text-base">
+                          <p>
                             During the program, you will learn the basics of
                             brainstorming and developing ideas, formulating
                             hypotheses, collecting and analyzing data, and
@@ -592,7 +592,7 @@ export const ApplicationForm = () => {
                         </div>
 
                         <div>
-                          <p className="text-sm md:text-base">
+                          <p>
                             At the beginning of the program, students will have
                             group workshops on research basics and
                             methodologies, topic exploration and idea
@@ -606,13 +606,13 @@ export const ApplicationForm = () => {
                         </div>
 
                         <div>
-                          <p className="text-sm md:text-base">
+                          <p>
                             The mentors of the program have backgrounds in STEM
                             and social sciences. Students can conduct research
                             and write a paper under the guidance of an
                             experienced mentor in any of the following fields:
                           </p>
-                          <div className="mt-4 text-sm md:text-base flex space-x-8 md:space-x-16">
+                          <div className="mt-4 flex space-x-8 md:space-x-16">
                             <ul className="mt-2 space-y-1">
                               <li>- Biology</li>
                               <li>- Business</li>
@@ -638,7 +638,7 @@ export const ApplicationForm = () => {
                         </div>
 
                         <div>
-                          <p className="text-sm md:text-base">
+                          <p>
                             Note: You will conduct research in one field only.
                             By selecting up to 3 fields, you indicate the areas
                             you are interested in. This will help us match you
@@ -662,21 +662,21 @@ export const ApplicationForm = () => {
                         </div>
 
                         <div>
-                          <p className="text-sm md:text-base">
+                          <p>
                             <b>Priority Application Deadline</b>: June 16th at
                             11:59 PM (UTC-5).
                           </p>
-                          <p className="text-sm md:text-base">
+                          <p>
                             <b>Final Application Deadline</b>: June 23th at
                             11:59 PM (UTC-5).
                           </p>
                         </div>
 
                         <div>
-                          <p className="text-sm md:text-base">
+                          <p>
                             For any questions please contact us at:
                             <br />
-                            Email: stemulate.program@gmail.com
+                            stemulate.program@gmail.com
                           </p>
                         </div>
                       </div>
