@@ -12,7 +12,7 @@ const navItems: NavItem[] = [
   { label: "Publications", href: "/publications" },
   {
     label: "Info Session",
-    href: "https://calendly.com/stemulate-program/30min",
+    href: "https://calendly.com/stemulate-program/info-sessions",
   },
 ]
 
