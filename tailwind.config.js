@@ -4,7 +4,7 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      sans: ['Philosopher', 'Helvetica', 'sans-serif']
+      sans: ['Roboto', 'Helvetica', 'sans-serif']
     },
     extend: {
       colors: {

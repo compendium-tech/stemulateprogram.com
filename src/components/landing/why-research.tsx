@@ -17,7 +17,8 @@ export const WhyResearch = () => {
           <StaggerText text="Why do research?" />
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-center items-center">
+        {/* Change items-center to items-start here */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 justify-center items-start">
           {reasonsWhyResearch.map((item, index) => (
             <div
               className="flex flex-col lg:items-start"
@@ -42,21 +43,21 @@ const reasonsWhyResearch = [
   {
     title: "Make an impact on the world",
     description: `Every day, we read about research that changes our lives - from
-        studies on vaccines to new computational algorithms. Each of
-        these breakthroughs comes from researchers working to advance
-        their field.`,
+         studies on vaccines to new computational algorithms. Each of
+         these breakthroughs comes from researchers working to advance
+         their field.`,
   },
   {
     title: "Develop crucial skills",
     description: `The goal of research is to extend human knowledge in an area.
-                  When you do research, you learn about the advances that came
-                  before you and contribute to our current knowledge.`,
+                     When you do research, you learn about the advances that came
+                     before you and contribute to our current knowledge.`,
   },
   {
     title: "Get a head start on your career",
     description: `Creating a research project is an effective way for you to
-                  showcase your strengths and demonstrate your abilities. Doing
-                  research can help at each stage of life - whether applying to
-                  college, grad school, or your next job.`,
+                     showcase your strengths and demonstrate your abilities. Doing
+                     research can help at each stage of life - whether applying to
+                     college, grad school, or your next job.`,
   },
 ]
