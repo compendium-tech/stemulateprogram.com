@@ -647,16 +647,24 @@ export const ApplicationForm = () => {
                         </div>
 
                         <div>
-                          <h2 className="font-medium mb-2">Program details:</h2>
-                          <ul className="space-y-1">
-                            <li>- Language: English.</li>
-                            <li>- Format: Online (Zoom).</li>
-                            <li>- Price: $1500.</li>{" "}
-                            <li>
-                              - Financial aid may be available to the most
+                          <h2 className="font-bold text-xl mb-2">
+                            Program details:
+                          </h2>
+                          <p>
+                            <b>Language</b>: English.
+                          </p>
+                          <p>
+                            <b>Format</b>: Online (Zoom).
+                          </p>
+                          <p>
+                            <b>Price</b>: $1500.
+                          </p>
+                          <p>
+                            <b>
+                              Financial aid may be available to the most
                               competitive students in the program.
-                            </li>
-                          </ul>
+                            </b>
+                          </p>
                         </div>
 
                         <div>
@@ -674,7 +682,7 @@ export const ApplicationForm = () => {
                           <p>
                             For any questions please contact us at:
                             <br />
-                            stemulate.program@gmail.com
+                            <i>stemulate.program@gmail.com</i>
                           </p>
                         </div>
                       </div>
@@ -1290,21 +1298,29 @@ export const ApplicationForm = () => {
                       name="financialAid"
                       render={({ field }) => (
                         <FormItem className="space-y-3">
-                          <FormLabel>Financial Aid</FormLabel>
+                          <FormLabel className="text-2xl font-bold">
+                            Financial Aid
+                          </FormLabel>
                           <FormControl>
-                            <div className="flex items-center space-x-2">
-                              <Checkbox
-                                checked={field.value}
-                                onCheckedChange={field.onChange}
-                                id="financial-aid"
-                              />
-                              <label
-                                htmlFor="financial-aid"
-                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                              >
-                                I am applying for financial aid
-                              </label>
-                            </div>
+                            <>
+                              <p>
+                                <b>Program price</b>: $1500.
+                              </p>
+                              <div className="flex items-center space-x-2">
+                                <br />
+                                <Checkbox
+                                  checked={field.value}
+                                  onCheckedChange={field.onChange}
+                                  id="financial-aid"
+                                />
+                                <label
+                                  htmlFor="financial-aid"
+                                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                                >
+                                  I am applying for financial aid
+                                </label>
+                              </div>
+                            </>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
