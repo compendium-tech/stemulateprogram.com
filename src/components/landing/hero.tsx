@@ -66,6 +66,7 @@ const highlightedCountries = [
   "Uzbekistan",
   "Kyrgyzstan",
   "Nepal",
+  "Italy",
   "Belarus",
   "Russia",
   "Philippines",
