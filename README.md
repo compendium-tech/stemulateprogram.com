@@ -1,4 +1,4 @@
-## STEMulate Research Program Website 
+## STEMulate Research Program  
 
 ### What is this code used for?
 
