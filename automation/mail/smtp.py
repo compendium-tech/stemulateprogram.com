@@ -28,9 +28,9 @@ def send_email_with_html(sender_email: str, app_password: str, recipient_email: 
 
         # Connect to Gmail's SMTP server
         # For Gmail, the SMTP server is smtp.gmail.com and the port is 587 (TLS)
-        with smtplib.SMTP("smtp.gmail.com", 587) as server:
+        with smtplib.SMTP("live.smtp.mailtrap.io", 587) as server:
             server.starttls()  # Upgrade the connection to a secure encrypted SSL/TLS connection
-            server.login(sender_email, app_password)  # Log in to the SMTP server
+            server.login("smtp@mailtrap.io", app_password)  # Log in to the SMTP server
             server.sendmail(sender_email, recipient_email, message.as_string()) # Send the email
         print("Email sent successfully!")
 

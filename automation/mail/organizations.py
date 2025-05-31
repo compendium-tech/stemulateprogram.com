@@ -19,9 +19,9 @@ for key in ["SENDER_EMAIL", "APP_PASSWORD"]:
     if not CONFIG[key]:
         raise ValueError(f"Missing required environment variable: {key}")
 
-def send_email(recipient: str, school_name: str) -> None:
+def send_email(recipient: str) -> None:
     """Send formatted email to recipient using school-specific content."""
-    email_html = create_email_template(school_name)
+    email_html = create_email_template()
 
     send_email_with_html(
         sender_email=CONFIG["SENDER_EMAIL"],
@@ -31,7 +31,7 @@ def send_email(recipient: str, school_name: str) -> None:
         html_content=email_html
     )
 
-def create_email_template(school_name: str) -> str:
+def create_email_template() -> str:
     """Generate HTML email template with school-specific content."""
     return f"""
 <!DOCTYPE html>
@@ -167,7 +167,6 @@ def create_email_template(school_name: str) -> str:
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
         <tr>
             <td align="center">
-<font face="georgia, serif">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" class="email-container">
                     <tr>
                         <td class="header-section">
@@ -183,14 +182,12 @@ def create_email_template(school_name: str) -> str:
                                 </tr>
                                 <tr>
                                     <td style="text-align: right;">
-                                        <p class="date">May 26, 2025</p>
+                                        <p class="date">May 31, 2025</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>Dear School Administrator At <i>{school_name}</i>,</p>
-
-                                        <p>We're excited to share an exceptional opportunity for your high school students: <b>STEMulate</b>, an international online research mentorship program designed for highly motivated students interested in STEM and social science fields.</p>
+                                        <p>We are excited to introduce the <b>STEMulate Research Program</b> – a unique opportunity for students around the world to boost their chances of getting into top universities.</p>
 
                                         <h3>What is STEMulate?</h3>
                                         <p>STEMulate is a virtual program where students will immerse themselves in the world of academic research. They'll learn to develop compelling research questions, effectively analyze data, and ultimately work towards writing a comprehensive research paper, all under the <b>one-on-one guidance of experienced mentors</b>.</p>
@@ -209,16 +206,13 @@ def create_email_template(school_name: str) -> str:
                                         <p><strong>Format</strong>: Exclusively online via Zoom.</p>
                                         <p><strong>Priority Application Deadline</strong>: June 16th at 11:59 PM (UTC-5)</p>
                                         <p><strong>Final Application Deadline</strong>: June 23th at 11:59 PM (UTC-5)</p>
+                                        <p><strong>Financial aid may be available to the most competitive students in the program.</strong></p>
                                         <p><strong>Application Portal</strong>: <a href="https://stemulateprogram.com/apply">https://stemulateprogram.com/apply</a>.</p>
                                         <hr />
 
-                                        <p><strong style="color: red;">We highly encourage you to share this invaluable opportunity with your students</strong>.
-
                                         <p>You can find more details and information on our website: <a href="https://stemulateprogram.com" target="_blank">https://www.stemulateprogram.com</a>.</p>
 
-                                        <p>Should you or your students have any questions, please don't hesitate to reach out to us at <a href="mailto:stemulate.program@gmail.com" style="color: #DB0C0C; text-decoration: none;">stemulate.program@gmail.com</a>.</p>
-
-                                        <p>Thank you for helping us empower curious and ambitious students globally through the STEMulate program.</p>
+                                        <p>Please don't hesitate to reach out to us at <a href="mailto:admissions@stemulateprogram.com" style="color: #DB0C0C; text-decoration: none;">admissions@stemulateprogram.com</a>.</p>
 
                                         <p class="signature">Best regards, <br>The STEMulate Team</p>
                                     </td>
@@ -232,7 +226,6 @@ def create_email_template(school_name: str) -> str:
                         </td>
                     </tr>
                 </table>
-    </font>
             </td>
         </tr>
     </table>
@@ -240,31 +233,28 @@ def create_email_template(school_name: str) -> str:
 </html>
     """
 
-def load_school_contacts() -> dict:
+def load_organizations() -> list[str]:
     """Parse school contacts from embedded string data."""
-    contacts = {}
+    organizations = []
 
-    with open("schools.txt", "r") as file:
+    with open("organizations.txt", "r") as file:
         contact_data = file.read()
 
     for line in contact_data.strip().split('\n'):
         parts = line.strip().split('\t')
-        if len(parts) >= 2:
-            school = parts[0].strip()
-            email = parts[-1].strip()  # Always get last element as email
-            contacts[email] = school
+        email = parts[-1].strip()
+        if "@" in email:
+          organizations.append(email)
 
-    return contacts
+    return organizations
 
 def main():
-    contacts = load_school_contacts()
+    organizations = load_organizations()
 
-    for email, school in contacts.items():
+    for email in organizations:
         try:
-            print(f"Sending to {email} ({school})")
-            send_email(email, school)
-            print(f"Waiting {CONFIG['THROTTLE_SECONDS']} seconds...")
-            time.sleep(CONFIG["THROTTLE_SECONDS"])
+            print(f"Sending to `{email}`")
+            send_email(email)
         except Exception as e:
             print(f"Failed to send to {email}: {str(e)}")
 
