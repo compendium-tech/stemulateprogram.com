@@ -682,7 +682,7 @@ export const ApplicationForm = () => {
                           <p>
                             For any questions please contact us at:
                             <br />
-                            <i>stemulate.program@gmail.com</i>
+                            <i>admissions@stemulateprogram.com</i>
                           </p>
                         </div>
                       </div>

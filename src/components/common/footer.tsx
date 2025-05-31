@@ -39,7 +39,7 @@ const links: FooterLink[] = [
     ),
   },
   {
-    href: "mailto:stemulate.program@gmail.com",
+    href: "mailto:admissions@stemulateprogram.com",
     icon: <MailIcon className="w-8 h-8" />,
   },
 ]
