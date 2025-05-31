@@ -1,3 +1,393 @@
+HaileyBury Almaty	S.Mills@haileyburyalmaty.kz
+HaileyBury Astana	J.Coles@haileyburyastana.kz
+Spectrum School	info@spectrum.edu.kz
+Inetrnational School of Astana	admissions_isa@isa.nis.edu.kz
+High Tech Academy Almaty	info@hta.kz
+Miras International School Almaty	mirashead@almaty.miras.kz
+Miras International School Astana	mail:admissions@miras-astana.kz
+National School Of Physics And Math (FIZMAT)	arman.olzhabayev@fizmat.kz
+International School of Monaco	www.ismonaco.org	contact@ismonaco.com
+Lycee Albert 1er	www.lycee-albert1er.monaco	la1secretariat@gouv.mc
+Lycee Technique et Hotelier de Monaco	www.lyceehotelier.com	lthsecretariat@gouv.mc
+Monaco International School	www.monaco-international-school.com	ecoleism@cote-dazur.com
+Ecole Supérieure de Commerce de Monaco (ESCM)	www.escmonaco.com	aurelie.gimenez@escm-ecole.fr
+Institut Stanislas	www.stanislas.mc	info@monaco1.com
+Ecole de la Condamine	www.ecoledelacondamine.com	condamine@gouv.mc
+Lycee Jean d'Arsonval	www.lyceejeandarsonval.fr	lr3-secretariat@gouv.mc
+Ecole Francaise de Monaco	www.efmonaco.com	saintcharles@gouv.mc
+Institut Le Rosey (located in Monegasque region)	www.rosey.ch	rosey@rosey.ch
+Hankuk Academy of Foreign Studies	international@hufs.ac.kr
+Korean Minjok Leadership Academy	oia@minjok.hs.kr
+Korea Science Academy of KAIST	admission@ksa.kaist.ac.kr
+Hyundai Chungun High School	dmin@hyundaiforeignschool.com
+Busan Foreign Language High School	sunover@korea.kr
+Kangwon Science High School	enter@kangwon.ac.kr
+Kyeongbuk Science High School	kbsh@kbsh.kr
+Sehwa Girls' High School	sehwa@sehwa.hs.kr
+Sejong Science High School	admin@sshs.hs.kr
+Sunhwa Arts School	sunhwaart@sunhwa.com
+BASIS Peoria	basispeoria.org	publicrecordsrequest@basised.com
+Signature School	signature.edu	jean.hitchcock@signature.edu
+Tesla STEM High School	teslastem.com	gerbern@wwu.edu
+Julia R. Masterman Secondary School	masterman.philasd.org	masterman@philasd.org
+Payton College Preparatory High School	payton.cps.edu	linebaugh.stephanie@gmail.com
+Stuyvesant High School	stuy.edu	contactpa@stuy-pa.org
+Oklahoma School of Science and Mathematics	ossm.edu	Brent.Richards@ossm.edu
+South Carolina Governor's School for Science & Mathematics	scgssm.org	communications@governors.school
+School for the Talented & Gifted	tag.dallasisd.org	GiftedandTalented@houstonisd.org
+Pine View School 	pineview.sarasota.k12.fl.us	sbishop@pasco.k12.fl.us
+Northside College Preparatory High School	northsideprep.org	ncpadmissions@cps.edu
+Bronx High School of Science	bxscience.edu	mhoyle@schools.nyc.gov
+International Academy	iacademies.com	info@iacademies.com
+Staten Island Technical High School	siths.org	maryann.reichel@sitechhs.com
+Gwinnett School of Mathematics, Science & Technology	gsmst.org	claudia.amaya@gcpsk12.org
+Illinois Mathematics and Science Academy	imsa.edu	admissions@imsa.edu
+School of Science & Engineering	seaisd.net	slu_sse@slu.edu
+Whitney M. Young Magnet High School	wyoung.cps.edu	dmpassolt1@cps.edu
+Bergen County Academies	bergen.edu	rusdav@bergen.org
+The Academy for Mathematics, Science & Engineering	morriscountyschools.org
+Liberal Arts & Science Academy	lasa.austinisd.org
+Indiana Academy for Science, Mathematics, and Humanities	indianaacademy.org	kworkman@bsu.edu
+California Academy of Mathematics & Science	cams.lbusd.k12.ca.us
+BASIS Scottsdale	basisschools.org	publicrecordsrequest@basised.com
+Harvard-Westlake School	hw.com	ekennedy@hw.com
+Commonwealth School	commonwealthschool.org	CWSS@moe.edu.sg
+The Hotchkiss School	hotchkiss.org	admission@hotchkiss.org
+The Lawrenceville School	lawrenceville.org	admission@lawrenceville.org
+The Westminster Schools	westminster.net	usadmissions@westminster.net
+The Brearley School	brearley.org	information@brearley.org
+The Dalton School	dalton.org	dgi@dalton.org
+The Chapin School	chapin.edu	darreolasegrove@chapin.edu
+The Collegiate School	collegiateschool.org	connect@collegiateschool.org
+The Trinity School	trinityschoolnyc.org	officeadmin@thetrinityschool.co.uk
+The Spence School	spenceschool.org	admissions@spenceschool.org
+The Hewitt School	hewittschool.org	therese.collins@hewittschool.org
+The Nightingale-Bamford School	nightingale.org	admissions@nightingale.org
+The Marymount School of New York	marymountnyc.org	tlonergan@marymountnyc.org
+The Sacred Heart School	sacredheartnyc.org	office@sacredheart.southwark.sch.ukBASIS Peoria	basispeoria.org	publicrecordsrequest@basised.com
+Signature School	signature.edu	jean.hitchcock@signature.edu
+Tesla STEM High School	teslastem.com	gerbern@wwu.edu
+Julia R. Masterman Secondary School	masterman.philasd.org	masterman@philasd.org
+Payton College Preparatory High School	payton.cps.edu	linebaugh.stephanie@gmail.com
+Stuyvesant High School	stuy.edu	contactpa@stuy-pa.org
+Oklahoma School of Science and Mathematics	ossm.edu	Brent.Richards@ossm.edu
+South Carolina Governor's School for Science & Mathematics	scgssm.org	communications@governors.school
+School for the Talented & Gifted	tag.dallasisd.org	GiftedandTalented@houstonisd.org
+Pine View School 	pineview.sarasota.k12.fl.us	sbishop@pasco.k12.fl.us
+Northside College Preparatory High School	northsideprep.org	ncpadmissions@cps.edu
+Bronx High School of Science	bxscience.edu	mhoyle@schools.nyc.gov
+International Academy	iacademies.com	info@iacademies.com
+Staten Island Technical High School	siths.org	maryann.reichel@sitechhs.com
+Gwinnett School of Mathematics, Science & Technology	gsmst.org	claudia.amaya@gcpsk12.org
+Illinois Mathematics and Science Academy	imsa.edu	admissions@imsa.edu
+School of Science & Engineering	seaisd.net	slu_sse@slu.edu
+Whitney M. Young Magnet High School	wyoung.cps.edu	dmpassolt1@cps.edu
+Indiana Academy for Science, Mathematics, and Humanities	indianaacademy.org	kworkman@bsu.edu
+BASIS Scottsdale	basisschools.org	publicrecordsrequest@basised.com
+Harvard-Westlake School	hw.com	ekennedy@hw.com
+Commonwealth School	commonwealthschool.org	CWSS@moe.edu.sg
+The Hotchkiss School	hotchkiss.org	admission@hotchkiss.org
+The Lawrenceville School	lawrenceville.org	admission@lawrenceville.org
+The Westminster Schools	westminster.net	usadmissions@westminster.net
+The Brearley School	brearley.org	information@brearley.org
+The Dalton School	dalton.org	dgi@dalton.org
+The Chapin School	chapin.edu	darreolasegrove@chapin.edu
+The Collegiate School	collegiateschool.org	connect@collegiateschool.org
+The Trinity School	trinityschoolnyc.org	officeadmin@thetrinityschool.co.uk
+The Spence School	spenceschool.org	admissions@spenceschool.org
+The Hewitt School	hewittschool.org	therese.collins@hewittschool.org
+The Nightingale-Bamford School	nightingale.org	admissions@nightingale.org
+The Marymount School of New York	marymountnyc.org	tlonergan@marymountnyc.org
+The Sacred Heart School	sacredheartnyc.org	office@sacredheart.southwark.sch.uk
+Upper Canada College	www.ucc.on.ca	admission@ucc.on.ca
+The Bishop Strachan School	www.bss.on.ca	nfo@bss.on.ca
+Saint Andrew's College	www.sac.on.ca	admission@sac.on.ca
+St. Michael's College School	www.stmichaelscollegeschool.com	info@smcsmail.com
+TFS – Canada's International School	www.tfs.on.ca	admissions@tfs.ca
+The Toronto French School	www.tfs.on.ca	admissions@tfs.ca
+Appleby College	www.appleby.on.ca	info@appleby.on.ca.com
+Trinity College School	www.tcs.on.ca	communications@tcs.on.ca
+Crescent School	www.crescentschool.org	info@crescentschool.org
+The York School	www.yorkschool.com	doug@york.org
+Western Canada High School	https://western.epsb.ca	westerncanada@cbe.ab.ca
+Lycée Louis Pasteur	www.lyceelouispasteur.ca	contact@lyceepasteurtunis.com
+Leaside High School	www.leasidehighschool.com	Leaside@tdsb.on.ca
+Havergal College	www.havergal.on.ca	info@havergal.on.ca
+The King’s School	www.kingsschool.ca	info@thekingsschool.ca
+Ashbury College	www.ashbury.ca	info@ashbury.ca
+Rothesay Netherwood School	www.rns.cc	paul.mclellan@rns.cc
+Branksome Hall	www.branksome.on.ca	admissions@branksome.on.ca
+Ridley College	www.ridleycollege.com	admissions@ridleycollege.com
+Blyth Academy	www.blytheducation.com	blyth.enquiries@northerneducationtrust.org
+Bloor Collegiate Institute	https://schoolweb.tdsb.on.ca/bloor	Bloor@tdsb.on.ca
+St. Francis Xavier High School	www.sfx.ca	FrancisXavier.High@ocsb.ca
+Westmount High School	www.westmount.highschool.com	westmount@hwdsb.on.ca
+École secondaire de la Côte-Des-Neiges	www.cdn.qc.ca	jameslyng@emsb.qc.ca
+Collège Jean-de-Brébeuf	www.brebeuf.qc.ca	diretu.collegial@brebeuf.qc.ca
+École secondaire Saint-Laurent	www.saintlaurenthighschool.com	Direction.EcoleSaint-Laurent@csmb.qc
+St. Paul's Secondary School	www.stpauls.school	contact-us@stpauls.mb.ca
+Mowat Collegiate Institute	www.mowatcollegiate.com	SirOliverMowat@tdsb.on.ca
+Cedarbrae Collegiate Institute	www.cedarbrae.collegiate.com	Cedarbrae@tdsb.on.ca
+International School of Brussels	www.isb.be	admissions@isb.be
+British School of Brussels	www.britishschool.be	admissions@britishschool.be
+Lycée Français Jean-Monnet	www.lyceefrancais.be	michael.alegre@lyceefrancais.be
+Collège Saint-Michel	www.colsaintmichel.be	direction@college-st-michel.be
+ISF Tervuren International School	www.isft.be	info@isftervuren.org
+Lycée Louis Pasteur	www.lyceelouispasteur.be	contact@lyceepasteurtunis.com
+Athénée Royal de Bruxelles	www.athenee.be	olivier.erauw@arbxl2.org
+École Européenne de Bruxelles II	www.eeb2.eu	caroline.jeanjot@eursc.eu
+Institut Saint-Louis	www.institutsaintlouis.be	secretariat.sl2@saintlouis.be
+Collège Notre-Dame de la Paix	www.cndlp.be	cndp.erpent@sec.cfwb.be
+Athénée Royal Jean Absil	www.atheneeabsil.be	ar.absil.etterbeek@sec.cfwb.be
+Institut de la Providence	www.providence.be	info@providence-wavre.be
+Athénée Royal de Wavre	www.atheneewavre.be	directionadjointewavre@gmail.com
+Institut Notre-Dame de la Paix	www.notredame.be	cndp.erpent@sec.cfwb.be
+Athénée Royal de Jodoigne	www.atheneejodoigne.be	secretariatdirection@arjodoigne.be
+Athénée Royal de Namur	www.atheneenamur.be	secretariat@arnamur.be
+Institut Sainte-Marie	www.saintemarie.be	maude.struglia@sainte-marie.be
+Collège Cardinal Mercier	www.ccmercier.be	institut@collegecardinalmercier.be
+Athénée Royal de Waterloo	www.athenee-waterloo.be	secretaire.eleves@ar-waterloo.be
+Schule Schloss Salem	www.schule-schloss-salem.de	aufnahme@schule-schloss-salem.de
+Schule Marienau Internatsgymnasium	www.marienau.de	sekretariat@marienau.de
+Schloß Torgelow	www.schlosstorgelow.de	a.vlach@schlosstorgelow.de
+Gymnasium Stift Neuzelle	www.gymnasium-neuzelle.de	gymnasium-nz@rahn-schulen.de
+Louisenlund	www.louisenlund.de	admissions@ntare-louisenlund.org
+Berlin Brandenburg International School	www.bbis-online.de	office@bbis.de
+BBIS Berlin Brandenburg International School	www.bbis-online.de	office@bbis.de
+Humboldt-Institut	www.humboldt-institut.org	info@humboldt-institut.org
+Cologne International School	www.cologne-international-school.de	info@if-koeln.de
+St. George’s, The British International School, Cologne	www.stgeorgeschool.de	officecologne@stgeorgesschool.com
+St. George's, The British International School, Düsseldorf Rhein-Ruhr	www.stgeorgeschool.de	officeduesseldorf@stgeorgesschool.com
+Schloss Neubeuern	www.schloss-neubeuern.de	info@schloss-neubeuern.de
+Gymnasium Lindenberg	www.gymnasium-lindenberg.de	gymnasium@gymlindenberg.de
+Schule Schloss Neubeuern	www.schule-schloss-neubeuern.de	info@schloss-neubeuern.de
+Gymnasium Schloss Torgelow	www.gymnasium-schloss-torgelow.de	sekretariat@schlosstorgelow.de
+Schule Schloss Salem	www.schule-schloss-salem.de	aufnahme@schule-schloss-salem.de
+Gymnasium Stift Neuzelle	www.gymnasium-stift-neuzelle.de	info@rahn.education
+Schule Marienau Internatsgymnasium	www.schule-marienau.de	sekretariat@marienau.de
+Schloß Torgelow	www.schlosstorgelow.de	a.vlach@schlosstorgelow.de
+Schule Schloss Salem	www.schule-schloss-salem.de	aufnahme@schule-schloss-salem.de
+Amadeus International School Vienna	amadeus-vienna.com	admissions@amadeus-vienna.com
+Schloss Krumbach International School	schlosskrumbach.at	info@krumbach.school
+American International School Salzburg (AISS)	aiss.at	office@ais-salzburg.at AIS Salzburg
+St. Gilgen International School	stgis.at	info@stgis.at StGIS
+Liceo Classico Giuseppe Parini	info@liceoparini.edu.it
+Liceo Scientifico Leonardo da Vinci	GEPS050008@istruzione.it
+Liceo Scientifico Leonardo da Vinci (Maglie)	leis05200b@istruzione.it
+Liceo Scientifico Leonardo da Vinci (Vallo)	SAPS10000T@istruzione.it
+Liceo Scientifico Leonardo da Vinci (Trento)	dir.liceodavinci@scuole.provincia.tn.it
+Liceo Scientifico Leonardo da Vinci (Firenze)	FIPS030006@istruzione.it
+SEK International School	www.sek.es	info@sek.es
+Newton College	www.newtoncollege.es	info@newtoncollege.es
+American School of Las Palmas	www.aslp.org	info@aslp.org
+Colegio Internacional Ausiàs March	www.ciamarch.com	info@ciamarch.com
+St. Peter's School Barcelona	www.stpeters.es	info@stpeters.es
+King's College, The British School of Murcia	www.kingscollege.es	info@kingscollege.es
+Anglo-Chinese School (Independent)	www.acsindep.moe.edu.sg	acsindep@acsindep.moe.edu.sg
+Nanyang Girls' High School	www.nygh.edu.sg	nygh@nygh.edu.sg
+Singapore Chinese Girls' School	www.scgs.edu.sg	scgs@scgs.edu.sg
+Victoria Junior College	www.vjc.edu.sg	vjc@vjc.edu.sg
+Serangoon Junior College	www.srjc.edu.sg	sjc@moe.edu.sg
+Institut Auf dem Rosenberg	info@rosenberg.ch
+Institut Le Rosey	info@rosey.ch
+Lyceum Alpinum Zuoz	info@lyceum-alpinum.ch
+Zurich International School	info@zis.ch
+The American School in Switzerland (TASIS)	info@tasis.ch
+The British School of Geneva	info@britishschool.ch
+Schule Schloss Salem	info@schule-schloss-salem.de
+Schweizerische Internationale Schule Basel (SISB)	info@sisb.ch
+Kings' School Dubai	info@kings-edu.com
+Repton School Dubai	info@reptondubai.org
+King's School Al Barsha	info@kingsalbarsha.com
+Dubai British School	info@dubaibritishschool.com
+Dubai International Academy	info@dia-uae.com
+Swiss International Scientific School in Dubai	info@sisd.ae
+North London Collegiate School Dubai	info@nlcsdubai.ae
+The British International School Abu Dhabi	info@britishschool.sch.ae
+Sharjah English School	info@sharjahenglishschool.org
+International School of Choueifat – Abu Dhabi	info@isc.sch.sa
+International School of Choueifat – Dubai	info@isc.sch.sa
+International School of Abu Dhabi	info@isad.sch.ae
+The American School of Abu Dhabi	info@asad.sch.ae
+The International School of Al Ain	info@isalain.sch.ae
+The International School of Sharjah	info@iss.sch.ae
+The International School of Fujairah	info@isf.sch.ae
+The International School of Ras Al Khaimah	info@israk.sch.ae
+The International School of Umm Al Quwain	info@isuaq.sch.ae
+The International School of Dibba	info@isd.sch.ae
+The International School of Kalba	info@isk.sch.ae
+The International School of Madinat Zayed	info@ismz.sch.ae
+The International School of Ruwais	info@isr.sch.ae
+The International School of Sweihan	info@issw.sch.ae
+The International School of Al Wagan	info@isaw.sch.ae
+The International School of Al Khobar	info@isak.sch.ae
+Cardiff Sixth Form College	info@cardiff.ac.uk
+Sevenoaks School	info@sevenoaksschool.org
+Queen Ethelburga's College	info@qe.org
+Brighton College	info@brightoncollege.net
+The National Mathematics and Science College	info@nmsc.org.uk
+Concord College	info@concordcollege.org.uk
+Westminster School	info@westminster.org.uk
+St Paul's Girls' School	info@stpaulsgirls.co.uk
+Magdalen College School	info@mcsoxford.org
+St Paul's School	info@stpaulsschool.org.uk
+King's College School, Wimbledon	info@kcs.org.uk
+Tonbridge School	info@tonbridge-school.co.uk
+Harrow School	info@harrowschool.org.uk
+Eton College	info@etoncollege.com
+Winchester College	info@winchestercollege.org
+Wycombe Abbey School	info@wycombeabbey.com
+Cheltenham Ladies' College	info@cheltladiescollege.org
+Reigate Grammar School	info@reigategrammar.org
+North London Collegiate School	info@nlcs.org.uk
+Wellington College	info@wellingtoncollege.org.uk
+St Michael’s School	info@st-michaels-school.co.uk
+The Perse School	info@perse.co.uk
+St Mary's School Ascot	info@st-marys-ascot.co.uk
+Charterhouse School	info@charterhouse.org.uk
+Downside School	info@downside.co.uk
+St Swithun’s School	info@stswithun.com
+Radley College	info@radley.org.uk
+Oundle School	info@oundleschool.org.uk
+Oslo International School	ois.main@oslois.no
+International School of Bergen	post@isbergen.no
+International School of Stavanger	information@isstavanger.no
+Kristiansand International School	info@kristiansandis.no
+French International School of Hong Kong (Lycée Français International de Hong Kong)	www.fis.edu.hk	inscriptions(@)g.lfis.edu.hk
+Hong Kong International School	www.hkis.edu.hk	admissions@hkis.edu.hk
+Korean International School, Hong Kong	www.kis.edu.hk	admissions@kis.edu.hk
+Christian Alliance International School	www.caisbv.edu.hk	info@capcl.edu.hk
+English Schools Foundation (ESF)	www.esf.edu.hk	secondary.admissions@esfcentre.edu.hk
+Banqiao Senior High School		veronika.ucekajova@iypt.org
+Taipei Municipal Chenggong High School		 ncadmin@gafe.cksh.tp.edu.tw
+Hsinchu American School		contact@has.hc.edu.tw
+Lycée International de Saint-Germain-en-Laye	lycee-international.ac-versailles.fr	seccion.stgermain@educacion.gob.es
+École Jeannine Manuel	ejm.net	info@ejm.net
+Lycée Henri-IV	lycee-henri4.com	ce.0750654d@ac-paris.fr
+Lycée Louis-le-Grand	louislegrand.org	ce.0750655e@ac-paris.fr
+Lycée Sainte-Geneviève	ginette.fr	institution@saintegenevieve-asnieres.com
+Lycée Stanislas	stanislas.fr	secretariat.lycee@stanislas.fr
+Lycée Hoche	lyc-hoche-versailles.ac-versailles.fr	0782562L@ac-versailles.fr
+Lycée Fénelon Sainte-Marie	fenelonsaintemarie.org	lycee@groupefenelon.org
+Lycée Janson-de-Sailly	lyc-janson-de-sailly.ac-paris.fr	lycee@janson-de-sailly.fr
+Lycée Condorcet	lycee-condorcet-paris.fr	ce.0940122x@ac-creteil.fr
+Lycée Chaptal	lycee-chaptal.fr	ce.0750663n@ac-paris.fr
+Lycée Pierre-de-Fermat	fermat-education.fr	0310036w@ac-toulouse.fr
+Lycée du Parc	lyceeduparc.fr	ce.0690026D@ac-lyon.fr
+Lycée Saint-Louis	lycee-saintlouis.fr	ce.0750658H@ac-paris.fr
+Lycée Notre-Dame du Grandchamp	grandchamp.fr	0783351U@ac-versailles.fr
+Lycée La Rochefoucauld	lycee-larochefoucauld.com	info@laroche.org
+Lycée Marcelin Berthelot	lyc-berthelot.fr	ce.0940120V@ac-creteil.fr
+Lycée Lakanal	lyc-lakanal-sceaux.ac-versailles.fr	ce.0920145h@ac-versailles.fr
+Lycée Claude Monet	lyc-monet-paris.fr	ce.0750683k@ac-paris.fr
+Lycée Montaigne	lycee-montaigne.fr	ce.0750657G@ac-paris.fr
+Lycée François Premier	lyceefrancoispremier.fr	ce.0770927p@ac-creteil.fr
+Lycée Saint-Jean de Passy	sjp.org	sjp@saintjeandepassy.fr
+Lycée Saint-Michel de Picpus	lycee-picpus.org	ecole.saintmichel@saintmicheldepicpus.fr
+Lycée Saint-Joseph de Tivoli	tivoli-33.org	secretariat.direction@tivoli-33.org
+Lycée Saint-Marc	lycee-saint-marc.org	lycee@centresaintmarc.org
+Lycée Saint-Thomas d'Aquin	lycee-saint-thomas-d-aquin.fr	contact@stthomasdaquin.fr
+Lycée Saint-Vincent Providence	saintvincent-providence.com25	ce.0350776D@ac-rennes.fr
+Lycée Saint-Dominique	lycee-saint-dominique.fr	service.administratif@saintdominique-nancy.fr
+Lycée Saint-Charles	lycee-saint-charles.fr	ce.0130039X@ac-aix-marseille.fr
+The Doon School	doonschool.com	itgrievo@doonschool.com.
+Rishi Valley School	rishivalley.org	OFFICE@RISHIVALLEY.ORG
+The Shri Ram School	tsrs.org	contactus@tsushyderabad.com
+Mayo College	mayocollege.com	rsoni@mayocollege.com
+The Cathedral and John Connon School	cathedral-school.com	dean@cathedral-school.com
+Dhirubhai Ambani International School	da-is.org	info@da-is.org
+Woodstock School	woodstockschool.in	admissions@woodstock.ac.in
+Scindia School	scindia.edu	thecommonroom.scindia@gmail.com,
+Welham Girls' School	welhamgirls.com	mainschool@welhamgirls.com
+Lawrence School, Sanawar	sanawar.edu.in	office@sanawar.edu.in
+Sishya School	sishya.com	sishya@sishya.com
+Modern School, Barakhamba Road	modernschool.net	principal@modernschool.net
+National Public School, Bangalore	npsinr.com	admission@npswhitefield.com
+La Martiniere College, Lucknow	lamartinierelucknow.org	admissions@lamartinierelucknow
+St. Xavier's Collegiate School, Kolkata	sxcs.edu.in	principal@sxcs.edu.in
+Mother's International School, Delhi	themis.in	themis.office@themis.in
+Campion School, Mumbai	campionschool.in	principal@campionmumbai.org
+Loreto House, Kolkata	loretohousekolkata.com	loretohousesec@loreto.in
+Bombay Scottish School, Mumbai	bombayscottish.in	mahim@bombayscottish.in
+Delhi Public School, R.K. Puram	dpsrkp.net	dpsvasantvihar@gmail.com
+Bishop Cotton Boys' School, Bangalore	bishopcottonboysschool.edu.in	bcbs@bishopcottonboysschool.edu.in
+St. John's High School, Chandigarh	stjohnschandigarh.com	stjohnschandigarh@gmail.com
+Vidya Niketan School, Bangalore	vidyaniketan.edu.in	admin@vidyaniketan.edu.in
+Hyderabad Public School	hpsbegumpet.org.in	contactus@hpsbegumpet.org.in
+Emerald Heights International School, Indore	emeraldheights.edu.in	info@emeraldheights.edu.in
+St. Paul's School, Darjeeling	stpaulsdarjeeling.com	info@stpaulsdarjeeling.edu.in
+Assam Valley School	assamvalleyschool.com	admissions@assamvalleyschool.com
+Birla Public School, Pilani	bpspilani.edu.in	principal@bpspilani.edu.in
+Chinmaya International Residential School	cirschool.org	directoraa@cirschool.org
+Sigtunaskolan Humanistiska Läroverket (SSHL)	www.sshl.se	info@sshl.se
+Lundsbergs skola	www.lundsberg.se	info@lundskola.se
+Katedralskolan	www.katedral.se	katedralskolan@lulea.se
+Internationella Engelska Gymnasiet Södermalm	www.engelska.se	info@engelska.se
+Bladins International School	www.bladins.se	info@bladins.se
+Futuraskolan International School of Stockholm	www.futuraskolan.se	info@futuraskolan.se
+Stockholm International School	www.sis.se	info@intsch.se
+Thea Private Grundskola	www.thea.se	info@theaskola.se
+Viktor Rydberg Gymnasium	www.vrg.se	info@vrg.se
+S:t Petri skola	www.stpeteri.se	info@stpetri.se
+Vasa International School	www.vasa.se	info@vasaskolan.se
+Lundbergska skolan	www.lundbergskolan.se	info@lundbergska.se
+Katrinelundsgymnasiet	www.katrinelundsgymnasiet.se	info@katrinelundsgymnasiet.se
+Malmö Borgarskola	www.mbg.se	info@malmogymnasium.se
+Värmdö gymnasium	www.varmdo.se	info@varmdogymnasium.se
+Kungsbacka gymnasieskola	www.kungsbacka.se	info@kungsbacka.se
+Sundsvalls gymnasium	www.sundsvall.se	info@sundsvall.se
+Helsingborgs stadsteater	www.helsingborg.se	info@helsingborgsstadsteater.se
+Östersunds gymnasium	www.ostersund.se	info@ostersund.se
+Umeå universitet	www.umu.se	info@umu.se
+Västerås gymnasium	www.vasteras.se	info@vasteras.se
+Högskolan i Borås	www.hb.se	info@hb.se
+Luleå tekniska universitet	www.ltu.se	info@ltu.se
+Karlstad universitet	www.kau.se	info@kau.se
+Örebro universitet	www.oru.se	info@oru.se
+Linköpings universitet	www.liu.se	info@liu.se
+Jönköping University	www.ju.se	info@ju.se
+Uppsala universitet	www.uu.se	info@uu.se
+Stockholms universitet	www.su.se	info@su.se
+Göteborgs universitet	www.gu.se	info@gu.se
+Taylors College Sydney	taylorssydney.edu.au	taylorschina.enquiry@navitas.com
+Canterbury College	canterbury.qld.edu.au	school@canterbury.qld.edu.au
+The Southport School	tss.qld.edu.au	admissions@tss.qld.edu.au
+All Saints Anglican School	asas.qld.edu.au	admissions@asas.qld.edu.au
+Eynesbury College	eynesbury.sa.edu.au	eynesbury.academicsupport@navitas.com
+The Pittwater House Schools	pittwaterhouse.com.au	school.admin@tphs.nsw.edu.au
+Newington College	newington.nsw.edu.au	contact@newington.nsw.edu.au
+Knox Grammar School	knox.nsw.edu.au	contact@knox.nsw.edu.au
+Barker College	barker.nsw.edu.au	reception@barker.nsw.edu.au
+The Scots College	tsc.nsw.edu.au	admissions@scots.college
+St Peter's College	stpeters.sa.edu.au	absenteeSS@stpeters.sa.edu.au
+The Hutchins School	hutchins.tas.edu.au	absentees@hutchins.tas.edu.au
+Melbourne Grammar School	mgs.vic.edu.au	mgs@mgs.vic.edu.au
+Wesley College	wesleycollege.edu.au	gw@wesleycollege.edu.au
+Scotch College	scotch.vic.edu.au	scotch@scotch.vic.edu.au
+Haileybury College	haileybury.com.au	reception@haileybury.com.au
+St Leonard's College	stleonards.vic.edu.au	stleonards@stleonards.vic.edu.au
+St Joseph's College	stjosephs.qld.edu.au	stanthorpe@twb.catholic.edu.au
+Somerset College	somerset.qld.edu.au	mail@somerset.qld.edu.au
+St Andrew's Cathedral School	sacs.nsw.edu.au	info@sacs.nsw.edu.au
+Loreto Kirribilli	loreto.nsw.edu.au	info@loreto.nsw.edu.au
+International School of Beijing (ISB)	Beijing	admissions@isb.bj.edu.cn
+Keystone Academy	Beijing	admission@keystoneacademy.cn
+The Western International School of Shanghai (WISS)	Shanghai	admissions@wiss.cn
+Yew Chung International School of Shanghai (YCIS)	Shanghai	admissions@ycis-sh.com
+Shanghai American School (SAS)	Shanghai	admissions@saschina.org
+Shekou International School (SIS)	Shenzhen	admissions@sis.org.cn
+Shenzhen College of International Education (SCIE)	Shenzhen	admissions@scie.com.cn
+British International School Guangzhou	Guangzhou	admissions@bisguangzhou.com
+Shekou International School (SIS)	Shenzhen	admissions@sis-shekou.org
+Shen Wai International School (SWIS)	Shenzhen	admissions@swis.cn
+Tianjin International School (TIS)	Tianjin	admissions@tiseagles.com
+Yew Chung International School of Beijing	Пекин	enquiry@bj.ycef.com
+Western International School of Shanghai	Шанхай	school@wiss.cn
+Beijing City International School	Пекин	connect@bcis.cn
+Shanghai Community International School	Шанхай	info@scis-china.org
+Zhuhai International School	Чжухай	zis@zischina.com
+Chengdu International School	Чэнду	admissions@cdischina.com
+Nanjing International School	Нанкин	info@nanjing-school.com
 Repton School Dubai	headmasterspa@reptondubai.org
 Dubai College	headsec@dubaicollege.org
 Swiss International Scientific School	info@sisd.ae
