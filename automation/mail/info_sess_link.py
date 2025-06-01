@@ -1,3 +1,4 @@
+import csv
 import os
 import time
 from dotenv import load_dotenv
@@ -19,13 +20,15 @@ for key in ["SENDER_EMAIL", "APP_PASSWORD"]:
     if not CONFIG[key]:
         raise ValueError(f"Missing required environment variable: {key}")
 
-def generate_email_content() -> str:
+def generate_email_content(first_name: str) -> str:
     return f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Update: STEMulate Program</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset & Body Styles */
         body {{
@@ -172,13 +175,16 @@ def generate_email_content() -> str:
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>We’re excited to invite you to an upcoming <b style="color: red;">STEMulate online info session on Friday, June 6, 2025 at 10:00 AM (GMT-4)</b>. Please make sure to convert the time to your local time zone to avoid any confusion.</p>
-
-<p><b>Register here</b>: <a href="https://calendly.com/stemulate-program/info-sessions" style="color: #DB0C0C; text-decoration: none;">https://calendly.com/stemulate-program/info-sessions</a>.</p>
-
-<p>Info sessions are an essential part of the application process. During the session, you will receive detailed information about the program’s structure, research opportunities, academic expectations, and selection criteria.
-We strongly encourage all prospective applicants to attend, as this is the best way to gain a comprehensive understanding of what the program offers and what we look for in candidates.</p>
-
+                                        <p>Dear {first_name},</p>
+                                        <p>Thank you for registering for the <b>STEMulate Information Session</b>.<br />
+We’re excited to meet you and share more about our research program and scholarship opportunities.</p>
+                                        <p><b>Date</b>: June 6 <br />
+<b>Time</b>: 10:00 AM (UTC-4, New York time) <br />
+<b>Zoom link</b>: https://us02web.zoom.us/j/4326519591</p>
+                                        <hr />
+                                        <p><b style="color:red;">Please convert the time to your local timezone for convenience.</b></p>
+                                        <p>We look forward to seeing you there!</p>
+                                        <p>Please don't hesitate to reach out to us at <a href="mailto:admissions@stemulateprogram.com" style="color: #DB0C0C; text-decoration: none;">admissions@stemulateprogram.com</a>.</p>
                                         <p class="signature">Best regards, <br>STEMulate Admissions Team</p>
                                     </td>
                                 </tr>
@@ -198,24 +204,30 @@ We strongly encourage all prospective applicants to attend, as this is the best 
 </html>
 """
 
-def load_recipient_list() -> list:
-    """Load and validate recipient emails."""
 
-    return [
-        email.strip() for email in
-        "matisg1212@gmail.com nigmonjonovkamoliddin@gmail.com marsophile@gmail.com kukueptapa@gmail.com asilbek08082008@icloud.com kamronbekraximov60@gmail.com ayanausub13@gmail.com mwaqasm4530@gmail.com student6537@pstmz.uz abduboriybahodirovv@gmail.com aisulu122008@gmail.com kzayliddinova@gmail.com satikovadil@gmail.com nkokeyev@gmail.com zhanussovv@gmail.com zhanussov@gmail.com aishazhekenova@gmail.com ibadullabatyr8@gmail.com mohaiminbaseer@gmail.com asalina20092611@gmail.com jamoliddinovaoydin@gmail.com kaywhite424@gmail.com asadbekongarbaev@gmail.com zhenishanalibi@gmail.com fotimadavlatova259@gmail.com kenzhibayevasabina777@gmail.com aminaatin33@gmail.com alibekkadralinov@gmail.com khalmuratovalala@gmail.com dariyaozog@gmail.com vanessaoperei@gmail.com muratovaasalina@gmail.com khanifamukhtasimova@mail.ru serikovabaljan29@gmail.com farangizza098@gmail.com murodovamohinur@mail.ru khulkarboybutaeva16@gmail.com irodaabdullayeva47@gmail.com ismailovakh345@gmail.com jumayeva479@gmail.com kirgizovagulchexra9@gmail.com hakimovasabrina688@gmail.com mahliyoismoilova697@gmail.com zeinepmuratova17@gmail.com shakhrizodashamsiddinova04@gmail.com zhanel.zhunusova.2009@mail.ru darlingayesha394@gmail.com darlingayesha394y@gmail.com muxlisasamiyeva0@gmail.com moldalievaaid@gmail.com addinaaisha@gmail.com faithanyangoomondi@gmail.com habibradzhab@gmail.com dilnazubaidullaa@gmail.com amzebekibrakhimhalil@gmail.com amankulaidana08@gmail.com anziyatemetay8@gmail.com hojiakbarrturdiyev@gmail.com fatinamaangeldi7@mail.ru elmurodovasevinch695@gmail.com amangeldiinkar58@gmail.com alishertuuchiyev@gmail.com alishertuychiyev2008@gmail.com lundi3147@gmail.com".split()
-        if '@' in email
-    ]
+def load_recipient_list() -> dict[str, str]:
+    email_to_first_name = {}
+
+    with open('events.csv', mode='r', encoding='utf-8') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            email = row['Invitee Email'].strip()
+            first_name = row['Invitee First Name'].strip()
+            if email:
+                email_to_first_name[email] = first_name
+
+    return email_to_first_name
+
 
 def main():
     """Main execution flow."""
     recipients = load_recipient_list()
 
-    for email in recipients:
+    for email, first_name in recipients.items():
         try:
-            print(f"Sending to {email}")
-            html_content = generate_email_content()
-            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["APP_PASSWORD"], email, "Invitation to STEMulate information session", html_content)
+            print(f"Sending to {email} ({first_name})")
+            html_content = generate_email_content(first_name)
+            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["APP_PASSWORD"], email, CONFIG["EMAIL_SUBJECT"], html_content)
         except Exception as e:
             print(f"Failed to process {email}: {str(e)}")
 
