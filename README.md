@@ -23,9 +23,13 @@ You can contact us using:
 
 ![Снимок экрана 2025-06-01 в 21 56 02](https://github.com/user-attachments/assets/9ae78934-b71d-43a2-bfa8-3c36b3e8086c)
 ![Снимок экрана 2025-06-01 в 21 43 13](https://github.com/user-attachments/assets/bf47fb04-dca2-4141-a1cc-c82efdd5e288)
+![Снимок экрана 2025-06-01 в 22 01 09](https://github.com/user-attachments/assets/ef8cf8af-ba93-478c-adbf-7d867d38a4f0)
+![Снимок экрана 2025-06-01 в 22 01 23](https://github.com/user-attachments/assets/142f1bcb-d67e-47c3-a4ec-0f6f0fb2e9fa)
+
 ![image](https://github.com/user-attachments/assets/723b88ff-42a0-48b3-a26f-0a8e4cba89c5)
 ![Снимок экрана 2025-06-01 в 21 43 35](https://github.com/user-attachments/assets/8613c683-4e91-476b-a037-864ec9d224ce)
 ![Снимок экрана 2025-06-01 в 21 43 46](https://github.com/user-attachments/assets/63b6919a-7982-4341-abf5-f2fadef618e6)
+![Снимок экрана 2025-06-01 в 22 00 20](https://github.com/user-attachments/assets/1d3c2929-120b-40fe-b77e-095881d3c567)
 ![Снимок экрана 2025-06-01 в 21 54 16](https://github.com/user-attachments/assets/8a8cb9e9-b449-4ce8-9dc5-3e6b4716d176)
 ![Снимок экрана 2025-06-01 в 21 44 22](https://github.com/user-attachments/assets/c5125060-2234-4792-a600-effeb2c8e7c2)
 ![Снимок экрана 2025-06-01 в 21 54 54](https://github.com/user-attachments/assets/076043fb-f41f-46ac-82c9-757ec87dd782)
