@@ -19,3 +19,8 @@ Us on:
 - Instagram: <a href="https://instagram.com/stemulate_program">@stemulate_program</a>
 - Linkedin: <a href="https://www.linkedin.com/company/stemulate-program/">STEMulate Program</a>
 ---
+
+![Снимок экрана 2025-06-01 в 21 43 13](https://github.com/user-attachments/assets/bf47fb04-dca2-4141-a1cc-c82efdd5e288)
+![image](https://github.com/user-attachments/assets/723b88ff-42a0-48b3-a26f-0a8e4cba89c5)
+![Снимок экрана 2025-06-01 в 21 43 35](https://github.com/user-attachments/assets/8613c683-4e91-476b-a037-864ec9d224ce)
+![Снимок экрана 2025-06-01 в 21 43 46](https://github.com/user-attachments/assets/63b6919a-7982-4341-abf5-f2fadef618e6)
