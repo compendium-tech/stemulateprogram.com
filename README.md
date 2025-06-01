@@ -32,3 +32,4 @@ Us on:
 ![Снимок экрана 2025-06-01 в 21 48 21](https://github.com/user-attachments/assets/3790f49c-0255-4122-aa82-b979ef86527b)
 ![Снимок экрана 2025-06-01 в 21 49 04](https://github.com/user-attachments/assets/58dc7e66-04d1-40f8-bbba-37954be191c0)
 ![Снимок экрана 2025-06-01 в 21 56 35](https://github.com/user-attachments/assets/d45ce4da-e37a-4223-874d-0238298d277f)
+![Снимок экрана 2025-06-01 в 21 58 02](https://github.com/user-attachments/assets/003d24fd-00cb-4e9d-97a8-11cb544fb9bf)
