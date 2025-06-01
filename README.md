@@ -6,18 +6,19 @@ This repository contains code for website in React.js, which is made for STEMula
 
 ### What is the tech stack?
 
-- React.js, Typescript, Vite
-- Supabase for application data storage with RLS configured
-- Mailtrap for sending authentication emails
-- Vercel for deployment and managing DNS records
+- React.js, Typescript, Vite.
+- Supabase for application data storage with RLS configured.
+- Mailtrap for sending authentication emails.
+- Vercel for deployment and managing DNS records.
 
 ### What is STEMulate Research Program?
 
 International research program, uniting students from over 20 countries, mentored by experts from top institutions like Stanford, Purdue, UC Berkley, in collaboration with OdepLabs and 360mentors, aimed at achieving the 4th Sustainable Development Goal of the United Nations: ensuring inclusive and equitable quality education and promoting lifelong learning opportunities for all.
 
-Us on:
+You can contact us using:
 - Instagram: <a href="https://instagram.com/stemulate_program">@stemulate_program</a>
 - Linkedin: <a href="https://www.linkedin.com/company/stemulate-program/">STEMulate Program</a>
+- Email: <a href="mailto:admissions@stemulateprogram.com">admissions@stemulateprogram.com</a>
 ---
 
 ![Снимок экрана 2025-06-01 в 21 56 02](https://github.com/user-attachments/assets/9ae78934-b71d-43a2-bfa8-3c36b3e8086c)
