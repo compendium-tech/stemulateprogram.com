@@ -49,7 +49,7 @@ export function Countdown(props: {
             <h3 className="text-xl font-bold text-red-600">
               {props.deadlinePassedHeader}
             </h3>
-            <p className="text-gray-400 text-sm">{props.deadlinePassedText}</p>
+            <p className="text-gray-200 text-sm">{props.deadlinePassedText}</p>
           </div>
         ) : (
           <>

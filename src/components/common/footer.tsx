@@ -38,10 +38,6 @@ const links: FooterLink[] = [
       </>
     ),
   },
-  {
-    href: "mailto:admissions@stemulateprogram.com",
-    icon: <MailIcon className="w-8 h-8" />,
-  },
 ]
 
 export const Footer: React.FC = () => (

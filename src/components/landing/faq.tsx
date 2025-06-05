@@ -28,6 +28,11 @@ export const FAQ = () => {
 
 export const faqs = [
   {
+    question: "How to contact us?",
+    answer: `If you have any questions about the admission process or the program itself, feel free to reach out!
+You can email us at admissions@stemulateprogram.com or connect with us on our social media accounts (links located in the footer below).`,
+  },
+  {
     question: "Who can apply?",
     answer: `The program is open to high school and undergraduate students
              interested in STEM, economics, and social sciences.`,

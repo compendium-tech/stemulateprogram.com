@@ -1,4 +1,4 @@
-import { StandartLayout } from "@/layout/navbar"
+import { StandartLayout } from "@/layout/layout"
 import { useEffect, useRef, useState } from "react"
 
 const AboutUsPageContent: React.FC = () => {

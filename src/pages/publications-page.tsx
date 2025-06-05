@@ -1,4 +1,4 @@
-import { StandartLayout } from "@/layout/navbar"
+import { StandartLayout } from "@/layout/layout"
 import { Link } from "react-router-dom"
 
 // const publications = [

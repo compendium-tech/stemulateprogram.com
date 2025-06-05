@@ -45,7 +45,7 @@ export const LandingHero = () => {
           targetDate={new Date(2025, 5, 23, 23, 59, 59)}
           deadlineDescriptionText="Applications submitted by this date will be considered for review."
           deadlinePassedHeader="Final Application Deadline Passed"
-          deadlinePassedText="The final deadline for submitting applications was June 16th at 11:59
+          deadlinePassedText="The final deadline for submitting applications was June 23th at 11:59
           PM. Please contact the program coordinator for any inquiries."
         />
       </div>

@@ -1,5 +1,5 @@
 import { ApplicationForm } from "@/components/application/application-form"
-import { StandartLayout } from "@/layout/navbar"
+import { StandartLayout } from "@/layout/layout"
 
 const ApplicationFormPageContent: React.FC = () => {
   return (
