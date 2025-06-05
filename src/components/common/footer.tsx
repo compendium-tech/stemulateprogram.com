@@ -1,5 +1,4 @@
 import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons"
-import { MailIcon } from "lucide-react"
 import { Link } from "react-router-dom"
 
 interface FooterLink {
