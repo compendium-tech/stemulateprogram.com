@@ -1,13 +1,4 @@
-## STEMulate Research Program  
-
-### What is this code used for?
-
-This repository contains code for website in React.js, which is made for STEMulate Research program for bringing in new students and accepting applications and also internal mail processing in Python. 
-
-### Tech stack
-
-- React.js, Typescript, Vite.
-- Supabase for application data storage with RLS configured.
+This repository contains code for website, which is made for <b>STEMulate Research program</b>.
 
 ### What is STEMulate Research Program?
 
@@ -18,6 +9,19 @@ You can contact us using:
 - Linkedin: <a href="https://www.linkedin.com/company/stemulate-program/">STEMulate Program</a>
 - Email: <a href="mailto:admissions@stemulateprogram.com">admissions@stemulateprogram.com</a>
 
+# Tables of contents
+
+- <a href="#tech-stack">Tech stack</a>
+- <a href="#database">Database</a>
+- <a href="#how-to-run">How to run (locally)</a>
+
+<hr />
+
+## Tech stack
+
+- React.js, Typescript, Vite.
+- Supabase for application data storage with RLS configured.
+
 ## Database
 
 Supabase serves as our primary data persistence layer; consequently, all data operations are executed using PostgreSQL functionalities, complemented by Supabase-specific enhancements.
@@ -26,29 +30,16 @@ Supabase serves as our primary data persistence layer; consequently, all data op
 
 ```sql
 CREATE TABLE public.applications (
-  createdAt timestamp with time zone NOT NULL DEFAULT now(),
-  city text,
-  country text,
-  phone text,
-  ieltsScore text,
-  satScore text,
-  schoolName text,
-  grade text,
-  gpa text,
-  parentPhone text,
-  firstName text,
-  fieldsOfInterest ARRAY,
-  researchInterest text,
-  motivation text,
-  additionalInfo text,
-  financialAid text,
-  extracurriculars text,
-  createdBy uuid NOT NULL DEFAULT auth.uid() UNIQUE,
   id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
-  lastName text,
-  noFinancialAidMoney text,
-  parentFirstName text,
-  parentLastName text,
+  firstName text, lastName text, phone text,
+  city text, country text, schoolName text, grade text, gpa text,
+  ieltsScore text, satScore text,
+  fieldsOfInterest ARRAY, researchInterest text, motivation text, additionalInfo text,
+  financialAid text, noFinancialAidMoney text,
+  extracurriculars text,
+  parentFirstName text, parentLastName text, parentPhone text,
+  createdBy uuid NOT NULL DEFAULT auth.uid() UNIQUE,
+  createdAt timestamp with time zone NOT NULL DEFAULT now(),
   CONSTRAINT applications_pkey PRIMARY KEY (id, createdBy)
 );
 ```
@@ -79,3 +70,11 @@ The following RLS policies are applied to the `applications` table to control da
   ```
   This policy enforces that the createdBy column is always set to the authenticated user's ID when a new application record is created.
 
+## How to run
+
+```
+git clone https://github.com/seacite-tech/stemulate
+cd stemulate
+npm install
+npm run dev
+```
