@@ -18,8 +18,6 @@ load_dotenv()
 CONFIG = {
     "SENDER_EMAIL": os.getenv("SENDER_EMAIL"),
     "SMTP_PASSWORD": os.getenv("SMTP_PASSWORD"),
-    "EMAIL_SUBJECT": os.getenv("EMAIL_SUBJECT", "Important Update: STEMulate Program"),
-    "THROTTLE_SECONDS": int(os.getenv("THROTTLE_SECONDS", 20)),
 }
 
 # Validate required configuration
@@ -35,7 +33,7 @@ def send_email(recipient: str) -> None:
         sender_email=CONFIG["SENDER_EMAIL"],
         smtp_password=CONFIG["SMTP_PASSWORD"],
         recipient_email=recipient,
-        subject=CONFIG["EMAIL_SUBJECT"],
+        subject="STEMulate Research Program",
         html_content=email_html
     )
 
