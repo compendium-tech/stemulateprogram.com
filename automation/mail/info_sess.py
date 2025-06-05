@@ -18,8 +18,6 @@ load_dotenv()
 CONFIG = {
     "SENDER_EMAIL": os.getenv("SENDER_EMAIL"),
     "SMTP_PASSWORD": os.getenv("SMTP_PASSWORD"),
-    "EMAIL_SUBJECT": os.getenv("EMAIL_SUBJECT", "Important Update: STEMulate Program"),
-    "THROTTLE_SECONDS": int(os.getenv("THROTTLE_SECONDS", 10)),
 }
 
 # Validate required configuration

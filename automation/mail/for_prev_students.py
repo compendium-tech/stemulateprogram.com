@@ -17,8 +17,6 @@ load_dotenv()
 CONFIG = {
     "SENDER_EMAIL": os.getenv("SENDER_EMAIL"),
     "SMTP_PASSWORD": os.getenv("SMTP_PASSWORD"),
-    "EMAIL_SUBJECT": os.getenv("EMAIL_SUBJECT", "STEMulate is back!"),
-    "THROTTLE_SECONDS": int(os.getenv("THROTTLE_SECONDS", 10)),
 }
 
 # Validate required configuration
@@ -33,7 +31,6 @@ def generate_email_content() -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STEMulate is back!</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset & Body Styles */
@@ -240,8 +237,7 @@ def main():
         try:
             print(f"Sending to {email}")
             html_content = generate_email_content()
-            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["SMTP_PASSWORD"], email, CONFIG["EMAIL_SUBJECT"], html_content)
-            time.sleep(CONFIG["THROTTLE_SECONDS"])
+            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["SMTP_PASSWORD"], email, "STEMulate is back!", html_content)
         except Exception as e:
             print(f"Failed to process {email}: {str(e)}")
 

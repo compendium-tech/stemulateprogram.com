@@ -18,8 +18,6 @@ load_dotenv()
 CONFIG = {
     "SENDER_EMAIL": os.getenv("SENDER_EMAIL"),
     "SMTP_PASSWORD": os.getenv("SMTP_PASSWORD"),
-    "EMAIL_SUBJECT": os.getenv("EMAIL_SUBJECT", "Important Update: STEMulate Program"),
-    "THROTTLE_SECONDS": int(os.getenv("THROTTLE_SECONDS", 20)),
 }
 
 # Validate required configuration
@@ -47,7 +45,6 @@ def create_email_template(school_name: str) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Important Update: STEMulate Program</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset & Body Styles */
