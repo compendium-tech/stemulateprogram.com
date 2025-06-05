@@ -24,6 +24,8 @@ You can contact us using:
 
 - React.js, Typescript, Vite.
 - Supabase for application data storage with RLS configured.
+- Google Sheets API v4 for transfering application data from Supabase to Google Sheets.
+- Python, SMTP for sending automated emails through MailTrap.
 
 ## Database
 
