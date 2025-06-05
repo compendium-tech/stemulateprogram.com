@@ -38,7 +38,7 @@ export const faqs = [
   },
   {
     question: "How much does it cost?",
-    answer: `Pricing varies depending on the mentorship level and selected research topics. Please contact us for more details.`,
+    answer: `The program fee is $1500. Financial aid is available for the most competitive applicants.`,
   },
   {
     question: "How do I apply?",

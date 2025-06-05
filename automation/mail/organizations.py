@@ -206,7 +206,7 @@ def create_email_template() -> str:
                                         <p><strong>Format</strong>: Exclusively online via Zoom.</p>
                                         <p><strong>Priority Application Deadline</strong>: June 16th at 11:59 PM (UTC-5)</p>
                                         <p><strong>Final Application Deadline</strong>: June 23th at 11:59 PM (UTC-5)</p>
-                                        <p><strong>Financial aid may be available to the most competitive students in the program.</strong></p>
+                                        <p><strong>Financial aid may be available to the most competitive applicants in the program.</strong></p>
                                         <p><strong>Application Portal</strong>: <a href="https://stemulateprogram.com/apply">https://stemulateprogram.com/apply</a>.</p>
                                         <hr />
 
