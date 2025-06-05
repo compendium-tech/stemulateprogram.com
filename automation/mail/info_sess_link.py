@@ -1,3 +1,11 @@
+# This script sends an email to registered participants of the STEMulate Info Session.
+# It reads the recipient list from a CSV file, and sends the emails with links to Zoom
+# conference.
+# ------------------------------------------------------------------------------------
+# Ensure you have the required environment variables set for email configuration:
+# - SENDER_EMAIL: The email address from which the emails will be sent.
+# - SMTP_PASSWORD: The api key for MailTrap.
+
 import csv
 import os
 import time
@@ -10,13 +18,13 @@ load_dotenv()
 # Configuration from environment variables
 CONFIG = {
     "SENDER_EMAIL": os.getenv("SENDER_EMAIL"),
-    "APP_PASSWORD": os.getenv("APP_PASSWORD"),
+    "SMTP_PASSWORD": os.getenv("SMTP_PASSWORD"),
     "EMAIL_SUBJECT": os.getenv("EMAIL_SUBJECT", "Important Update: STEMulate Program"),
     "THROTTLE_SECONDS": int(os.getenv("THROTTLE_SECONDS", 10)),
 }
 
 # Validate required configuration
-for key in ["SENDER_EMAIL", "APP_PASSWORD"]:
+for key in ["SENDER_EMAIL", "SMTP_PASSWORD"]:
     if not CONFIG[key]:
         raise ValueError(f"Missing required environment variable: {key}")
 
@@ -27,7 +35,6 @@ def generate_email_content(first_name: str) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Important Update: STEMulate Program</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset & Body Styles */
@@ -180,7 +187,7 @@ def generate_email_content(first_name: str) -> str:
 We’re excited to meet you and share more about our research program and scholarship opportunities.</p>
                                         <p><b>Date</b>: June 6 <br />
 <b>Time</b>: 10:00 AM (UTC-4, New York time) <br />
-<b>Zoom link</b>: https://us02web.zoom.us/j/4326519591</p>
+<b>Zoom link</b>: <a href="https://us02web.zoom.us/j/4326519591" style="color: #DB0C0C; text-decoration: none;">https://us02web.zoom.us/j/4326519591</a></p>
                                         <hr />
                                         <p><b style="color:red;">Please convert the time to your local timezone for convenience.</b></p>
                                         <p>We look forward to seeing you there!</p>
@@ -227,7 +234,7 @@ def main():
         try:
             print(f"Sending to {email} ({first_name})")
             html_content = generate_email_content(first_name)
-            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["APP_PASSWORD"], email, CONFIG["EMAIL_SUBJECT"], html_content)
+            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["SMTP_PASSWORD"], email, "STEMulate Information Session will take place tomorrow", html_content)
         except Exception as e:
             print(f"Failed to process {email}: {str(e)}")
 

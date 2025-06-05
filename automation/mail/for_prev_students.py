@@ -1,3 +1,10 @@
+
+# This script sends emails to previous students of the STEMulate program (cohort 2024).
+# ------------------------------------------------------------------------------------
+# Ensure you have the required environment variables set for email configuration:
+# - SENDER_EMAIL: The email address from which the emails will be sent.
+# - SMTP_PASSWORD: The password for the sender email account.
+
 import os
 import time
 from dotenv import load_dotenv
@@ -9,13 +16,13 @@ load_dotenv()
 # Configuration from environment variables
 CONFIG = {
     "SENDER_EMAIL": os.getenv("SENDER_EMAIL"),
-    "APP_PASSWORD": os.getenv("APP_PASSWORD"),
+    "SMTP_PASSWORD": os.getenv("SMTP_PASSWORD"),
     "EMAIL_SUBJECT": os.getenv("EMAIL_SUBJECT", "STEMulate is back!"),
     "THROTTLE_SECONDS": int(os.getenv("THROTTLE_SECONDS", 10)),
 }
 
 # Validate required configuration
-for key in ["SENDER_EMAIL", "APP_PASSWORD"]:
+for key in ["SENDER_EMAIL", "SMTP_PASSWORD"]:
     if not CONFIG[key]:
         raise ValueError(f"Missing required environment variable: {key}")
 
@@ -233,7 +240,7 @@ def main():
         try:
             print(f"Sending to {email}")
             html_content = generate_email_content()
-            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["APP_PASSWORD"], email, CONFIG["EMAIL_SUBJECT"], html_content)
+            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["SMTP_PASSWORD"], email, CONFIG["EMAIL_SUBJECT"], html_content)
             time.sleep(CONFIG["THROTTLE_SECONDS"])
         except Exception as e:
             print(f"Failed to process {email}: {str(e)}")

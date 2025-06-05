@@ -1,3 +1,11 @@
+# This script sends an email to people registered in the STEMulate application portal.
+# It reads the recipient list, and sends the emails with links to Calendly for
+# info sessions.
+# ------------------------------------------------------------------------------------
+# Ensure you have the required environment variables set for email configuration:
+# - SENDER_EMAIL: The email address from which the emails will be sent.
+# - SMTP_PASSWORD: The api key for MailTrap.
+
 import os
 import time
 from dotenv import load_dotenv
@@ -9,13 +17,13 @@ load_dotenv()
 # Configuration from environment variables
 CONFIG = {
     "SENDER_EMAIL": os.getenv("SENDER_EMAIL"),
-    "APP_PASSWORD": os.getenv("APP_PASSWORD"),
+    "SMTP_PASSWORD": os.getenv("SMTP_PASSWORD"),
     "EMAIL_SUBJECT": os.getenv("EMAIL_SUBJECT", "Important Update: STEMulate Program"),
     "THROTTLE_SECONDS": int(os.getenv("THROTTLE_SECONDS", 10)),
 }
 
 # Validate required configuration
-for key in ["SENDER_EMAIL", "APP_PASSWORD"]:
+for key in ["SENDER_EMAIL", "SMTP_PASSWORD"]:
     if not CONFIG[key]:
         raise ValueError(f"Missing required environment variable: {key}")
 
@@ -203,7 +211,7 @@ def load_recipient_list() -> list:
 
     return [
         email.strip() for email in
-        "matisg1212@gmail.com nigmonjonovkamoliddin@gmail.com marsophile@gmail.com kukueptapa@gmail.com asilbek08082008@icloud.com kamronbekraximov60@gmail.com ayanausub13@gmail.com mwaqasm4530@gmail.com student6537@pstmz.uz abduboriybahodirovv@gmail.com aisulu122008@gmail.com kzayliddinova@gmail.com satikovadil@gmail.com nkokeyev@gmail.com zhanussovv@gmail.com zhanussov@gmail.com aishazhekenova@gmail.com ibadullabatyr8@gmail.com mohaiminbaseer@gmail.com asalina20092611@gmail.com jamoliddinovaoydin@gmail.com kaywhite424@gmail.com asadbekongarbaev@gmail.com zhenishanalibi@gmail.com fotimadavlatova259@gmail.com kenzhibayevasabina777@gmail.com aminaatin33@gmail.com alibekkadralinov@gmail.com khalmuratovalala@gmail.com dariyaozog@gmail.com vanessaoperei@gmail.com muratovaasalina@gmail.com khanifamukhtasimova@mail.ru serikovabaljan29@gmail.com farangizza098@gmail.com murodovamohinur@mail.ru khulkarboybutaeva16@gmail.com irodaabdullayeva47@gmail.com ismailovakh345@gmail.com jumayeva479@gmail.com kirgizovagulchexra9@gmail.com hakimovasabrina688@gmail.com mahliyoismoilova697@gmail.com zeinepmuratova17@gmail.com shakhrizodashamsiddinova04@gmail.com zhanel.zhunusova.2009@mail.ru darlingayesha394@gmail.com darlingayesha394y@gmail.com muxlisasamiyeva0@gmail.com moldalievaaid@gmail.com addinaaisha@gmail.com faithanyangoomondi@gmail.com habibradzhab@gmail.com dilnazubaidullaa@gmail.com amzebekibrakhimhalil@gmail.com amankulaidana08@gmail.com anziyatemetay8@gmail.com hojiakbarrturdiyev@gmail.com fatinamaangeldi7@mail.ru elmurodovasevinch695@gmail.com amangeldiinkar58@gmail.com alishertuuchiyev@gmail.com alishertuychiyev2008@gmail.com lundi3147@gmail.com".split()
+        ["test@gmail.com"] # list of emails can be extended or loaded from a file
         if '@' in email
     ]
 
@@ -215,7 +223,7 @@ def main():
         try:
             print(f"Sending to {email}")
             html_content = generate_email_content()
-            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["APP_PASSWORD"], email, "Invitation to STEMulate information session", html_content)
+            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["SMTP_PASSWORD"], email, "Invitation to STEMulate information session", html_content)
         except Exception as e:
             print(f"Failed to process {email}: {str(e)}")
 
