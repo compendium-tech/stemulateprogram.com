@@ -175,7 +175,7 @@ def generate_email_content(first_name: str) -> str:
                                 </tr>
                                 <tr>
                                     <td style="text-align: right;">
-                                        <p class="date">June 1, 2025</p>
+                                        <p class="date">June 6, 2025</p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -232,7 +232,7 @@ def main():
         try:
             print(f"Sending to {email} ({first_name})")
             html_content = generate_email_content(first_name)
-            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["SMTP_PASSWORD"], email, "STEMulate Information Session will take place tomorrow", html_content)
+            send_email_with_html(CONFIG["SENDER_EMAIL"], CONFIG["SMTP_PASSWORD"], email, "STEMulate Information Session will take place in 30 minutes", html_content)
         except Exception as e:
             print(f"Failed to process {email}: {str(e)}")
 
