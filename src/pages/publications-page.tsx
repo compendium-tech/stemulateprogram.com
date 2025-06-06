@@ -10,6 +10,13 @@ Dementia Classification On Imbalanced Multi-Domain Clinical Data`,
     presentationLink: "/presentations/Presentation_TuanAnhNgo.pptx",
   },
   {
+    name: `How can dynamic pricing models be successfully implemented into
+digital marketplaces to benefit SMEs in Kazakhstan?`,
+    student: "Safiyakhon Zulfikarova",
+    pdfLink: "/papers/Paper_Safiyakhon_Zulfikarova.pdf",
+    presentationLink: "/pdf/presentation2.pdf",
+  },
+  {
     name: `Hosting the Olympics: a comparative study of developed and
 developing economies.`,
     student: "Yesseniya Zhumagatova",
@@ -49,13 +56,6 @@ successful in promoting creativity compared to specialized/private schools?`,
     student: "Bolat Leila",
     pdfLink: "/papers/Paper_Bolat_Leila.pdf",
     presentationLink: "/presentations/Presentation_Bolat_Leila.pdf",
-  },
-  {
-    name: `How can dynamic pricing models be successfully implemented into
-digital marketplaces to benefit SMEs in Kazakhstan?`,
-    student: "Safiyakhon Zulfikarova",
-    pdfLink: "/papers/Paper_Safiyakhon_Zulfikarova.pdf",
-    presentationLink: "/pdf/presentation2.pdf",
   },
 ]
 
