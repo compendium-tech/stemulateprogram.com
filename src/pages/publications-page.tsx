@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const publications = [
   {
     name: `Explainable AI in Healthcare: Interpreting Machine Learning’s
-Dementia Classification On Imbalanced Multi-Domain Clinical Data`,
+Dementia Classification On Imbalanced Multi-Domain Clinical Data.`,
     student: "Tuan Anh Ngo",
     pdfLink: "/papers/Paper_TuanAnhNgo.pdf",
     presentationLink: "/presentations/Presentation_TuanAnhNgo.pptx",
@@ -14,7 +14,7 @@ Dementia Classification On Imbalanced Multi-Domain Clinical Data`,
 digital marketplaces to benefit SMEs in Kazakhstan?`,
     student: "Safiyakhon Zulfikarova",
     pdfLink: "/papers/Paper_Safiyakhon_Zulfikarova.pdf",
-    presentationLink: "/pdf/presentation2.pdf",
+    presentationLink: undefined,
   },
   {
     name: `Hosting the Olympics: a comparative study of developed and
@@ -24,7 +24,7 @@ developing economies.`,
     presentationLink: "/presentations/Presentation_Yesseniya_Zhumagatova.pdf",
   },
   {
-    name: "Relevance and impact of neurography in Kazakhstan",
+    name: "Relevance and impact of neurography in Kazakhstan.",
     student: "Alsana",
     pdfLink: "/papers/Paper_Alsana.pdf",
     presentationLink: "/presentations/Presentation_Alsana.pptx",
@@ -66,7 +66,40 @@ const PublicationsPageContent = () => {
         <p className="font-bold text-2xl sm:text-4xl md:text-5xl">
           Publications
         </p>
-        <p className="text-xl">Research made by our students.</p>
+        <p className="text-xl sm:text-2xl">
+          <b>Research made by our students</b>.
+        </p>
+        <hr />
+        <ul className="space-y-8">
+          {publications.map((pub, index) => (
+            <li key={index} className="md:text-xl">
+              <b>Paper name: </b> {pub.name} <br />
+              <b>Student name: </b> {pub.student} <br />
+              <b>Links: </b>
+              {pub.pdfLink && (
+                <a
+                  href={pub.pdfLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-red-500 hover:underline"
+                >
+                  &lt;research paper&gt;
+                </a>
+              )}{" "}
+              {pub.presentationLink && (
+                <a
+                  href={pub.presentationLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-red-500 hover:underline"
+                >
+                  &lt;presentation&gt;
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+        <hr />
         <p className="text-lg md:text-xl">
           Here every student can get published their research paper and
           presentation. If you want to get published, please contact us.
@@ -77,35 +110,6 @@ const PublicationsPageContent = () => {
             Apply now!
           </Link>
         </p>
-        <ul className="space-y-8">
-          {publications.map((pub, index) => (
-            <li key={index} className="md:text-xl">
-              "<i>{pub.name}</i>" by{" "}
-              <i>
-                <b>{pub.student}</b>
-              </i>{" "}
-              -{" "}
-              <a
-                href={pub.pdfLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                [paper]
-              </a>
-              {" / "}
-              <a
-                href={pub.presentationLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                [presentation]
-              </a>
-              .
-            </li>
-          ))}
-        </ul>
       </div>
     </main>
   )
