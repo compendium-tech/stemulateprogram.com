@@ -15,6 +15,9 @@ import {
   StepBackIcon,
   UserIcon,
 } from "lucide-react"
+import HCaptcha from "@hcaptcha/react-hcaptcha"
+
+const HCAPTCHA_SITE_KEY = "b8c81da2-79f2-452a-85ea-38a4ec08caf6"
 
 export function AuthSection() {
   const [email, setEmail] = useState<string>("")
@@ -27,9 +30,15 @@ export function AuthSection() {
   const [isCodeSent, setIsCodeSent] = useState(false)
   const [sendingOtp, setSendingOtp] = useState(false)
   const [verifyingOtp, setVerifyingOtp] = useState(false)
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null)
 
   const handleSendOtp = async (signUp: boolean) => {
     if (!email) return
+    if (!captchaToken) {
+      setSendCodeError("Please complete the captcha verification.")
+      return
+    }
+
     setSendingOtp(true)
     try {
       const { error } = await supabaseClient.auth.signInWithOtp({
@@ -37,6 +46,7 @@ export function AuthSection() {
         options: {
           emailRedirectTo: "https://stemulateprogram.com/apply",
           shouldCreateUser: signUp,
+          captchaToken,
         },
       })
 
@@ -147,10 +157,12 @@ export function AuthSection() {
               <p className="text-red-500 text-sm">{sendCodeError}</p>
             )}
 
+            <HCaptcha sitekey={HCAPTCHA_SITE_KEY} onVerify={setCaptchaToken} />
+
             <div className="flex flex-col md:flex-row gap-2 md:gap-4">
               <Button
                 onClick={() => handleSendOtp(false)}
-                disabled={sendingOtp || !email}
+                disabled={sendingOtp || !email || !captchaToken}
                 variant="outline"
               >
                 <MailCheckIcon />
@@ -183,10 +195,15 @@ export function AuthSection() {
                 <p className="text-red-500 text-sm">{sendCodeError}</p>
               )}
 
+              <HCaptcha
+                sitekey={HCAPTCHA_SITE_KEY}
+                onVerify={setCaptchaToken}
+              />
+
               <div className="flex flex-col md:flex-row gap-2 md:gap-4">
                 <Button
                   onClick={() => handleSendOtp(true)}
-                  disabled={sendingOtp || !email}
+                  disabled={sendingOtp || !email || !captchaToken}
                   variant="outline"
                   className="rounded-xl"
                 >
