@@ -1,6 +1,7 @@
+import { FC } from "react"
 import { Link } from "react-router-dom"
 
-export const NotFoundPage: React.FC = () => (
+export const NotFoundPage: FC = () => (
   <div className="flex items-center min-h-screen px-4 py-12 sm:px-6 md:px-8 lg:px-12 xl:px-16">
     <div className="w-full space-y-6 text-center">
       <div className="space-y-3">

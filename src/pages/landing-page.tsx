@@ -1,22 +1,23 @@
-import { WhyResearch } from "@/components/landing/why-research"
-import { WorkWithExperts } from "@/components/landing/work-with-experts"
-import { ResearchAreas } from "@/components/landing/research-areas"
-import { FAQ } from "@/components/landing/faq"
-import { StandartLayout } from "@/layout/layout"
-import { LandingHero } from "@/components/landing/hero"
+import { WhyResearchSection } from "@/components/landing/why-research-section"
+import { WorkWithExpertsSection } from "@/components/landing/work-with-experts-section"
+import { ResearchAreasSection } from "@/components/landing/research-areas-section"
+import { FAQSection } from "@/components/landing/faq-section"
+import { StandartLayout } from "@/layout/standard-layout"
+import { HeroSection } from "@/components/landing/hero-section"
+import { FC } from "react"
 
-const LandingPageContent: React.FC = () => {
+const LandingPageContent: FC = () => {
   return (
     <>
-      <LandingHero />
-      <WhyResearch />
-      <WorkWithExperts />
-      <ResearchAreas />
-      <FAQ />
+      <HeroSection />
+      <WhyResearchSection />
+      <WorkWithExpertsSection />
+      <ResearchAreasSection />
+      <FAQSection />
     </>
   )
 }
-export const LandingPage: React.FC = () => (
+export const LandingPage: FC = () => (
   <StandartLayout>
     <LandingPageContent />
   </StandartLayout>

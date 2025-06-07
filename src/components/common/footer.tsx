@@ -1,4 +1,5 @@
 import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 
 interface FooterLink {
@@ -39,7 +40,7 @@ const links: FooterLink[] = [
   },
 ]
 
-export const Footer: React.FC = () => (
+export const Footer: FC = () => (
   <footer className="bg-neutral-900 text-white py-8">
     <div className="container mx-auto px-4">
       <div className="flex flex-col md:flex-row items-center justify-between">

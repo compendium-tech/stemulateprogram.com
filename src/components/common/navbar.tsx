@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-interface NavItem {
+interface NavbarItem {
   label: string
   href: string
 }
 
-const navItems: NavItem[] = [
+const navItems: NavbarItem[] = [
   { label: "Apply", href: "/apply" },
   { label: "About Us", href: "/about-us" },
   { label: "Publications", href: "/publications" },

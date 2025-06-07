@@ -1,4 +1,4 @@
-import { useAuthFlow } from "./hooks/use-auth-flow"
+import { useAuthFlow } from "./use-auth-flow"
 import { AuthChoice } from "./auth-choice"
 import { EmailInputForm } from "./email-input-form"
 import { OtpInputForm } from "./otp-input-form"

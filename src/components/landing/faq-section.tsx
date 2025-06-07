@@ -4,29 +4,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import { FC } from "react"
 
-export const FAQ = () => {
-  return (
-    <>
-      <section className="px-5 md:px-14 bg-neutral-900 text-white">
-        <Accordion type="single" collapsible className="w-full">
-          {faqs.map((faq, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger>
-                <p className="text-lg md:text-2xl">{faq.question}</p>
-              </AccordionTrigger>
-              <AccordionContent>
-                <p className="md:text-xl">{faq.answer}</p>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </section>
-    </>
-  )
+interface FAQ {
+  question: string
+  answer: string
 }
 
-export const faqs = [
+const faqs: FAQ[] = [
   {
     question: "How to contact us?",
     answer: `If you have any questions about the admission process or the program itself, feel free to reach out!
@@ -57,3 +42,20 @@ You can email us at admissions@stemulateprogram.com or connect with us on our so
              ensures participants can balance STEMulate with other commitments.`,
   },
 ]
+
+export const FAQSection: FC = () => (
+  <section className="px-5 md:px-14 bg-neutral-900 text-white">
+    <Accordion type="single" collapsible className="w-full">
+      {faqs.map((faq, index) => (
+        <AccordionItem key={index} value={`item-${index}`}>
+          <AccordionTrigger>
+            <p className="text-lg md:text-2xl">{faq.question}</p>
+          </AccordionTrigger>
+          <AccordionContent>
+            <p className="md:text-xl">{faq.answer}</p>
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  </section>
+)

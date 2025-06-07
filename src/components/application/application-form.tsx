@@ -35,7 +35,11 @@ import { AuthSection } from "./auth/auth-section"
 import { Spinner } from "./spinner"
 import { supabaseClient } from "@/supabase"
 import confetti from "canvas-confetti"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -44,9 +48,9 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "../ui/alert-dialog"
-import { PhoneInput } from "../input/phone-number-input"
-import { CountryInput } from "../input/country-input"
+} from "@/components/ui/alert-dialog"
+import { PhoneInput } from "@/components/ui/phone-number-input"
+import { CountryInput } from "@/components/ui/country-input"
 
 const fieldsOfInterest = [
   "Biology",

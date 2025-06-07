@@ -1,12 +1,11 @@
-import { StandartLayout } from "@/layout/layout"
-import { useEffect, useRef, useState } from "react"
+import { StandartLayout } from "@/layout/standard-layout"
+import { FC, useEffect, useRef, useState } from "react"
 
-const AboutUsPageContent: React.FC = () => {
+const useVantaEffect = () => {
   const [vantaEffect, setVantaEffect] = useState<any>(null)
   const myRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    // Use an async function or .then() to handle dynamic import properly:
     if (!vantaEffect) {
       import("vanta/dist/vanta.globe.min.js")
         .then((vantaModule) => {
@@ -38,6 +37,12 @@ const AboutUsPageContent: React.FC = () => {
     }
   }, [vantaEffect])
 
+  return { myRef, vantaEffect }
+}
+
+const AboutUsPageContent: FC = () => {
+  const { myRef } = useVantaEffect()
+
   return (
     <div ref={myRef}>
       <main className="min-h-screen text-white py-8 px-4 md:px-8 flex items-center justify-center">
@@ -58,7 +63,7 @@ const AboutUsPageContent: React.FC = () => {
   )
 }
 
-export const AboutUsPage: React.FC = () => (
+export const AboutUsPage: FC = () => (
   <StandartLayout>
     <AboutUsPageContent />
   </StandartLayout>

@@ -1,6 +1,7 @@
-import { StaggerText } from "./stagger-text"
+import { StaggerText } from "@/components/ui/stagger-text"
+import { FC } from "react"
 
-export const WorkWithExperts = () => (
+export const WorkWithExpertsSection: FC = () => (
   <section className="text-black relative px-5 md:px-14 bg-white py-20">
     <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-4 ">
       <StaggerText text="Work With International Experts" />

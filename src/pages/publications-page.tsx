@@ -1,7 +1,15 @@
-import { StandartLayout } from "@/layout/layout"
+import { StandartLayout } from "@/layout/standard-layout"
+import { FC } from "react"
 import { Link } from "react-router-dom"
 
-const publications = [
+interface Publication {
+  name: string
+  student: string
+  pdfLink?: string
+  presentationLink?: string
+}
+
+const publications: Publication[] = [
   {
     name: `Explainable AI in Healthcare: Interpreting Machine Learning’s
 Dementia Classification On Imbalanced Multi-Domain Clinical Data.`,
@@ -59,63 +67,59 @@ successful in promoting creativity compared to specialized/private schools?`,
   },
 ]
 
-const PublicationsPageContent = () => {
-  return (
-    <main className="min-h-screen bg-white text-black py-24 px-4 md:px-8 flex-col items-center">
-      <div className="max-w-5xl mx-auto space-y-8">
-        <p className="font-bold text-2xl sm:text-4xl md:text-5xl">
-          Publications
-        </p>
-        <p className="text-xl sm:text-2xl">
-          <b>Research made by our students</b>.
-        </p>
-        <hr />
-        <ul className="space-y-8">
-          {publications.map((pub, index) => (
-            <li key={index} className="md:text-xl">
-              <b>Paper name: </b> {pub.name} <br />
-              <b>Student name: </b> {pub.student} <br />
-              <b>Links: </b>
-              {pub.pdfLink && (
-                <a
-                  href={pub.pdfLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-red-500 hover:underline"
-                >
-                  &lt;research paper&gt;
-                </a>
-              )}{" "}
-              {pub.presentationLink && (
-                <a
-                  href={pub.presentationLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-red-500 hover:underline"
-                >
-                  &lt;presentation&gt;
-                </a>
-              )}
-            </li>
-          ))}
-        </ul>
-        <hr />
-        <p className="text-lg md:text-xl">
-          Here every student can get published their research paper and
-          presentation. If you want to get published, please contact us.
-        </p>
-        <p className="text-lg md:text-xl">
-          Haven't applied yet?{" "}
-          <Link to="/apply" className="underline">
-            Apply now!
-          </Link>
-        </p>
-      </div>
-    </main>
-  )
-}
+const PublicationsPageContent: FC = () => (
+  <main className="min-h-screen bg-white text-black py-24 px-4 md:px-8 flex-col items-center">
+    <div className="max-w-5xl mx-auto space-y-8">
+      <p className="font-bold text-2xl sm:text-4xl md:text-5xl">Publications</p>
+      <p className="text-xl sm:text-2xl">
+        <b>Research made by our students</b>.
+      </p>
+      <hr />
+      <ul className="space-y-8">
+        {publications.map((pub, index) => (
+          <li key={index} className="md:text-xl">
+            <b>Paper name: </b> {pub.name} <br />
+            <b>Student name: </b> {pub.student} <br />
+            <b>Links: </b>
+            {pub.pdfLink && (
+              <a
+                href={pub.pdfLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-500 hover:underline"
+              >
+                &lt;research paper&gt;
+              </a>
+            )}{" "}
+            {pub.presentationLink && (
+              <a
+                href={pub.presentationLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-500 hover:underline"
+              >
+                &lt;presentation&gt;
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+      <hr />
+      <p className="text-lg md:text-xl">
+        Here every student can get published their research paper and
+        presentation. If you want to get published, please contact us.
+      </p>
+      <p className="text-lg md:text-xl">
+        Haven't applied yet?{" "}
+        <Link to="/apply" className="underline">
+          Apply now!
+        </Link>
+      </p>
+    </div>
+  </main>
+)
 
-export const PublicationsPage: React.FC = () => (
+export const PublicationsPage: FC = () => (
   <StandartLayout>
     <PublicationsPageContent />
   </StandartLayout>

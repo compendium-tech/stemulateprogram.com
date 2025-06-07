@@ -52,16 +52,14 @@ export const EmailInputForm: FC<EmailInputFormProps> = ({
     <div className="flex flex-col md:flex-row gap-2 md:gap-4">
       <Button
         onClick={() => onSendOtp(isSignUp)}
-        disabled={sendingOtp || !email || captchaToken == ""}
+        disabled={sendingOtp || !email || !captchaToken}
         variant="outline"
-        className="rounded-xl" // Added rounded-xl for consistency
       >
         <MailCheckIcon className="mr-2" />
         {sendingOtp ? "Sending code..." : "Send Verification Code"}
       </Button>
-      <Button onClick={onGoBack} variant="outline" className="rounded-xl">
+      <Button onClick={onGoBack} variant="outline">
         {" "}
-        {/* Added rounded-xl */}
         <StepBackIcon className="mr-2" /> Go back
       </Button>
     </div>

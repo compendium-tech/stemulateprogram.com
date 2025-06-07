@@ -16,7 +16,7 @@ interface OtpInputFormProps {
   verifyingOtp: boolean
   verifyCodeError: string
   onResendCode: () => void
-  sendingOtp: boolean // For resend button loading state
+  sendingOtp: boolean
   onGoBackToStart: () => void
 }
 
@@ -58,7 +58,7 @@ export const OtpInputForm: FC<OtpInputFormProps> = ({
 
     <div className="flex flex-col md:flex-row gap-2 md:gap-4">
       <Button
-        className="w-full md:w-1/2 bg-neutral-800 hover:bg-neutral-700 rounded-xl py-2 md:py-2.5"
+        className="w-full md:w-1/2 bg-neutral-800 hover:bg-neutral-700 py-2 md:py-2.5"
         onClick={onVerifyCode}
         disabled={verifyingOtp || code.length !== 6}
       >
@@ -72,7 +72,7 @@ export const OtpInputForm: FC<OtpInputFormProps> = ({
         <Button
           variant="outline"
           onClick={onResendCode}
-          className="w-full md:w-auto text-primary hover:text-primary/80 rounded-xl py-2 md:py-2.5"
+          className="w-full md:w-auto text-primary hover:text-primary/80 py-2 md:py-2.5"
           disabled={sendingOtp}
         >
           <div className="flex items-center justify-center gap-2">
@@ -84,7 +84,7 @@ export const OtpInputForm: FC<OtpInputFormProps> = ({
         <Button
           onClick={onGoBackToStart}
           variant="outline"
-          className="w-full md:w-auto rounded-xl py-2 md:py-2.5"
+          className="w-full md:w-auto py-2 md:py-2.5"
         >
           <div className="flex items-center justify-center gap-2">
             <StepBackIcon className="h-4 w-4 md:h-5 md:w-5" />
