@@ -40,7 +40,7 @@
 
 @keyframes redPulse {
   0%, 100% {
-    fill: #ff0000; /* bright red */
+    fill: #ff6b70; /* bright red */
   }
   50% {
     fill: #ff6b6b; /* lighter red in the middle */
