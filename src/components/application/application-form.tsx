@@ -31,7 +31,7 @@ import {
   EditIcon,
 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
-import { AuthSection } from "./auth-section"
+import { AuthSection } from "./auth/auth-section"
 import { Spinner } from "./spinner"
 import { supabaseClient } from "@/supabase"
 import confetti from "canvas-confetti"
