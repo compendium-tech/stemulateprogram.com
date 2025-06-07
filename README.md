@@ -1,4 +1,4 @@
-<img src="https://github.com/user-attachments/assets/6fcb38bd-e87f-4cbe-bc68-8fa1fcb18fff" width="50%" /> 
+<img src="https://github.com/user-attachments/assets/6fcb38bd-e87f-4cbe-bc68-8fa1fcb18fff" width="50%" />
 <img src="https://github.com/user-attachments/assets/7c6a1d4f-8790-4625-a6c0-dec6924e970d" width="48%"/>
 <img src="https://github.com/user-attachments/assets/c65f4421-9ce8-40d8-9a85-4e62ccae2e55" width="39%" />
 <img src="https://github.com/user-attachments/assets/d05e1f8a-c393-43a1-aadb-417f26436a8a" width="59%" />
@@ -23,7 +23,7 @@ You can contact us using:
 ## Tech stack
 
 - React.js, Typescript, Vite.
-- Supabase for application data storage with RLS configured.
+- HCaptcha, Supabase with RLS configured.
 - Google Sheets API v4 for transfering application data from Supabase to Google Sheets.
 - Python, SMTP for sending automated emails through MailTrap.
 
@@ -38,51 +38,7 @@ npm run dev
 
 ## Database
 
-Supabase serves as our primary data persistence layer; consequently, all data operations are executed using PostgreSQL functionalities, complemented by Supabase-specific enhancements.
-
-### Schema
-
-```sql
-CREATE TABLE public.applications (
-  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
-  firstName text, lastName text, phone text,
-  city text, country text, schoolName text, grade text, gpa text,
-  ieltsScore text, satScore text,
-  fieldsOfInterest ARRAY, researchInterest text, motivation text, additionalInfo text,
-  financialAid text, noFinancialAidMoney text,
-  extracurriculars text,
-  parentFirstName text, parentLastName text, parentPhone text,
-  createdBy uuid NOT NULL DEFAULT auth.uid() UNIQUE,
-  createdAt timestamp with time zone NOT NULL DEFAULT now(),
-  CONSTRAINT applications_pkey PRIMARY KEY (id, createdBy)
-);
-```
-
-### Row Level Security (RLS) Policies
-
-The following RLS policies are applied to the `applications` table to control data access:
-
-- Enable users to view their own data only:
-  ```sql
-  alter policy "Enable users to view their own data only"
-  on "public"."applications"
-  to authenticated
-  using (
-    (( SELECT auth.uid() AS uid) = "createdBy")
-  );
-  ```
-  This policy ensures that authenticated users can only view application records that they created themselves.
-
-- Ensure `createdBy` is equal to `auth.uid()`:
-  ```sql
-  alter policy "Ensure createdBy is auth.uid()"
-  on "public"."applications"
-  to authenticated
-  with check (
-    ("createdBy" = auth.uid())
-  );
-  ```
-  This policy enforces that the createdBy column is always set to the authenticated user's ID when a new application record is created.
+Supabase serves as our primary data persistence layer; consequently, all data operations are executed using PostgreSQL functionalities, complemented by Supabase-specific enhancements. All data required to replicate our Supabase setup is located in `supabase` folder.
 
 ### Transferring Applications Table to Google Sheets
 
@@ -107,7 +63,7 @@ To automatically transfer your application data to Google Sheets, follow these s
   GOOGLE_SHEET_NAME=STEMulate 2025
   GOOGLE_SHEET_WORKSHEET_NAME=Application
   ```
-  
+
   - `SUPABASE_URL`: Your Supabase project URL.
   - `SUPABASE_ANON_KEY`: Your Supabase anonymous key.
   - `GOOGLE_SHEETS_CREDENTIALS_PATH`: The path to your service account's JSON key file (e.g., service_account.json).
@@ -130,7 +86,7 @@ To automatically transfer your application data to Google Sheets, follow these s
   ```bash
   0 3 * * * /usr/bin/python3 /path/to/your/automation/google_sheets.py >> /path/to/your/automation/cron.log 2>&1
   ```
-  
+
 > [!NOTE]
 > Remember to replace the placeholder paths with your actual paths before setting up the cron job.
 
