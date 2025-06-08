@@ -13,7 +13,7 @@ export const AuthChoice: FC<AuthChoiceProps> = ({ onSignIn, onSignUp }) => (
       Welcome to application form.
     </p>
     <p className="md:text-lg">
-      It seems like you are not logged in to your STEMulate account.
+      It seems like you are not logged in to your account.
     </p>
     <Button onClick={onSignIn} variant="outline" className="mr-4 p-4">
       <LogInIcon className="mr-2" />
