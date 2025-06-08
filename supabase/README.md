@@ -1,6 +1,6 @@
 # Supabase Setup Guide
 
-This supabase folder contains the necessary SQL schemas, policies, and email templates for your Supabase project. Follow these steps to set up your 
+This supabase folder contains the necessary SQL schemas, policies, and email templates for your Supabase project. Follow these steps to set up your
 database and authentication securely:
 
 ## Database Schema and Policies:
@@ -18,6 +18,7 @@ database and authentication securely:
 - In your Supabase project dashboard, go to the Authentication section.
 - Select the Attack Protection tab (or similar security settings).
 - Paste your hCaptcha secret token into the designated field to enable captcha protection for your authentication flows.
+- Change `HCAPTCHA_SITE_KEY` variable in `/src/globals.ts`.
 
 ## Custom Email Templates (Optional):
 
