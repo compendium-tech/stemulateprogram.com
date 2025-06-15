@@ -60,7 +60,8 @@ export const HeroSection: FC = () => {
       <div className="flex flex-col md:flex-row justify-center items-center md:gap-4 gap-0">
         <DeadlineCountdown
           aboutDeadline="Priority Application Deadline"
-          targetDate={new Date(2025, 5, 16, 23, 59, 59)}
+          targetDateString="End of June 16, 2025 (UTC-5)"
+          targetDate={new Date(Date.UTC(2025, 5, 17, 5, 0, 0))}
           deadlineDescription="Applications submitted by this date will be given priority review."
           deadlinePassedHeader="Priority Application Deadline Passed"
           deadlinePassedBrief="The priority deadline for submitting applications was June 16th at 11:59
@@ -68,7 +69,8 @@ export const HeroSection: FC = () => {
         />
         <DeadlineCountdown
           aboutDeadline="Final Application Deadline"
-          targetDate={new Date(2025, 5, 23, 23, 59, 59)}
+          targetDateString="End of June 23, 2025 (UTC-5)"
+          targetDate={new Date(Date.UTC(2025, 5, 24, 5, 0, 0))}
           deadlineDescription="Applications submitted by this date will be considered for review."
           deadlinePassedHeader="Final Application Deadline Passed"
           deadlinePassedBrief="The final deadline for submitting applications was June 23th at 11:59

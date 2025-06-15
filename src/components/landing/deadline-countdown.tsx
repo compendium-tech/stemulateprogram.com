@@ -50,6 +50,7 @@ const calculateTimeLeft = (targetDate: Date): TimeLeft => {
 
 interface DeadlineCountdownProps {
   targetDate: Date
+  targetDateString: string
   aboutDeadline: string
   deadlinePassedHeader: string
   deadlinePassedBrief: string
@@ -103,7 +104,7 @@ export const DeadlineCountdown: FC<DeadlineCountdownProps> = (
                   <p className="text-left text-xs md:text-sm text-gray-200">
                     Deadline:{" "}
                     <span className="font-semibold">
-                      {props.targetDate.toLocaleDateString()}
+                      {props.targetDateString}
                     </span>
                     . {props.deadlineDescription}
                   </p>
