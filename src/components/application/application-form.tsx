@@ -555,7 +555,7 @@ export const ApplicationForm = () => {
                       <TabsTrigger
                         key={tab}
                         value={tab}
-                        className={`data-[state=active]:shadow-none text-base whitespace-nowrap px-3 snap-start ${
+                        className={`data-[state=active]:shadow-none text-sm whitespace-nowrap px-3 snap-start ${
                           activeTab === tab ? "active-tab" : ""
                         }`}
                         onClick={() => scrollToTab(index)}
