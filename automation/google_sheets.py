@@ -92,17 +92,17 @@ def transfer_data_to_google_sheets():
 
     # Rename the column createdBy_email to 'email' as requested in the final screenshot
     applications_df["email"] = applications_df["createdBy"].apply(
-        lambda uuid: user_emails_map.get(uuid, "N/A")
+    	lambda uuid: user_emails_map.get(uuid, "N/A")
     )
     applications_df = applications_df.drop(columns=["createdBy"])
 
     # Let's define the desired order based on the Google Sheet screenshot and your Supabase schema:
     desired_order = [
-        'id', 'email', 'firstName', 'lastName', 'city', 'country', 'phone',
-        'ieltsScore', 'satScore', 'schoolName', 'grade', 'gpa', 'parentPhone',
-        'fieldsOfInterest', 'researchInterest', 'motivation',
-        'financialAid', 'noFinancialAidMoney', 'extracurriculars',
-        'parentFirstName', 'parentLastName', 'additionalInfo', 'createdAt'
+      'id', 'email', 'firstName', 'lastName', 'city', 'country', 'phone',
+      'ieltsScore', 'satScore', 'schoolName', 'grade', 'gpa', 'parentPhone',
+      'fieldsOfInterest', 'researchInterest', 'motivation',
+      'financialAid', 'noFinancialAidMoney', 'extracurriculars',
+      'parentFirstName', 'parentLastName', 'additionalInfo', 'createdAt'
     ]
 
     # We create a new list of columns that are *both* in desired_order and the DataFrame
@@ -112,10 +112,14 @@ def transfer_data_to_google_sheets():
     # This prevents accidental data loss if new columns are added to Supabase.
     existing_cols = applications_df.columns.tolist()
     for col in existing_cols:
-        if col not in final_columns_filtered:
+      	if col not in final_columns_filtered:
             final_columns_filtered.append(col)
 
     applications_df = applications_df[final_columns_filtered]
+
+    # Sort by 'id' column
+    applications_df = applications_df.sort_values(by='id')
+
     print(applications_df.head())
 
     # --- Handle list/dict values and NaN values before writing ---
