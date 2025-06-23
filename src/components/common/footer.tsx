@@ -41,9 +41,9 @@ const links: FooterLink[] = [
 ]
 
 export const Footer: FC = () => (
-  <footer className="bg-neutral-900 text-white py-8">
-    <div className="container mx-auto px-4">
-      <div className="flex flex-col md:flex-row items-center justify-between">
+  <footer className="bg-neutral-900 text-white">
+    <div className="container mx-auto">
+      <div className="flex flex-col md:flex-row items-center justify-between py-8 px-8">
         <div className="mb-6 md:mb-0">
           <Link to="/">
             <img className="p-2" src="logo.svg" alt="logo" />
