@@ -489,6 +489,18 @@ export const ApplicationForm = () => {
     }
   }
 
+  if (new Date() > new Date("2025-06-23T23:59:59-05:00")) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[60vh] space-y-3">
+        <h1 className="text-2xl font-semibold">Application Portal Closed</h1>
+        <p className="text-muted-foreground text-center md:w-[60vh]">
+          The final deadline (June 23, 23:59 UTC-5) has passed, application
+          portal is now closed. Thank you for your interest!
+        </p>
+      </div>
+    )
+  }
+
   if (!isAuthChecked) {
     return <Spinner />
   }
