@@ -24,7 +24,7 @@ export function AuthSection() {
   } = useAuthFlow()
 
   return (
-    <div className="mt-2 px-2 w-full md:w-3/6 space-y-3">
+    <div className="mt-2 w-full md:w-4/6 space-y-3">
       {!isCodeSent ? (
         !signInOrSignUp ? (
           <AuthChoice

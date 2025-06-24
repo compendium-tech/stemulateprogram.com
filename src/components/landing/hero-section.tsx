@@ -35,7 +35,7 @@ export const HeroSection: FC = () => {
   return (
     <section className="text-white bg-neutral-900 text-center pt-12 px-5 md:px-14">
       <p className="font-semibold text-4xl md:text-5xl mb-4">
-        <StaggerText text="Develop your research" />
+        <StaggerText className="font-serif" text="Develop your research" />
       </p>
       <p className="sm:text-xl md:text-2xl mb-6">
         Join students from over 20 countries in a world-class research program.

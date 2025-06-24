@@ -42,7 +42,7 @@ export const WhyResearchSection: FC = () => (
     {/* Content Wrapper */}
     <div className="relative z-10 container mx-auto">
       <h2 className="text-center text-3xl sm:text-4xl md:text-5xl font-bold mb-8">
-        <StaggerText text="Why do research?" />
+        <StaggerText className="font-serif" text="Why do research?" />
       </h2>
 
       {/* Change items-center to items-start here */}
@@ -54,7 +54,7 @@ export const WhyResearchSection: FC = () => (
           >
             <div>
               <CheckCircleIcon className="h-8 w-8 mb-4 text-red-500" />
-              <h3 className="text-lg sm:text-2xl font-semibold mb-2">
+              <h3 className="font-serif text-lg sm:text-2xl font-semibold mb-2">
                 {item.title}
               </h3>
               <p className="text-sm md:text-lg">{item.description}</p>

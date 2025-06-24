@@ -9,7 +9,7 @@ interface AuthChoiceProps {
 
 export const AuthChoice: FC<AuthChoiceProps> = ({ onSignIn, onSignUp }) => (
   <>
-    <p className="text-2xl md:text-3xl font-semibold">
+    <p className="text-3xl md:text-4xl font-semibold font-serif">
       Welcome to application form.
     </p>
     <p className="md:text-lg">

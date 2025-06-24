@@ -32,7 +32,9 @@ export const OtpInputForm: FC<OtpInputFormProps> = ({
   onGoBackToStart,
 }) => (
   <>
-    <p className="text-xl font-semibold">Enter Verification Code</p>
+    <p className="text-3xl md:text-4xl font-serif font-semibold">
+      Enter Verification Code
+    </p>
     <p>
       This may take a while for our system to send an email with verification
       code, check "Spam folder".

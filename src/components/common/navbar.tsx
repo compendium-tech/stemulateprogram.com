@@ -36,7 +36,11 @@ export const Navbar: React.FC = () => {
         ]
           .concat(navItems)
           .map((item, i) => (
-            <Link key={i} to={item.href} className="hover:text-red-500">
+            <Link
+              key={i}
+              to={item.href}
+              className="hover:text-red-500 font-serif"
+            >
               {item.label}
             </Link>
           ))}
@@ -90,7 +94,7 @@ export const Navbar: React.FC = () => {
               <Link
                 key={i}
                 to={item.href}
-                className="block hover:text-red-500"
+                className="block hover:text-red-500 font-serif"
                 onClick={() => setIsMobileNavMenuOpen(false)}
               >
                 {item.label}

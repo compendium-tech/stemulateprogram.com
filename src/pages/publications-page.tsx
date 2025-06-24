@@ -92,51 +92,45 @@ const PublicationsPageContent: FC = () => {
       <div className="max-w-5xl mx-auto space-y-8 w-full">
         {" "}
         {/* Added w-full for better responsiveness */}
-        <p className="font-bold text-2xl sm:text-4xl md:text-5xl">
+        <p className="font-bold text-3xl sm:text-4xl md:text-5xl font-serif">
           Publications
         </p>
         <p className="text-xl sm:text-2xl">
           <b>Research made by our students</b>.
         </p>
-        <hr className="border-t border-gray-300" />{" "}
-        {/* Added a light border for the hr */}
-        <ul className="space-y-8">
-          {publications.map((pub, index) => (
-            <li key={index} className="md:text-xl">
-              <b>Paper name</b>:{" "}
-              {/* Make the paper name clickable to open the modal */}
-              <a
-                onClick={() => openModal(pub)}
-                className=" hover:underline text-left cursor-pointer focus:outline-none"
-              >
-                {pub.name}
-              </a>
-              <br />
-              <b>Student name: </b> {pub.student}.
-            </li>
-          ))}
-        </ul>
-        <hr className="border-t border-gray-300" />{" "}
-        {/* Added a light border for the hr */}
         <p className="text-lg md:text-xl">
           Here every student can get published their research paper and
-          presentation. If you want to get published, please contact us.
-        </p>
-        <p className="text-lg md:text-xl">
-          Haven't applied yet?{" "}
+          presentation. If you want to get published, please contact us. Haven't
+          applied yet?{" "}
           <Link
             to="/apply"
-            className="underline text-blue-600 hover:text-blue-800"
+            className="underline text-red-600 hover:text-red-800"
           >
             Apply now!
           </Link>
         </p>
+        <hr className="border-t border-gray-300" />{" "}
+        {/* Added a light border for the hr */}
+        <ul className="space-y-8">
+          {publications.map((pub, index) => (
+            <li key={index} className="md:text-xl ">
+              {/* Make the paper name clickable to open the modal */}
+              <a
+                onClick={() => openModal(pub)}
+                className="hover:text-red-500 hover:underline transition duration-200 ease-in-out text-left cursor-pointer focus:outline-none font-serif font-semibold"
+              >
+                • "{pub.name}" by {pub.student}.
+              </a>
+            </li>
+          ))}
+        </ul>
+        {/* Added a light border for the hr */}
       </div>
 
       {/* Modal component */}
       {showModal && selectedPublication && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 shadow-xl max-w-lg w-full transform transition-all scale-100 opacity-100 relative">
+          <div className="bg-white rounded-lg p-6 shadow-xl max-w-2xl w-full transform transition-all scale-100 opacity-100 relative">
             {/* Close button */}
             <button
               onClick={closeModal}
@@ -145,21 +139,18 @@ const PublicationsPageContent: FC = () => {
             >
               &times;
             </button>
-            <h3 className="text-xl font-bold mb-4 text-gray-900 leading-tight">
-              {selectedPublication.name}
+            <h3 className="text-lg font-serif md:text-xl font-bold mb-4 text-gray-900 leading-tight">
+              "{selectedPublication.name}" by {selectedPublication.student}
             </h3>
-            <p className="text-lg text-gray-700 mb-4">
-              Made by (our student): {selectedPublication.student}
-            </p>
-            <div className="flex flex-col space-y-3 text-sm">
+            <div className="grid md:flex md:flex-row grid-cols-1 gap-2 md:space-x-2 md:space-y-0 space-y-1 text-sm">
               {selectedPublication.pdfLink && (
                 <a
                   href={selectedPublication.pdfLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-5 rounded-md shadow-md transition duration-200 ease-in-out flex items-center justify-center gap-2"
+                  className="hover:underline hover:text-red-500 font-semibold py-2 px-4 rounded-md transition duration-200 ease-in-out flex items-center justify-center gap-2"
                 >
-                  <FileBoxIcon />
+                  <FileBoxIcon className="w-5 h-5" />
                   View Research Paper
                 </a>
               )}
@@ -168,9 +159,9 @@ const PublicationsPageContent: FC = () => {
                   href={selectedPublication.presentationLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-5 rounded-md shadow-md transition duration-200 ease-in-out flex items-center justify-center gap-2"
+                  className="hover:underline hover:text-red-500 font-semibold py-2 px-4 rounded-md transition duration-200 ease-in-out flex items-center justify-center gap-2"
                 >
-                  <PresentationIcon />
+                  <PresentationIcon className="w-5 h-5" />
                   View Presentation
                 </a>
               )}

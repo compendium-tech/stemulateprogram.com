@@ -491,12 +491,16 @@ export const ApplicationForm = () => {
 
   if (new Date() > new Date("2025-06-23T23:59:59-05:00")) {
     return (
-      <div className="flex flex-col items-center justify-center h-[60vh] space-y-3">
-        <h1 className="text-2xl font-semibold">Application Portal Closed</h1>
-        <p className="text-muted-foreground text-center md:w-[60vh]">
-          The final deadline (June 23, 23:59 UTC-5) has passed, application
-          portal is now closed. Thank you for your interest!
-        </p>
+      <div className="flex flex-col items-center justify-center h-[60vh] space-y-6">
+        <div className="text-center">
+          <h1 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
+            Application Portal Closed
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-md">
+            The final deadline (June 23, 23:59 UTC-5) has passed, application
+            portal is now closed. Thank you for your interest!
+          </p>
+        </div>
       </div>
     )
   }
@@ -538,7 +542,9 @@ export const ApplicationForm = () => {
           <Spinner />
         ) : applicationExists ? (
           <CardContent className="flex flex-col items-center justify-center h-[60vh] space-y-6">
-            <h1 className="text-2xl font-semibold">Application Submitted</h1>
+            <h1 className="text-3xl font-serif font-semibold">
+              Application Submitted
+            </h1>
             <p className="text-center text-muted-foreground max-w-md">
               Thank you for submitting your application! If you have any
               questions or need to update your information, please contact us.
@@ -591,7 +597,7 @@ export const ApplicationForm = () => {
                     <div className="space-y-2">
                       <div className="space-y-6">
                         <div>
-                          <h2 className="text-2xl font-semibold mb-6 mt-6">
+                          <h2 className="text-3xl font-serif font-semibold mb-6 mt-6">
                             Program Overview:
                           </h2>
                           <p>
@@ -718,7 +724,7 @@ export const ApplicationForm = () => {
                   {/* -------------------- PERSONAL TAB -------------------- */}
                   <TabsContent value="personal" className="space-y-6">
                     <div className="space-y-2">
-                      <h2 className="text-2xl font-semibold">
+                      <h2 className="text-3xl font-serif font-semibold">
                         Personal Information
                       </h2>
                       <p className="text-muted-foreground">
@@ -814,7 +820,7 @@ export const ApplicationForm = () => {
                   {/* -------------------- ACADEMIC TAB -------------------- */}
                   <TabsContent value="academic" className="space-y-6">
                     <div className="space-y-2">
-                      <h2 className="text-2xl font-semibold">
+                      <h2 className="text-3xl font-serif font-semibold">
                         Academic Background
                       </h2>
                       <p className="text-muted-foreground">
@@ -931,7 +937,7 @@ export const ApplicationForm = () => {
                   {/* -------------------- PARENT TAB -------------------- */}
                   <TabsContent value="parent" className="space-y-6">
                     <div className="space-y-2">
-                      <h2 className="text-2xl font-semibold">
+                      <h2 className="text-3xl font-serif font-semibold">
                         Parent Information
                       </h2>
                       <p className="text-muted-foreground">
@@ -1006,7 +1012,7 @@ export const ApplicationForm = () => {
                   {/* -------------------- RESEARCH TAB -------------------- */}
                   <TabsContent value="research" className="space-y-6">
                     <div className="space-y-2">
-                      <h2 className="text-2xl font-semibold">
+                      <h2 className="text-3xl font-serif font-semibold">
                         Research Interests
                       </h2>
                       <p className="text-muted-foreground">
@@ -1140,7 +1146,7 @@ export const ApplicationForm = () => {
                   {/* -------------------- EXTRACURRICULAR TAB -------------------- */}
                   <TabsContent value="extracurricular" className="space-y-6">
                     <div className="space-y-2">
-                      <h2 className="text-2xl font-semibold">
+                      <h2 className="text-3xl font-serif font-semibold">
                         Extracurricular Activities
                       </h2>
                       <p className="text-muted-foreground">
@@ -1250,7 +1256,7 @@ export const ApplicationForm = () => {
                   {/* -------------------- ADDITIONAL TAB -------------------- */}
                   <TabsContent value="additional" className="space-y-6">
                     <div className="space-y-2">
-                      <h2 className="text-2xl font-semibold">
+                      <h2 className="text-3xl font-serif font-semibold">
                         Additional Information
                       </h2>
                       <p className="text-muted-foreground">
@@ -1415,7 +1421,9 @@ export const ApplicationForm = () => {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogTitle className="text-3xl font-serif">
+              Are you sure?
+            </AlertDialogTitle>
           </AlertDialogHeader>
           <div className="text-sm text-muted-foreground">
             Please make sure you reviewed all information carefully. You won't
@@ -1442,7 +1450,7 @@ export const ApplicationForm = () => {
       {showAddActivityModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white p-6 rounded-md w-full max-w-md">
-            <h3 className="text-xl font-semibold mb-4">
+            <h3 className="text-2xl font-serif font-semibold mb-4">
               Add Extracurricular Activity
             </h3>
             <div className="space-y-4">

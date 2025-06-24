@@ -29,7 +29,7 @@ export const EmailInputForm: FC<EmailInputFormProps> = ({
   isSignUp,
 }) => (
   <>
-    <p className="text-2xl md:text-3xl font-semibold">
+    <p className="text-3xl md:text-4xl font-semibold font-serif">
       {isSignUp ? "Create an account" : "Log into your account"}
     </p>
     <p className="md:text-lg">
