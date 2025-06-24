@@ -76,7 +76,7 @@ export const DeadlineCountdown: FC<DeadlineCountdownProps> = (
         {timeLeft.days == 0 && timeLeft.hours == 0 && timeLeft.minutes == 0 ? (
           <div className="flex flex-col items-center space-y-4 p-6 text-center">
             <CheckCircle className="h-9 w-9 text-red-600 mb-2" />
-            <h3 className="text-xl font-bold text-red-600 font-serif">
+            <h3 className="md:text-2xl text-xl font-bold text-red-600 font-serif">
               {props.deadlinePassedHeader}
             </h3>
             <p className="text-gray-200 text-sm">{props.deadlinePassedBrief}</p>
