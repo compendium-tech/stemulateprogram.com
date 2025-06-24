@@ -1,7 +1,7 @@
-<img width="48%" src="https://github.com/user-attachments/assets/ddacd1f8-1ef7-4b25-afb9-f2ca11212f92" />
-<img src="https://github.com/user-attachments/assets/7c6a1d4f-8790-4625-a6c0-dec6924e970d" width="48%"/>
-<img src="https://github.com/user-attachments/assets/c65f4421-9ce8-40d8-9a85-4e62ccae2e55" width="39%" />
-<img src="https://github.com/user-attachments/assets/d05e1f8a-c393-43a1-aadb-417f26436a8a" width="59%" />
+<img width="50%" alt="Снимок экрана 2025-06-24 в 19 45 24" src="https://github.com/user-attachments/assets/3a8cb01f-00a2-40c0-81ac-f846c8b22bf5" />
+<img src="https://github.com/user-attachments/assets/3e666fb7-2552-4278-b91a-f087a28195ca" width="48%"/>
+<img src="https://github.com/user-attachments/assets/ff83bb63-efb4-4f63-9e2e-0066c94451ac" width="39%" />
+<img src="https://github.com/user-attachments/assets/041602cd-09db-47a5-a09d-6a13afd426e8" width="60%" />
 
 ### What is STEMulate Research Program?
 
