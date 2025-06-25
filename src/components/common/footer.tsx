@@ -43,6 +43,7 @@ const links: FooterLink[] = [
 const companyLinks = [
   { name: "About Us", href: "/about-us" },
   { name: "Contact Info", href: "/contact-info" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
 ]
 
 export const Footer: FC = () => (
