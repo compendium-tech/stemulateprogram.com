@@ -1,67 +1,21 @@
 import { FC } from "react"
 import { StandartLayout } from "@/layout/standard-layout"
-import { BookTextIcon, UsersRoundIcon } from "lucide-react" // Icons for visual flair
-
-// --- MOCKING SHADCN UI COMPONENTS (Keep as is, but their internal styling will be overridden for mobile) ---
-// In a real project, you would import these from '@/components/ui/table'
-const TableHeader: FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => <div className={`relative w-full ${className}`}>{children}</div>
-const TableBody: FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => <div className={`relative w-full ${className}`}>{children}</div>
-// TableRow is modified to be a block on mobile
-const TableRow: FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => (
-  <div
-    className={`flex flex-col md:flex-row w-full border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted
-                md:data-[state=selected]:bg-muted/50 md:[&>*:last-child]:pr-4 md:[&>*:first-child]:pl-4
-                p-4 md:p-0 border rounded-lg shadow-sm mb-4 md:mb-0 md:border-none md:rounded-none md:shadow-none
-                ${className}`}
-  >
-    {children}
-  </div>
-)
-// TableHead will be hidden on mobile within the main table, and re-used as labels inside cells
-const TableHead: FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => (
-  <div
-    className={`h-12 px-4 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0
-                 [&amp;:not(:last-child)]:border-r [&amp;:not(:last-child)]:border-gray-200
-                 flex-1 md:flex-auto hidden md:block ${className}`}
-  >
-    {children}
-  </div>
-)
-// TableCell will be a block on mobile, and flex-auto on desktop
-const TableCell: FC<{ children: React.ReactNode; className?: string }> = ({
-  children,
-  className,
-}) => (
-  <div
-    className={`p-4 md:p-4 align-top md:align-middle [&amp;:has([role=checkbox])]:pr-0
-                flex-1 md:flex-auto w-full md:w-auto
-                border-b last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0
-                border-gray-200 ${className}`}
-  >
-    {children}
-  </div>
-)
-// --- END MOCKING ---
+import { BookTextIcon, UsersRoundIcon } from "lucide-react"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const ProgramsPageContent: FC = () => {
   const programs = [
     {
       name: "Research Writing Bootcamp",
       phase: "Step 1",
-      icon: <BookTextIcon className="w-6 h-6 text-red-600 mr-2" />,
-      description: `This intensive bootcamp provides students with the foundational knowledge and essential skills required for academic research and writing. It covers various aspects from understanding research methodologies to mastering citation styles and ensuring academic integrity.`,
+      icon: <BookTextIcon className="w-6 h-6 text-red-600 mr-4" />,
       features: [
         "Interactive workshops & lectures",
         "Introduction to diverse research methodologies",
@@ -74,8 +28,7 @@ const ProgramsPageContent: FC = () => {
     {
       name: "Individual Research Mentorship Program",
       phase: "Step 2",
-      icon: <UsersRoundIcon className="w-6 h-6 text-red-600 mr-2" />,
-      description: `Following the bootcamp, selected students are paired with experienced mentors who provide one-on-one guidance. This personalized program supports students through the entire research process, from refining their topic to data analysis and paper submission.`,
+      icon: <UsersRoundIcon className="w-8 h-8 text-red-600 mr-4" />,
       features: [
         "Personalized research topic development",
         "Regular one-on-one feedback sessions",
@@ -93,72 +46,80 @@ const ProgramsPageContent: FC = () => {
         <p className="font-bold text-2xl sm:text-3xl md:text-4xl font-serif md:text-left">
           Programs at STEMulate
         </p>
-        <p className="sm:text-xl text-gray-700 md:text-left">
+        <p className="text-lg sm:text-xl text-gray-700 md:text-left">
           At STEMulate, we believe in nurturing future researchers through a
           structured yet personalized approach. Our program is designed in two
           distinct phases to ensure comprehensive development.
         </p>
 
-        {/* Outer container for responsiveness */}
-        <div className="md:border md:rounded-lg md:shadow-md md:bg-white md:overflow-hidden">
-          {/* Table Header - visible only on desktop */}
-          <TableHeader className="bg-gray-100 hidden md:flex md:w-full">
-            <TableRow className="w-full">
-              <TableHead className="p-5 w-1/4">Program</TableHead>
-              <TableHead className="p-5 w-2/5">Key Features</TableHead>
-              <TableHead className="p-5 w-1/4">Outcome</TableHead>
-            </TableRow>
-          </TableHeader>
-
-          {/* Table Body */}
-          <TableBody>
-            {programs.map((program, index) => (
-              <TableRow
-                key={index}
-                // Custom mobile styling applied directly to TableRow for a card-like appearance
-                className="flex flex-col md:flex-row w-full items-start md:items-stretch
-                           mb-4 md:mb-0 border rounded-lg shadow-sm bg-white md:border-b md:last:border-b-0"
-              >
-                {/* Program Name & Phase - visible on both mobile & desktop */}
-                <TableCell className="w-full md:w-1/4">
-                  <span className="md:hidden text-sm font-semibold text-gray-500 block mb-1">
-                    Program
-                  </span>
-                  <div className="flex items-center text-xl font-semibold mb-2">
-                    {program.icon}
-                    {program.name}
-                  </div>
-                  <span className="text-sm font-medium text-red-600 bg-red-50 px-2 py-1 rounded-full">
-                    {program.phase}
-                  </span>
-                </TableCell>
-
-                {/* Key Features - specific layout for mobile vs. desktop */}
-                <TableCell className="w-full md:w-2/5">
-                  <span className="md:hidden text-sm font-semibold text-gray-500 block mb-1">
-                    Key Features
-                  </span>
-                  <ul className="list-disc list-inside space-y-1 text-gray-700">
-                    {program.features.map((feature, i) => (
-                      <li key={i}>{feature}</li>
-                    ))}
-                  </ul>
-                </TableCell>
-
-                {/* Outcome - specific layout for mobile vs. desktop */}
-                <TableCell className="w-full md:w-1/4">
-                  <span className="md:hidden text-sm font-semibold text-gray-500 block mb-1">
-                    Outcome
-                  </span>
-                  <span className="text-gray-700">{program.outcome}</span>
-                </TableCell>
+        {/* Outer container for Shadcn Table */}
+        {/* Shadcn Table often handles its own border/shadow */}
+        <div className="rounded-lg border shadow-sm">
+          <Table className="w-full">
+            <TableHeader>
+              <TableRow className="hidden md:table-row text-lg">
+                {" "}
+                <TableHead className="w-[220px] p-3">Program</TableHead>{" "}
+                <TableHead className="w-[400px] p-3">Key Features</TableHead>{" "}
+                <TableHead className="w-[300px] p-3">Outcome</TableHead>{" "}
               </TableRow>
-            ))}
-          </TableBody>
+            </TableHeader>
+            <TableBody>
+              {programs.map((program, index) => (
+                <TableRow
+                  key={index}
+                  className="flex flex-col md:table-row md:border-b transition-colors hover:bg-gray-50
+                             p-4 md:p-0 mb-4 md:mb-0 rounded-lg shadow-sm bg-white md:rounded-none md:shadow-none"
+                >
+                  {/* Program Name & Phase */}
+                  <TableCell className="md:w-[220px]">
+                    {" "}
+                    {/* Apply width for desktop */}
+                    <span className="md:hidden text-sm font-semibold text-gray-500 block mb-1">
+                      Program
+                    </span>
+                    <div className="flex items-center text-xl font-semibold mb-2">
+                      {program.icon}
+                      {program.name}
+                    </div>
+                    <span className="text-sm font-medium text-red-600 bg-red-50 px-2 py-1 rounded-full">
+                      {program.phase}
+                    </span>
+                  </TableCell>
+
+                  {/* Key Features */}
+                  <TableCell className="md:w-[400px]">
+                    {" "}
+                    {/* Apply width for desktop */}
+                    <span className="md:hidden text-sm font-semibold text-gray-500 block mb-1">
+                      Key Features
+                    </span>
+                    <ul className="list-disc list-inside space-y-1 text-base text-gray-700">
+                      {program.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
+                      ))}
+                    </ul>
+                  </TableCell>
+
+                  {/* Outcome */}
+                  <TableCell className="md:w-[300px]">
+                    {" "}
+                    {/* Apply width for desktop */}
+                    <span className="md:hidden text-sm font-semibold text-gray-500 block mb-1">
+                      Outcome
+                    </span>
+                    <span className="text-gray-700 text-base">
+                      {program.outcome}
+                    </span>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
 
         <div className="mt-12">
-          <p className="md:text-xl text-gray-700">
+          <p className="text-lg md:text-xl text-gray-700">
             Interested in joining STEMulate? Learn more about the application
             process:{" "}
             <a
