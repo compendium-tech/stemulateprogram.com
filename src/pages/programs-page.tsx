@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Link } from "react-router-dom"
 
 const ProgramsPageContent: FC = () => {
   const programs = [
@@ -128,12 +129,12 @@ const ProgramsPageContent: FC = () => {
           <p className="text-lg md:text-xl text-gray-700">
             Interested in joining STEMulate? Learn more about the application
             process:{" "}
-            <a
-              href="/apply"
+            <Link
+              to="/apply"
               className="underline text-red-600 hover:text-red-800 transition-colors duration-200"
             >
               Apply now!
-            </a>
+            </Link>
           </p>
         </div>
       </div>
