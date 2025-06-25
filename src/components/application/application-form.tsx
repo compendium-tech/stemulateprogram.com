@@ -492,7 +492,7 @@ export const ApplicationForm = () => {
   if (new Date() > new Date("2025-06-23T23:59:59-05:00")) {
     return (
       <div className="flex flex-col items-center justify-center h-[60vh] space-y-6">
-        <div className="text-center">
+        <div>
           <h1 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
             Application Portal Closed
           </h1>
