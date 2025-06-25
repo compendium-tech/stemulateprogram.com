@@ -6,6 +6,8 @@ import { LandingPage } from "./pages/landing-page"
 import { ApplicationFormPage } from "./pages/application-page"
 import { AboutUsPage } from "./pages/about-us-page"
 import { PublicationsPage } from "./pages/publications-page"
+import { ContactInfoPage } from "./pages/contact-info-page"
+import { ProgramsPage } from "./pages/programs-page"
 
 export const App = () => {
   return (
@@ -14,6 +16,8 @@ export const App = () => {
         <Toaster />
         <Router>
           <Routes>
+            <Route Component={ProgramsPage} path="/programs" />
+            <Route Component={ContactInfoPage} path="/contact-info" />
             <Route Component={AboutUsPage} path="/about-us" />
             <Route Component={ApplicationFormPage} path="/apply" />
             <Route Component={PublicationsPage} path="/publications" />

@@ -40,6 +40,11 @@ const links: FooterLink[] = [
   },
 ]
 
+const companyLinks = [
+  { name: "About Us", href: "/about-us" },
+  { name: "Contact Info", href: "/contact-info" },
+]
+
 export const Footer: FC = () => (
   <footer className="bg-neutral-900 text-white">
     <div className="container mx-auto">
@@ -48,6 +53,17 @@ export const Footer: FC = () => (
           <Link to="/">
             <img className="p-2" src="logo.svg" alt="logo" />
           </Link>
+        </div>
+        <div className="grid grid-cols-2 gap-x-16 gap-y-4 mb-6 md:mb-0">
+          {companyLinks.map(({ name, href }) => (
+            <Link
+              key={name}
+              to={href}
+              className="hover:text-neutral-300 transition font-serif text-lg"
+            >
+              {name}
+            </Link>
+          ))}
         </div>
         <div className="flex items-center space-x-6 mb-6 md:mb-0">
           {links.map(({ href, icon }) => (
@@ -61,6 +77,9 @@ export const Footer: FC = () => (
             </a>
           ))}
         </div>
+      </div>
+      <div className="text-center py-4 text-gray-400 md:text-sm text-xs">
+        &copy; 2025 STEMulate Research Program. All rights reserved.
       </div>
     </div>
   </footer>

@@ -69,29 +69,23 @@ successful in promoting creativity compared to specialized/private schools?`,
 ]
 
 const PublicationsPageContent: FC = () => {
-  // State to control the visibility of the modal
   const [showModal, setShowModal] = useState(false)
-  // State to store the publication data for the currently selected item
   const [selectedPublication, setSelectedPublication] =
     useState<Publication | null>(null)
 
-  // Function to handle opening the modal
   const openModal = (publication: Publication) => {
     setSelectedPublication(publication)
     setShowModal(true)
   }
 
-  // Function to handle closing the modal
   const closeModal = () => {
     setShowModal(false)
-    setSelectedPublication(null) // Clear selected publication when closing
+    setSelectedPublication(null)
   }
 
   return (
     <main className="min-h-screen bg-white text-black py-24 px-4 md:px-8 flex flex-col items-center">
       <div className="max-w-5xl mx-auto space-y-8 w-full">
-        {" "}
-        {/* Added w-full for better responsiveness */}
         <p className="font-bold text-3xl sm:text-4xl md:text-5xl font-serif">
           Publications
         </p>
@@ -104,51 +98,58 @@ const PublicationsPageContent: FC = () => {
           applied yet?{" "}
           <Link
             to="/apply"
-            className="underline text-red-600 hover:text-red-800"
+            className="underline text-red-600 hover:text-red-800 transition-colors duration-200"
           >
             Apply now!
           </Link>
         </p>
-        <hr className="border-t border-gray-300" />{" "}
-        {/* Added a light border for the hr */}
-        <ul className="space-y-8">
+        <hr className="border-t border-gray-300" />
+
+        <ul className="space-y-6 md:space-y-8">
           {publications.map((pub, index) => (
-            <li key={index} className="md:text-xl ">
-              {/* Make the paper name clickable to open the modal */}
+            <li key={index} className="md:text-xl group">
               <a
                 onClick={() => openModal(pub)}
-                className="hover:text-red-500 hover:underline transition duration-200 ease-in-out text-left cursor-pointer focus:outline-none font-serif font-semibold"
+                className="block p-4 -mx-4 rounded-lg cursor-pointer transition-all duration-300 ease-in-out
+
+                           focus:outline-none focus:ring-2 focus:ring-opacity-50"
               >
-                • "{pub.name}" by {pub.student}.
+                <span className="font-serif font-semibold text-gray-900 group-hover:text-red-600 transition-colors duration-200">
+                  "{pub.name}"
+                </span>{" "}
+                <span className="text-gray-700 group-hover:text-red-600 transition-colors duration-200">
+                  by {pub.student}.
+                </span>
               </a>
             </li>
           ))}
         </ul>
-        {/* Added a light border for the hr */}
       </div>
 
-      {/* Modal component */}
       {showModal && selectedPublication && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 shadow-xl max-w-2xl w-full transform transition-all scale-100 opacity-100 relative">
-            {/* Close button */}
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 p-4 animate-fade-in">
+          <div className="bg-white rounded-lg p-8 shadow-xl max-w-2xl w-full transform transition-all duration-150 scale-95 opacity-100 animate-scale-in relative">
             <button
               onClick={closeModal}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold rounded-full w-8 h-8 flex items-center justify-center focus:outline-none"
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-2xl font-bold rounded-full w-8 h-8 flex items-center justify-center focus:outline-none transition-colors duration-200"
               aria-label="Close"
             >
               &times;
             </button>
-            <h3 className="text-lg font-serif md:text-xl font-bold mb-4 text-gray-900 leading-tight">
-              "{selectedPublication.name}" by {selectedPublication.student}
+            <h3 className="text-lg md:text-xl font-bold mb-4 text-gray-900 leading-tight">
+              <span className="font-serif">"{selectedPublication.name}"</span>{" "}
+              by {selectedPublication.student}
             </h3>
-            <div className="grid md:flex md:flex-row grid-cols-1 gap-2 md:space-x-2 md:space-y-0 space-y-1 text-sm">
+
+            <div className="grid md:flex md:flex-row grid-cols-1 gap-3 md:space-x-3 md:space-y-0 space-y-2 text-base">
               {selectedPublication.pdfLink && (
                 <a
                   href={selectedPublication.pdfLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline hover:text-red-500 font-semibold py-2 px-4 rounded-md transition duration-200 ease-in-out flex items-center justify-center gap-2"
+                  className="bg-red-500 text-white hover:bg-red-700 font-semibold py-2 px-4 rounded-md
+                             transition-all duration-200 ease-in-out flex items-center justify-center gap-2
+                             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >
                   <FileBoxIcon className="w-5 h-5" />
                   View Research Paper
@@ -159,7 +160,9 @@ const PublicationsPageContent: FC = () => {
                   href={selectedPublication.presentationLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:underline hover:text-red-500 font-semibold py-2 px-4 rounded-md transition duration-200 ease-in-out flex items-center justify-center gap-2"
+                  className="bg-black text-white hover:bg-gray-700 font-semibold py-2 px-4 rounded-md
+                             transition-all duration-200 ease-in-out flex items-center justify-center gap-2
+                             focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
                 >
                   <PresentationIcon className="w-5 h-5" />
                   View Presentation

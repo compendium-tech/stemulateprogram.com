@@ -9,6 +9,7 @@ interface NavbarItem {
 const navItems: NavbarItem[] = [
   { label: "Apply", href: "/apply" },
   { label: "About Us", href: "/about-us" },
+  { label: "Programs", href: "/programs" },
   { label: "Publications", href: "/publications" },
   {
     label: "Info Session",
