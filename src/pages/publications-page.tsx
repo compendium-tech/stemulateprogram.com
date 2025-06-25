@@ -147,9 +147,9 @@ const PublicationsPageContent: FC = () => {
                   href={selectedPublication.pdfLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-red-500 text-white hover:bg-red-700 font-semibold py-2 px-4 rounded-md
+                  className="hover:text-red-600 font-semibold py-2 px-4 rounded-md
                              transition-all duration-200 ease-in-out flex items-center justify-center gap-2
-                             focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                             focus:outline-none focus:ring-2 focus:ring-opacity-50"
                 >
                   <FileBoxIcon className="w-5 h-5" />
                   View Research Paper
@@ -160,9 +160,9 @@ const PublicationsPageContent: FC = () => {
                   href={selectedPublication.presentationLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-black text-white hover:bg-gray-700 font-semibold py-2 px-4 rounded-md
+                  className="hover:text-red-600 font-semibold py-2 px-4 rounded-md
                              transition-all duration-200 ease-in-out flex items-center justify-center gap-2
-                             focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+                             focus:outline-none focus:ring-2 focus:ring-opacity-50"
                 >
                   <PresentationIcon className="w-5 h-5" />
                   View Presentation
