@@ -42,8 +42,9 @@ const links: FooterLink[] = [
 
 const companyLinks = [
   { name: "About Us", href: "/about-us" },
-  { name: "Contact Info", href: "/contact-info" },
   { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms Of Service", href: "/tos" },
+  { name: "Contact Info", href: "/contact-info" },
 ]
 
 export const Footer: FC = () => (
@@ -60,7 +61,7 @@ export const Footer: FC = () => (
             <Link
               key={name}
               to={href}
-              className="hover:text-neutral-300 transition font-serif text-lg"
+              className="hover:text-neutral-300 transition font-serif text-base md:text-lg"
             >
               {name}
             </Link>

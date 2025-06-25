@@ -9,6 +9,7 @@ import { PublicationsPage } from "./pages/publications-page"
 import { ContactInfoPage } from "./pages/contact-info-page"
 import { ProgramsPage } from "./pages/programs-page"
 import { PrivacyPolicyPage } from "./pages/privacy-policy-page"
+import { TermsOfServicePage } from "./pages/terms-of-service-page"
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
         <Toaster />
         <Router>
           <Routes>
+            <Route Component={TermsOfServicePage} path="/tos" />
             <Route Component={PrivacyPolicyPage} path="/privacy-policy" />
             <Route Component={ProgramsPage} path="/programs" />
             <Route Component={ContactInfoPage} path="/contact-info" />
