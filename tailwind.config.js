@@ -5,7 +5,7 @@ export default {
   theme: {
     fontFamily: {
       sans: ['CustomFont', 'Helvetica', 'sans-serif'],
-      serif: ['Harding Text', 'Times New Roman', 'serif'],
+      serif: ['CustomFont', 'Times New Roman', 'serif'],
       mono: ['Fira Code', 'Courier New', 'monospace'],
     },
     extend: {
