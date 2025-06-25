@@ -114,12 +114,9 @@ const PublicationsPageContent: FC = () => {
 
                            focus:outline-none focus:ring-2 focus:ring-opacity-50"
               >
-                <span className="font-serif font-semibold text-gray-900 group-hover:text-red-600 transition-colors duration-200">
-                  "{pub.name}"
+                <span className="font-serif font-semibold group-hover:text-red-600 transition-colors duration-200">
+                  "{pub.name}" by {pub.student}.
                 </span>{" "}
-                <span className="text-gray-700 group-hover:text-red-600 transition-colors duration-200">
-                  by {pub.student}.
-                </span>
               </a>
             </li>
           ))}
@@ -136,9 +133,8 @@ const PublicationsPageContent: FC = () => {
             >
               &times;
             </button>
-            <h3 className="text-lg md:text-xl font-bold mb-4 text-gray-900 leading-tight">
-              <span className="font-serif">"{selectedPublication.name}"</span>{" "}
-              by {selectedPublication.student}
+            <h3 className="text-lg md:text-xl font-bold mb-4 text-gray-900 leading-tight font-serif">
+              {selectedPublication.name} by {selectedPublication.student}
             </h3>
 
             <div className="grid md:flex md:flex-row grid-cols-1 gap-3 md:space-x-3 md:space-y-0 space-y-2 text-base">
@@ -147,7 +143,7 @@ const PublicationsPageContent: FC = () => {
                   href={selectedPublication.pdfLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-red-600 font-semibold py-2 px-4 rounded-md
+                  className="hover:text-red-600 py-2 px-4 rounded-md
                              transition-all duration-200 ease-in-out flex items-center justify-center gap-2
                              focus:outline-none focus:ring-2 focus:ring-opacity-50"
                 >
@@ -160,7 +156,7 @@ const PublicationsPageContent: FC = () => {
                   href={selectedPublication.presentationLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-red-600 font-semibold py-2 px-4 rounded-md
+                  className="hover:text-red-600 py-2 px-4 rounded-md
                              transition-all duration-200 ease-in-out flex items-center justify-center gap-2
                              focus:outline-none focus:ring-2 focus:ring-opacity-50"
                 >

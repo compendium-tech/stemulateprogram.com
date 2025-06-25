@@ -4,9 +4,8 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     fontFamily: {
-      sans: ['CustomFont', 'Helvetica', 'sans-serif'],
-      serif: ['CustomFont', 'Times New Roman', 'serif'],
-      mono: ['Fira Code', 'Courier New', 'monospace'],
+      sans: ['GT America Standard', 'Helvetica', 'sans-serif'],
+      serif: ['Canela Deck', 'Times New Roman', 'serif'],
     },
     extend: {
       colors: {
