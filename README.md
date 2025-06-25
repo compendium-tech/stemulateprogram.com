@@ -2,7 +2,7 @@
 
 <img src="https://github.com/user-attachments/assets/ee3adea5-a710-4ebb-b333-26e636a33d52" width="45%"/>
 <img src="https://github.com/user-attachments/assets/b49e8893-a4da-47e5-81f2-4d002b1f2266" width="39%" />
-<img src="https://github.com/user-attachments/assets/cb2dcd9f-c22a-4272-b388-dafc3de65fa2" width="60%" />
+<img src="https://github.com/user-attachments/assets/cb2dcd9f-c22a-4272-b388-dafc3de65fa2" width="58%" />
 
 ### What is STEMulate Research Program?
 
