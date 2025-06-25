@@ -22,14 +22,7 @@ const ContactInfoPageContent: FC = () => {
           >
             admissions@stemulateprogram.com
           </a>
-          ,{" "}
-          <a
-            href="mailto:stemulate.program@gmail.com"
-            className="hover:underline text-red-600 hover:text-red-800"
-          >
-            stemulate.program@gmail.com
-          </a>
-          . <br />
+          <br />
           Phone number:{" "}
           <a
             href="tel:+77753036077"
@@ -37,7 +30,6 @@ const ContactInfoPageContent: FC = () => {
           >
             +7 (775) 303-6077
           </a>
-          .
         </p>
         <p className="text-lg md:text-xl">
           We aim to respond to all inquiries within 24-48 business hours. <br />

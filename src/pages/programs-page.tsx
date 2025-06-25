@@ -43,7 +43,7 @@ const ProgramsPageContent: FC = () => {
   return (
     <main className="min-h-screen bg-white text-black py-24 px-4 md:px-8 flex flex-col items-center">
       <div className="max-w-6xl mx-auto space-y-10 w-full">
-        <p className="font-bold text-2xl sm:text-3xl md:text-4xl font-serif md:text-left">
+        <p className="font-bold text-3xl md:text-4xl font-serif md:text-left">
           Programs at STEMulate
         </p>
         <p className="text-lg sm:text-xl text-gray-700 md:text-left">
@@ -59,9 +59,15 @@ const ProgramsPageContent: FC = () => {
             <TableHeader>
               <TableRow className="hidden md:table-row text-lg">
                 {" "}
-                <TableHead className="w-[220px] p-3">Program</TableHead>{" "}
-                <TableHead className="w-[400px] p-3">Key Features</TableHead>{" "}
-                <TableHead className="w-[300px] p-3">Outcome</TableHead>{" "}
+                <TableHead className="w-[250px] p-3 text-black font-semibold">
+                  Program
+                </TableHead>{" "}
+                <TableHead className="w-[400px] p-3 text-black font-semibold">
+                  Key Features
+                </TableHead>{" "}
+                <TableHead className="w-[300px] p-3 text-black font-semibold">
+                  Outcome
+                </TableHead>{" "}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -72,13 +78,13 @@ const ProgramsPageContent: FC = () => {
                              p-4 md:p-0 mb-4 md:mb-0 rounded-lg shadow-sm bg-white md:rounded-none md:shadow-none"
                 >
                   {/* Program Name & Phase */}
-                  <TableCell className="md:w-[220px]">
+                  <TableCell className="md:w-[250px]">
                     {" "}
                     {/* Apply width for desktop */}
                     <span className="md:hidden text-sm font-semibold text-gray-500 block mb-1">
                       Program
                     </span>
-                    <div className="flex items-center text-xl font-semibold mb-2">
+                    <div className="flex items-center text-xl font-semibold mb-2 font-serif">
                       {program.icon}
                       {program.name}
                     </div>
