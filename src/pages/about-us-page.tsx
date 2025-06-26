@@ -47,7 +47,7 @@ const AboutUsPageContent: FC = () => {
     <div ref={myRef}>
       <main className="min-h-screen text-white py-8 px-4 md:px-8 flex items-center justify-center">
         <div className="max-w-4xl mx-auto space-y-8">
-          <p className="font-serif font-bold text-3xl md:text-5xl">About Us</p>
+          <p className="font-bold text-3xl md:text-5xl">About Us</p>
           <p className="text-lg md:text-xl">
             STEMulate was created to address a critical gap in research
             education. Our mission is to train over 5000 students in research

@@ -44,7 +44,7 @@ const ProgramsPageContent: FC = () => {
   return (
     <main className="min-h-screen bg-white text-black py-24 px-4 md:px-8 flex flex-col items-center">
       <div className="max-w-6xl mx-auto space-y-10 w-full">
-        <p className="font-bold text-3xl md:text-4xl font-serif md:text-left">
+        <p className="font-bold text-3xl md:text-4xl md:text-left">
           Programs at STEMulate
         </p>
         <p className="text-lg sm:text-xl text-gray-700 md:text-left">

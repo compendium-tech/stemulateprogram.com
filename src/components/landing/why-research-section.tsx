@@ -54,7 +54,7 @@ export const WhyResearchSection: FC = () => (
           >
             <div>
               <CheckCircleIcon className="h-8 w-8 mb-4 text-red-500" />
-              <h3 className="font-serif text-lg sm:text-2xl font-semibold mb-2">
+              <h3 className="text-lg sm:text-2xl font-semibold mb-2">
                 {item.title}
               </h3>
               <p className="text-sm md:text-lg">{item.description}</p>

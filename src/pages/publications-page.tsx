@@ -114,7 +114,7 @@ const PublicationsPageContent: FC = () => {
 
                            focus:outline-none focus:ring-2 focus:ring-opacity-50"
               >
-                <span className="font-serif font-semibold group-hover:text-red-600 transition-colors duration-200">
+                <span className="font-semibold group-hover:text-red-600 transition-colors duration-200">
                   "{pub.name}" by {pub.student}.
                 </span>{" "}
               </a>
@@ -133,11 +133,11 @@ const PublicationsPageContent: FC = () => {
             >
               &times;
             </button>
-            <h3 className="text-lg md:text-xl font-bold mb-4 text-gray-900 leading-tight font-serif">
+            <h3 className="text-lg md:text-xl font-bold mb-8 md:mb-4 text-gray-900 leading-tight font-serif">
               {selectedPublication.name} by {selectedPublication.student}
             </h3>
 
-            <div className="grid md:flex md:flex-row grid-cols-1 gap-3 md:space-x-3 md:space-y-0 space-y-2 text-base">
+            <div className="grid md:flex md:flex-row grid-cols-1 md:space-x-3 md:space-y-0 space-y-1 text-base">
               {selectedPublication.pdfLink && (
                 <a
                   href={selectedPublication.pdfLink}

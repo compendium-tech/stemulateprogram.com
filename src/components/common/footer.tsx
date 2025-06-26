@@ -61,7 +61,7 @@ export const Footer: FC = () => (
             <Link
               key={name}
               to={href}
-              className="hover:text-neutral-300 transition font-serif text-base md:text-lg"
+              className="hover:text-neutral-300 transition text-base md:text-lg"
             >
               {name}
             </Link>

@@ -32,7 +32,7 @@ export const OtpInputForm: FC<OtpInputFormProps> = ({
   onGoBackToStart,
 }) => (
   <>
-    <p className="text-3xl md:text-4xl font-serif font-semibold">
+    <p className="text-3xl md:text-4xl font-semibold">
       Enter Verification Code
     </p>
     <p>

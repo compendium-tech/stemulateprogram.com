@@ -5,7 +5,6 @@ export default {
   theme: {
     fontFamily: {
       sans: ['Sohne', 'Helvetica', 'sans-serif'],
-      serif: ['Sohne', 'sans-serif'],
     },
     extend: {
       colors: {
