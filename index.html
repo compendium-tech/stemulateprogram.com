@@ -46,19 +46,19 @@
       window.onload = function () {
         function fadeOutLoadingDiv() {
           var loadingDiv = document.getElementById("loadingDiv")
-          loadingDiv.style.transition = "opacity 2s ease-in-out"
+          loadingDiv.style.transition = "opacity 0.5s ease-in-out"
           loadingDiv.style.opacity = 0
 
           setTimeout(function () {
             if (loadingDiv && loadingDiv.parentNode) {
               loadingDiv.parentNode.removeChild(loadingDiv)
             }
-          }, 2000)
+          }, 500)
         }
 
         setTimeout(function () {
           fadeOutLoadingDiv()
-        }, 2000)
+        }, 3000)
       }
     </script>
     <div
